@@ -1,3 +1,4 @@
+
 import React, { useState } from "react";
 import useRequestData from "../../hooks/useRequestData";
 import { BASE_URL } from "./../../constants/Url/url";
@@ -40,6 +41,7 @@ function FeedPage() {
   const restaurantFilter = res.restaurant?.filter((rest) => {
     return rest.name.toLowerCase().includes(search.toLowerCase());
   });
+
 
   return (
     <DivContainer>
