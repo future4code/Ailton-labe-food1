@@ -25,7 +25,9 @@ export const login = (body, clear, Navigate, setIsLoading) => {
     };
 
 
-export const signup = (body, clear, Navigate, setIsLoading) => {
+export const signup = (body, clear, Navigate, setIsLoading, verifyPass) => {
+
+      if(body.password === verifyPass){
 
         axios
           .post(`${BASE_URL}/signup`, body)
@@ -39,5 +41,11 @@ export const signup = (body, clear, Navigate, setIsLoading) => {
             setIsLoading(false)
             alert(err);
           });
-  
+
+      }else{
+
+        return alert('Senhas não coincidem')
+
+      }
+
       };
