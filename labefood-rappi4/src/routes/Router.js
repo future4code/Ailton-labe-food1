@@ -19,7 +19,7 @@ return(
             
     <Route path='/login' element={<LoginPage/>}></Route>
     <Route path='/signup' element={<SignUpPage/>}></Route>
-    <Route path='/' element={<FeedPage/>}></Route>
+    <Route index element={<FeedPage/>}></Route>
     <Route path='profile' element={<ProfilePage/>}></Route>
     <Route path='/edit/inf' element={<EditInfoPage/>}></Route>
     <Route path='/edit/end' element={<EditEndPage/>}></Route>

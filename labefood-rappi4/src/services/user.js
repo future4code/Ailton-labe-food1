@@ -25,19 +25,24 @@ export const login = (body, clear, Navigate, setIsLoading) => {
     };
 
 
-export const signup = (body, clear, Navigate, setIsLoading) => {
+export const signup = (body, clear, Navigate, setIsLoading, passVerify) => {
 
-        axios
-          .post(`${BASE_URL}/signup`, body)
-          .then((res) => {
-            clear()
-            setIsLoading(false)
-            goToPage(Navigate, "login")
-  
-          })
-          .catch((err) => {
-            setIsLoading(false)
-            alert(err);
-          });
-  
+
+    if(body.password === passVerify){
+      axios
+              .post(`${BASE_URL}/signup`, body)
+              .then((res) => {
+                clear()
+                setIsLoading(false)
+                goToPage(Navigate, "login")
+      
+              })
+              .catch((err) => {
+                setIsLoading(false)
+                alert(err);
+              });
+      
+    }else{
+      alert('senha não coincide')
+    }
       };
