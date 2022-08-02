@@ -1,17 +1,20 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-import useGetProfile from "../../../hooks/useGetProfile";
+import useGetProfileDetails from "../../../hooks/useGetProfileDetails";
 import { useForm } from "../../../hooks/useForm";
 import goToPage from "../../../routes/coordinator";
 import { useNavigate } from "react-router-dom";
 import { Container } from "./style";
+import { address } from "../../../services/user";
+import useProtectedPage from "../../../hooks/useProtected";
 
 function EditEndePage() {
 
-  // const profile = useGetProfile();
+  const profileDetails = useGetProfileDetails();
   const navigate = useNavigate();
+  useProtectedPage()
 
-  const [form, onChange] = useForm({
+  const [form, onChange, cleanFields] = useForm({
     street: "",
     number: "",
     neighbourhood: "",
@@ -20,7 +23,9 @@ function EditEndePage() {
     complement: "",
   });
 
-  // PEGAR FUNÇÃO DE ADD ADRESS
+  const onSubmit = () => {
+    address(form, cleanFields);
+  };
 
   return (
     <Container>
@@ -37,14 +42,16 @@ function EditEndePage() {
             name="street"
             value={form.street}
             onChange={onChange}
-            // placeholder={profile.street}
+            placeholder={profileDetails.street}
+            required
           />
           <input
             type="number"
             name="number"
             value={form.number}
             onChange={onChange}
-            // placeholder={profile.number}
+            placeholder={profileDetails.number}
+            required
           />
           <input
             name="complement"
@@ -56,27 +63,29 @@ function EditEndePage() {
             name="neighbourhood"
             value={form.neighbourhood}
             onChange={onChange}
-            // placeholder={profile.neighbourhood}
+            placeholder={profileDetails.neighbourhood}
+            required
           />
           <input
             name="city"
             value={form.city}
             onChange={onChange}
-            // placeholder={profile.city}
+            placeholder={profileDetails.city}
+            required
           />
           <input
             name="state"
             value={form.state}
             onChange={onChange}
-            // placeholder={profile.state}
+            placeholder={profileDetails.state}
+            required
           />
-          <button>Salvar</button>
+          <button onClick={() => onSubmit()}>Salvar</button>
           {/* ADICIONAR FUNÇÃO DE ADD ADRESS NO ONCLICK*/}
         </form>
       </main>
     </Container>
   );
-
 }
 
 export default EditEndePage;

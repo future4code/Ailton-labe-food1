@@ -1,6 +1,8 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import useProtectedPage from "../../hooks/useProtected";
 import useRequestData from "../../hooks/useRequestData";
+import goToPage from "../../routes/coordinator";
 import { BASE_URL } from "./../../constants/Url/url";
 import {
   DivContainer,
@@ -16,6 +18,7 @@ function FeedPage() {
   const res = useRequestData([], `${BASE_URL}/restaurants`);
   const [search, setSearch] = useState("");
   useProtectedPage()
+  const navigate = useNavigate()
 
 
   const cardRestaurant = res.restaurants?.filter((restaurant) => {
@@ -24,7 +27,7 @@ function FeedPage() {
     .includes(search.toLowerCase())
  }).map((restaurant) => {
    return (
-     <ContainerRest key={restaurant.id}>
+     <ContainerRest key={restaurant.id} onClick={() => goToPage(navigate, `res/${restaurant.id}`)}>
        <ContainerLogo>
          <Img src={restaurant.logoUrl} alt="logo" />
        </ContainerLogo>

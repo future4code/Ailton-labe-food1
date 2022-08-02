@@ -1,11 +1,11 @@
-import axios from "axios";
+
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-import { BASE_URL } from "../../constants/Url/url";
 import { primaryColor } from "../../constants/colors/colors";
 import goToPage from "../../routes/coordinator";
 import { useNavigate } from "react-router-dom";
 import useGetProfile from "../../hooks/useGetProfile";
+import useProtectedPage from "../../hooks/useProtected";
 import { BsPencil } from "react-icons/bs";
 import { Button, Icon, InputRightElement } from "@chakra-ui/react";
 
@@ -138,6 +138,7 @@ const ContainerMap = styled.div`
 
 function ProfilePage() {
   const navigate = useNavigate();
+  useProtectedPage()
   const arrayTest = [
     {
       name: "Bullguer Vila Madalena",

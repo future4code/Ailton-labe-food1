@@ -22,7 +22,7 @@ function AddressRegistrationFormPage() {
 
   const onSubmit = (e) => {
     e.preventDefault()
-    address(form, clean, Navigate, setIsLoading)
+    address(form, clean, 'firstTime', Navigate, setIsLoading)
   }
 
   return (
