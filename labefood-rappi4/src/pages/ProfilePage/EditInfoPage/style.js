@@ -8,8 +8,9 @@ export const Container = styled.div`
   #header {
     display: flex;
     align-items: center;
+    justify-content: center;
     height: 6vh;
-
+    
     p {
       margin: 0;
     }

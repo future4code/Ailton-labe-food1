@@ -6,7 +6,14 @@ import { primaryColor } from "../../constants/colors/colors";
 import goToPage from "../../routes/coordinator";
 import { useNavigate } from "react-router-dom";
 import useGetProfile from "../../hooks/useGetProfile";
+import { BsPencil } from "react-icons/bs";
+import { Button, Icon, InputRightElement } from "@chakra-ui/react";
 
+const DivEdicao = styled.div`
+  position: absolute;
+  top: 3px;
+  right: 20px;
+`;
 const Container = styled.div`
   height: 100%;
   display: flex;
@@ -31,6 +38,16 @@ const Container = styled.div`
       padding: 0 16px;
       position: relative;
 
+      #container-info {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        margin-top: 15px;
+        p {
+          margin: 0;
+        }
+      }
+
       button {
         position: absolute;
         top: 0;
@@ -41,7 +58,7 @@ const Container = styled.div`
     #container-adress {
       background-color: #eeeeee;
       height: 10vh;
-      margin: 16px 0;
+      margin: 11px 0;
       padding: 16px;
       display: flex;
       align-items: center;
@@ -52,7 +69,6 @@ const Container = styled.div`
       }
 
       #adress-title {
-        height: 18px;
         margin: 0 0 8px;
         font-family: Roboto;
         font-size: 16px;
@@ -65,7 +81,6 @@ const Container = styled.div`
       }
 
       #adress-itself {
-        height: 18px;
         margin: 8px 0 0;
         font-family: "Roboto";
         font-size: 16px;
@@ -122,7 +137,6 @@ const ContainerMap = styled.div`
 `;
 
 function ProfilePage() {
-
   const navigate = useNavigate();
   const arrayTest = [
     {
@@ -137,12 +151,14 @@ function ProfilePage() {
   return (
     <Container>
       <header>
-        <p>Meu Perfil</p>
+        <p>
+          <b>Meu Perfil</b>
+        </p>
       </header>
       <main>
         <section id="info-profile">
           {profile.name && profile.email ? (
-            <div>
+            <div id="container-info">
               <p>{profile.name}</p>
               <p>{profile.email}</p>
               <p>{profile.cpf}</p>
@@ -150,17 +166,25 @@ function ProfilePage() {
           ) : (
             <p>carregando..</p>
           )}
-          <button onClick={() => goToPage(navigate, "edit/inf")}>ab</button>
+          <DivEdicao onClick={() => goToPage(navigate, "edit/inf")}>
+            <div>
+              <Icon as={BsPencil} />
+            </div>
+          </DivEdicao>
         </section>
         <section id="container-adress">
           <div>
             <p id="adress-title">Endereço cadastrado</p>
-            <p id="adress-itself">Rua ablublebleble</p>
+            <p id="adress-itself">{profile.address}</p>
           </div>
-          <button onClick={() => goToPage(navigate, "edit/end")}>cd</button>
+          <div onClick={() => goToPage(navigate, "edit/end")}>
+            <div>
+              <Icon as={BsPencil} />
+            </div>
+          </div>
         </section>
         <section id="order-history">
-          <p>Histórico de pedidos</p>
+          <p><b>Histórico de pedidos</b></p>
           <hr />
           {arrayTest.map((obj) => {
             return (
@@ -178,7 +202,6 @@ function ProfilePage() {
       </main>
     </Container>
   );
-
 }
 
 export default ProfilePage;
