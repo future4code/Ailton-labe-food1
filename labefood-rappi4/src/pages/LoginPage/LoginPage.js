@@ -11,7 +11,7 @@ import {
   DivInput,
   DivCadastre,
   DivCliqueAqui,
-} from './styled'
+} from "./styled";
 import { login } from "./../../services/user";
 import logo from "./../../assets/images/logo.svg";
 import Header from "../../components/Header/Login-Signup/header";
@@ -33,6 +33,7 @@ import {
 } from "@chakra-ui/react";
 import { BsFillEyeSlashFill } from "react-icons/bs";
 import { BsFillEyeFill } from "react-icons/bs";
+import { LabelFloat } from "../../services/FloatingLabel";
 
 function LoginPage() {
   const Navigate = useNavigate();
@@ -46,13 +47,10 @@ function LoginPage() {
   const [show, setShow] = React.useState(false);
   const handleClick = () => setShow(!show);
 
-
-
   const onSubmitForm = (e) => {
     e.preventDefault();
     login(form, cleanFields, Navigate, setIsLoading);
   };
-
 
   return (
     <ChakraProvider>
@@ -71,37 +69,43 @@ function LoginPage() {
         <div>
           <Form onSubmit={onSubmitForm}>
             <DivInput>
-              <Input
-                placeholder="email@email.com"
-                value={form.email}
-                type={"email"}
-                name="email"
-                required
-                onChange={onChange}
-              ></Input>
-
-              <InputGroup size="md">
-                <Input
-                  placeholder="Mínimo de 6 caracteres"
-                  value={form.password}
-                  name="password"
-                  type={show ? "text" : "password"}
+              <LabelFloat>
+                <input
+                  placeholder="email@email.com"
+                  value={form.email}
+                  type={"email"}
+                  name="email"
                   required
                   onChange={onChange}
-                />
-                <InputRightElement width="4.5rem">
-                  <div onClick={handleClick}>
-                    {show ? (
-                      <div>
-                        <Icon as={BsFillEyeSlashFill} />
-                      </div>
-                    ) : (
-                      <div>
-                        <Icon as={BsFillEyeFill} />
-                      </div>
-                    )}
-                  </div>
-                </InputRightElement>
+                ></input>
+                <label>E-mail*</label>
+              </LabelFloat>
+
+              <InputGroup size="md">
+                <LabelFloat>
+                  <input
+                    placeholder="Mínimo de 6 caracteres"
+                    value={form.password}
+                    name="password"
+                    type={show ? "text" : "password"}
+                    required
+                    onChange={onChange}
+                  />
+                  <label>Senha*</label>
+                  <InputRightElement width="4.5rem">
+                    <div onClick={handleClick}>
+                      {show ? (
+                        <div>
+                          <Icon as={BsFillEyeSlashFill} />
+                        </div>
+                      ) : (
+                        <div>
+                          <Icon as={BsFillEyeFill} />
+                        </div>
+                      )}
+                    </div>
+                  </InputRightElement>
+                </LabelFloat>
               </InputGroup>
             </DivInput>
 
@@ -120,4 +124,3 @@ function LoginPage() {
 }
 
 export default LoginPage;
-
