@@ -15,6 +15,18 @@ export const ContainerRest = styled.div`
   height: 13rem;
 `;
 
+
+
+
+export const DivCarousel = styled.div`
+  display: flex;
+  gap: 1rem;
+  width: 100vw;
+  justify-content: center;
+`;
+
+
+
 export const DivDetalhe = styled.div`
   display: flex;
   align-items: center;
@@ -39,6 +51,11 @@ export const Img = styled.img`
 export const H3 = styled.h3`
   margin: 5px;
 `;
+
+export const H1 = styled.h1`
+  margin: 5px;
+`;
+
 
 export const ContainerLogo = styled.div`
   width: 328px;
