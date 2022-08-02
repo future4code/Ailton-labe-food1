@@ -178,6 +178,7 @@ function ProfilePage() {
       </main>
     </Container>
   );
+
 }
 
 export default ProfilePage;
