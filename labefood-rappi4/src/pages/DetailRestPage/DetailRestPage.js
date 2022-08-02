@@ -1,9 +1,10 @@
-import React, { useEffect } from "react";
+import React, { useContext, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import styled from "styled-components";
 import useProtectedPage from "../../hooks/useProtected";
 import useRestDetails from "../../hooks/useRestDetails";
 import Header from "../../components/Header/Login-Signup/header";
+import { GlobalContext } from "../../Global/GlobalContext";
 
 const Container = styled.div`
   height: 100%;
@@ -128,11 +129,13 @@ function DetailRestPage() {
   const pathParams = useParams();
   const restDetails = useRestDetails(pathParams.id);
 
-  console.log(restDetails);
+  const values = useContext(GlobalContext);
+
+  console.log(values.cartProducts);
 
   return (
     <Container>
-      <Header page="" />
+      <Header page="" title="Restaurant" />
       <main>
         <img id="rest-logo" src={restDetails.logoUrl} alt="logo" />
         <ContainerRestInfo>
@@ -160,7 +163,15 @@ function DetailRestPage() {
                     <strong>R${product.price}</strong>
                   </p>
                 </div>
-                <button>Adicionar</button>
+                {values.cartProducts.includes(product) ? (
+                  <button onClick={() => values.functionRemove(product.id)}>
+                    Remover
+                  </button>
+                ) : (
+                  <button onClick={() => values.functionAdd(product, 2)}>
+                    Adicionar
+                  </button>
+                )}
               </ContainerMap>
             );
           })}

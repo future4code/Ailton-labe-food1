@@ -7,6 +7,7 @@ import { useNavigate } from "react-router-dom";
 import { Container } from "./style";
 import { address } from "../../../services/user";
 import useProtectedPage from "../../../hooks/useProtected";
+import Header from "../../../components/Header/Login-Signup/header"
 
 function EditEndePage() {
 
@@ -29,13 +30,14 @@ function EditEndePage() {
 
   return (
     <Container>
-      <header>
+      <Header page="profile" title="Endereço"/>
+      {/* <header>
         <div id="header">
           <button onClick={() => goToPage(navigate, "profile")}>Voltar</button>
           <p>Endereço</p>
         </div>
         <hr />
-      </header>
+      </header> */}
       <main>
         <form id="forms">
           <input

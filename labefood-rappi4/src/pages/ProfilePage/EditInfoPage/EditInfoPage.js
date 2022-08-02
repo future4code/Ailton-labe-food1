@@ -10,6 +10,7 @@ import useProtectedPage from "../../../hooks/useProtected";
 import { Container } from "./style"
 import {MdArrowBackIos} from "react-icons/md";
 import {Icon} from '@chakra-ui/react'
+import Header from "../../../components/Header/Login-Signup/header"
 
 function EditInfoPage() {
   const token = localStorage.getItem("token");
@@ -37,7 +38,8 @@ function EditInfoPage() {
 
   return (
     <Container>
-      <header>
+      <Header page="profile" title="Editar"/>
+      {/* <header>
         <div id="header">
           <div onClick={() => goToPage(navigate, "profile")}>
             <Icon as={MdArrowBackIos}/>
@@ -45,7 +47,7 @@ function EditInfoPage() {
           <p><b>Editar</b></p>
         </div>
         <hr />
-      </header>
+      </header> */}
       <main>
         <form id="forms">
           <input

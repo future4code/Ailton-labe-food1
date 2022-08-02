@@ -13,8 +13,9 @@ function Header(props) {
   return (
     <ChakraProvider>
       <DivContainerHeader>
-        <div onClick={() => goToPage(Navigate, `${props.page}`)}>
-          <ImageBack src={back}></ImageBack>
+        <div>
+          <ImageBack src={back} onClick={() => goToPage(Navigate, `${props.page}`)}></ImageBack>
+          <p>{props.title}</p>
         </div>
         <hr></hr>
       </DivContainerHeader>
