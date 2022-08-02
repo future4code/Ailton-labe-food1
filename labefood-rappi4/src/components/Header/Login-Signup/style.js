@@ -26,3 +26,5 @@ export const ImageBack = styled.img`
   left: 0;
 
 `;
+
+

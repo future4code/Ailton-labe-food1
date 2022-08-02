@@ -14,7 +14,6 @@ import {
 } from './styled'
 import { login } from './../../services/user'
 import logo from './../../assets/images/logo.svg'
-import Header from '../../components/Header/Login-Signup/header'
 import {
   ChakraProvider,
   Icon,
@@ -34,6 +33,7 @@ import {
 import { BsFillEyeSlashFill } from 'react-icons/bs'
 import { BsFillEyeFill } from 'react-icons/bs'
 import { LabelFloat } from '../../services/FloatingLabel'
+
 
 function LoginPage() {
   const Navigate = useNavigate()
@@ -55,10 +55,6 @@ function LoginPage() {
   return (
     <ChakraProvider>
       <DivContainer>
-        <div>
-          <Header />
-        </div>
-
         <DivContainerImage>
           <img src={logo} alt="logo"></img>
         </DivContainerImage>
@@ -118,6 +114,7 @@ function LoginPage() {
             </DivCliqueAqui>
           </DivCadastre>
         </div>
+        <splashScreen/>
       </DivContainer>
     </ChakraProvider>
   )
