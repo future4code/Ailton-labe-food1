@@ -27,11 +27,11 @@ import "./Example.css";
 
 function FeedPage() {
   const res = useRequestData([], `${BASE_URL}/restaurants`);
+  const navigate = useNavigate()
   const [search, setSearch] = useState("");
   useProtectedPage();
   const [filtredRestaurant, setFiltredRestaurant] = useState("");
 
-  
 
   const cardRestaurant = res.restaurants
     ?.filter((restaurant) => {
@@ -43,7 +43,7 @@ function FeedPage() {
     })
     .map((restaurant) => {
       return (
-        <ContainerRest key={restaurant.id}>
+        <ContainerRest key={restaurant.id} onClick={() => goToPage(navigate, `res/${restaurant.id}`)}>
           <ContainerLogo>
             <Img src={restaurant.logoUrl} alt="logo" />
           </ContainerLogo>
