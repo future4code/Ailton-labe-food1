@@ -6,8 +6,10 @@ import useGetProfile from "../../../hooks/useGetProfile";
 import { useForm } from "../../../hooks/useForm";
 import goToPage from "../../../routes/coordinator";
 import { useNavigate } from "react-router-dom";
-import { Container } from "./style";
 import useProtectedPage from "../../../hooks/useProtected";
+import { Container } from "./style"
+import {MdArrowBackIos} from "react-icons/md";
+import {Icon} from '@chakra-ui/react'
 
 function EditInfoPage() {
   const token = localStorage.getItem("token");
@@ -37,8 +39,10 @@ function EditInfoPage() {
     <Container>
       <header>
         <div id="header">
-          <button onClick={() => goToPage(navigate, "profile")}>Voltar</button>
-          <p>Editar</p>
+          <div onClick={() => goToPage(navigate, "profile")}>
+            <Icon as={MdArrowBackIos}/>
+            </div>
+          <p><b>Editar</b></p>
         </div>
         <hr />
       </header>

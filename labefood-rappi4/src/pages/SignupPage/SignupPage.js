@@ -1,18 +1,18 @@
-import React, { useState } from "react";
-import goToPage from "../../routes/coordinator";
-import { useForm } from "./../../hooks/useForm";
-import { useNavigate } from "react-router-dom";
+import React, { useState } from 'react'
+import goToPage from '../../routes/coordinator'
+import { useForm } from './../../hooks/useForm'
+import { useNavigate } from 'react-router-dom'
 import {
   Form,
   DivContainer,
   DivContainerImage,
   DivText,
   DivInput,
-  ButtonCadastrar,
-} from "./style";
-import { signup } from "./../../services/user";
-import logo from "./../../assets/images/logo.svg";
-import Header from "../../components/Header/Login-Signup/header";
+  ButtonCadastrar
+} from './style'
+import { signup } from './../../services/user'
+import logo from './../../assets/images/logo.svg'
+import Header from '../../components/Header/Login-Signup/header'
 import {
   ChakraProvider,
   Stack,
@@ -27,49 +27,49 @@ import {
   FormLabel,
   FormErrorMessage,
   FormHelperText,
-  Button,
-} from "@chakra-ui/react";
-import { BsFillEyeSlashFill } from "react-icons/bs";
-import { BsFillEyeFill } from "react-icons/bs";
+  Button
+} from '@chakra-ui/react'
+import { BsFillEyeSlashFill } from 'react-icons/bs'
+import { BsFillEyeFill } from 'react-icons/bs'
 
 function SignupPage() {
-  const Navigate = useNavigate();
+  const Navigate = useNavigate()
 
-  const [show, setShow] = React.useState(false);
-  const handleClick = () => setShow(!show);
+  const [show, setShow] = React.useState(false)
+  const handleClick = () => setShow(!show)
 
-  const [ocultar, setOcultar] = useState(false);
-  const ocultarMostrar = () => setOcultar(!ocultar);
+  const [ocultar, setOcultar] = useState(false)
+  const ocultarMostrar = () => setOcultar(!ocultar)
 
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(false)
   const [form, onChange, cleanFields] = useForm({
-    name: "",
-    email: "",
-    cpf: "",
-    password: "",
-    passVerify: "",
-  });
+    name: '',
+    email: '',
+    cpf: '',
+    password: '',
+    passVerify: ''
+  })
 
   const onSubmitForm = (e) => {
-    e.preventDefault();
+    e.preventDefault()
 
-    const passVerify = form.passVerify;
+    const passVerify = form.passVerify
 
     const body = {
       name: form.name,
       email: form.email,
       cpf: form.cpf,
-      password: form.password,
-    };
+      password: form.password
+    }
 
-    signup(body, cleanFields, Navigate, setIsLoading, passVerify);
-  };
+    signup(body, cleanFields, Navigate, setIsLoading, passVerify)
+  }
 
   return (
     <ChakraProvider>
       <DivContainer>
         <div>
-          <Header />
+          <Header page="login" />
         </div>
 
         <DivContainerImage>
@@ -85,7 +85,7 @@ function SignupPage() {
               <Input
                 placeholder="Nome e sobrenome"
                 value={form.name}
-                type={"text"}
+                type={'text'}
                 name="name"
                 required
                 onChange={onChange}
@@ -99,7 +99,6 @@ function SignupPage() {
                 required
                 onChange={onChange}
               ></Input>
-
 
               <Input
                 placeholder="000.000.000-00"
@@ -115,7 +114,7 @@ function SignupPage() {
                   placeholder="Mínimo 6 caracteres"
                   value={form.password}
                   name="password"
-                  type={show ? "text" : "password"}
+                  type={show ? 'text' : 'password'}
                   required
                   onChange={onChange}
                 />
@@ -139,7 +138,7 @@ function SignupPage() {
                   placeholder="Digite novamente."
                   value={form.passVerify}
                   name="passVerify"
-                  type={ocultar ? "text" : "password"}
+                  type={ocultar ? 'text' : 'password'}
                   required
                   onChange={onChange}
                 />
@@ -165,8 +164,7 @@ function SignupPage() {
         </div>
       </DivContainer>
     </ChakraProvider>
-  );
+  )
 }
 
-export default SignupPage;
-
+export default SignupPage

@@ -1,27 +1,24 @@
 import React from 'react'
-import {DivContainerHeader, ImageBack} from './style'
+import { DivContainerHeader, ImageBack } from './style'
 import { ChakraProvider } from '@chakra-ui/react'
-import {
-    Icon,
-  } from "@chakra-ui/react";
-import { BsFillPersonFill } from "react-icons/bs";
+import { Icon } from '@chakra-ui/react'
+import { BsFillPersonFill } from 'react-icons/bs'
 import back from './../../../assets/images/back.svg'
-import { useNavigate } from 'react-router-dom';
-import goToPage from '../../../routes/coordinator';
-
+import { useNavigate } from 'react-router-dom'
+import goToPage from '../../../routes/coordinator'
 
 function Header(props) {
-
-    const Navigate = useNavigate()
+  const Navigate = useNavigate()
 
   return (
-
     <ChakraProvider>
-    <DivContainerHeader>
-    <div onClick={() => goToPage(Navigate, `${props.page}`)}><ImageBack src={back}></ImageBack></div>
+      <DivContainerHeader>
+        <div onClick={() => goToPage(Navigate, `${props.page}`)}>
+          <ImageBack src={back}></ImageBack>
+        </div>
         <hr></hr>
-        </DivContainerHeader>
-        </ChakraProvider>
+      </DivContainerHeader>
+    </ChakraProvider>
   )
 }
 
