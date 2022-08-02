@@ -69,7 +69,7 @@ function SignupPage() {
     <ChakraProvider>
       <DivContainer>
         <div>
-          <Header />
+          <Header page="login" />
         </div>
 
         <DivContainerImage>

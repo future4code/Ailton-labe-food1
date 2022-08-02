@@ -1,0 +1,11 @@
+.carousel__container {
+ width: 80vw;
+ 
+  
+}
+
+/* gives us the illusion of a "centered" slide */
+.carousel__slider {
+  padding-left: 45%;
+  padding-right: 25%;
+}

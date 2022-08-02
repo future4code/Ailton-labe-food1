@@ -1,17 +1,12 @@
 import React from "react";
-import Router from './routes/Router'
+import Router from "./routes/Router";
+import GlobalState from "./Global/GlobalState";
 
 function App() {
-
-
   return (
-    <Router>
-    
-    <div className="App">
-     LABEFOOD
-    </div>
-    </Router>
-
+    <GlobalState>
+      <Router />
+    </GlobalState>
   );
 }
 
