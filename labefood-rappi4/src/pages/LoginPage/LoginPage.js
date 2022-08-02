@@ -1,31 +1,38 @@
-
-import React, { useState } from 'react'
-import { useForm } from './../../hooks/useForm'
-import { useNavigate } from 'react-router-dom'
-import goToPage from './../../routes/coordinator'
-import { Form, DivContainer } from './styled'
-import { login } from './../../services/user'
-
-function LoginPage() {
-  const Navigate = useNavigate()
-
-  const [form, onChange, cleanFields] = useForm({
-    email: '',
-    password: ''
-  })
-  const [isLoading, setIsLoading] = useState(false)
-
-  const onSubmitForm = (e) => {
-    e.preventDefault()
-    login(form, cleanFields, Navigate, setIsLoading)
-  }
-
 import React, { useState } from "react";
 import { useForm } from "./../../hooks/useForm";
 import { useNavigate } from "react-router-dom";
 import goToPage from "./../../routes/coordinator";
-import { Form, DivContainer } from "./style";
+import {
+  Form,
+  DivContainer,
+  ButtonEntrar,
+  DivContainerImage,
+  DivText,
+  DivInput,
+  DivCadastre,
+  DivCliqueAqui,
+} from './styled'
 import { login } from "./../../services/user";
+import logo from "./../../assets/images/logo.svg";
+import Header from "../../components/Header/Login-Signup/header";
+import {
+  ChakraProvider,
+  Icon,
+  Stack,
+  Input,
+  InputGroup,
+  InputLeftElement,
+  InputRightElement,
+  extendTheme,
+  Select,
+  FormControl,
+  FormLabel,
+  FormErrorMessage,
+  FormHelperText,
+  Button,
+} from "@chakra-ui/react";
+import { BsFillEyeSlashFill } from "react-icons/bs";
+import { BsFillEyeFill } from "react-icons/bs";
 
 function LoginPage() {
   const Navigate = useNavigate();
@@ -36,6 +43,11 @@ function LoginPage() {
   });
   const [isLoading, setIsLoading] = useState(false);
 
+  const [show, setShow] = React.useState(false);
+  const handleClick = () => setShow(!show);
+
+
+
   const onSubmitForm = (e) => {
     e.preventDefault();
     login(form, cleanFields, Navigate, setIsLoading);
@@ -43,54 +55,67 @@ function LoginPage() {
 
 
   return (
-    <DivContainer>
-      <div>Página de login dos usuários cadastrados !</div>
-
-      <div>
-        <Form onSubmit={onSubmitForm}>
-          <input
-            placeholder="email"
-            value={form.email}
-
-            type={'email'}
-
-            type={"email"}
-
-            name="email"
-            required
-            onChange={onChange}
-          ></input>
-
-          <input
-            placeholder="senha"
-            value={form.password}
-            type="password"
-            name="password"
-            required
-            onChange={onChange}
-          ></input>
-
-          <button type="submit">Entrar</button>
-        </Form>
+    <ChakraProvider>
+      <DivContainer>
         <div>
-
-          Não possui uma conta ?{' '}
-          <strong onClick={() => goToPage(Navigate, 'signup')}>
-
-          Não possui uma conta ?{" "}
-          <strong onClick={() => goToPage(Navigate, "signup")}>
-
-            cadastre-se
-          </strong>
+          <Header />
         </div>
-      </div>
-    </DivContainer>
 
-  )
-}
+        <DivContainerImage>
+          <img src={logo} alt="logo"></img>
+        </DivContainerImage>
+        <DivText>
+          <p>Entrar</p>
+        </DivText>
 
-export default LoginPage
-=======
+        <div>
+          <Form onSubmit={onSubmitForm}>
+            <DivInput>
+              <Input
+                placeholder="email@email.com"
+                value={form.email}
+                type={"email"}
+                name="email"
+                required
+                onChange={onChange}
+              ></Input>
+
+              <InputGroup size="md">
+                <Input
+                  placeholder="Mínimo de 6 caracteres"
+                  value={form.password}
+                  name="password"
+                  type={show ? "text" : "password"}
+                  required
+                  onChange={onChange}
+                />
+                <InputRightElement width="4.5rem">
+                  <div onClick={handleClick}>
+                    {show ? (
+                      <div>
+                        <Icon as={BsFillEyeSlashFill} />
+                      </div>
+                    ) : (
+                      <div>
+                        <Icon as={BsFillEyeFill} />
+                      </div>
+                    )}
+                  </div>
+                </InputRightElement>
+              </InputGroup>
+            </DivInput>
+
+            <ButtonEntrar type="submit">Entrar</ButtonEntrar>
+          </Form>
+          <DivCadastre>
+            Não possui cadastro?
+            <DivCliqueAqui onClick={() => goToPage(Navigate, "signup")}>
+              Clique aqui.{" "}
+            </DivCliqueAqui>
+          </DivCadastre>
+        </div>
+      </DivContainer>
+    </ChakraProvider>
   );
 }
 

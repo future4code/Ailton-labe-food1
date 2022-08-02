@@ -72,6 +72,7 @@ function EditInfoPage() {
       </main>
     </Container>
   );
+
 }
 
 export default EditInfoPage;

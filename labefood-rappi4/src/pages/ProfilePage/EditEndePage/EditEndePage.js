@@ -76,6 +76,7 @@ function EditEndePage() {
       </main>
     </Container>
   );
+
 }
 
 export default EditEndePage;

@@ -94,6 +94,7 @@ function AddressRegistrationFormPage() {
           ></input>
 
           <button type="submit">Salvar Endereço</button>
+
         </Form>
       </div>
     </DivContainer>

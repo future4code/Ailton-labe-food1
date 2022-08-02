@@ -1,163 +1,172 @@
-import React, { useState } from 'react'
-import goToPage from '../../routes/coordinator'
-import { useForm } from './../../hooks/useForm'
-import { useNavigate } from 'react-router-dom'
-import { Form, DivContainer } from './style'
-import { signup } from './../../services/user'
+import React, { useState } from "react";
+import goToPage from "../../routes/coordinator";
+import { useForm } from "./../../hooks/useForm";
+import { useNavigate } from "react-router-dom";
+import {
+  Form,
+  DivContainer,
+  DivContainerImage,
+  DivText,
+  DivInput,
+  ButtonCadastrar,
+} from "./style";
+import { signup } from "./../../services/user";
+import logo from "./../../assets/images/logo.svg";
+import Header from "../../components/Header/Login-Signup/header";
+import {
+  ChakraProvider,
+  Stack,
+  Input,
+  Icon,
+  InputGroup,
+  InputLeftElement,
+  InputRightElement,
+  extendTheme,
+  Select,
+  FormControl,
+  FormLabel,
+  FormErrorMessage,
+  FormHelperText,
+  Button,
+} from "@chakra-ui/react";
+import { BsFillEyeSlashFill } from "react-icons/bs";
+import { BsFillEyeFill } from "react-icons/bs";
 
 function SignupPage() {
-  const Navigate = useNavigate()
-  const [isLoading, setIsLoading] = useState(false)
+  const Navigate = useNavigate();
+
+  const [show, setShow] = React.useState(false);
+  const handleClick = () => setShow(!show);
+
+  const [ocultar, setOcultar] = useState(false);
+  const ocultarMostrar = () => setOcultar(!ocultar);
+
+  const [isLoading, setIsLoading] = useState(false);
   const [form, onChange, cleanFields] = useForm({
-
-    name: '',
-    email: '',
-    cpf: '',
-    password: ''
-  })
-=======
-    name: '', email:'', cpf:'', password:'', confirmPass:''
-   }) 
-
-   const body = {
-     name: form.name,
-     email: form.email,
-     cpf: form.cpf,
-     password: form.password
-   }
-
-   const verifyPass = form.confirmPass
-
+    name: "",
+    email: "",
+    cpf: "",
+    password: "",
+    passVerify: "",
+  });
 
   const onSubmitForm = (e) => {
-    e.preventDefault()
+    e.preventDefault();
 
-    signup(form, cleanFields, Navigate, setIsLoading)
-  }
+    const passVerify = form.passVerify;
 
-    signup(body, cleanFields, Navigate, setIsLoading, verifyPass)
+    const body = {
+      name: form.name,
+      email: form.email,
+      cpf: form.cpf,
+      password: form.password,
+    };
 
-   }
-
+    signup(body, cleanFields, Navigate, setIsLoading, passVerify);
+  };
 
   return (
-    <DivContainer>
-
-      <div>Página de cadastro dos usuários !</div>
-
-      <div>
-        <Form onSubmit={onSubmitForm}>
-          <input
-            placeholder="Name"
-            value={form.name}
-            type={'text'}
-            name="name"
-            required
-            onChange={onChange}
-          ></input>
-
-          <input
-            placeholder="Email"
-            value={form.email}
-            type="email"
-            name="email"
-            required
-            onChange={onChange}
-          ></input>
-
-          <input
-            placeholder="Cpf"
-            value={form.cpf}
-            type="number"
-            name="cpf"
-            required
-            onChange={onChange}
-          ></input>
-
-          <input
-            placeholder="Senha"
-            value={form.password}
-            type="password"
-            name="password"
-            required
-            onChange={onChange}
-          ></input>
-
-          <button type="submit">Cadastrar</button>
-        </Form>
+    <ChakraProvider>
+      <DivContainer>
         <div>
-          Já possui uma conta ? Faça{' '}
-          <strong onClick={() => goToPage(Navigate, 'login')}>login</strong>
+          <Header />
         </div>
-      </div>
-    </DivContainer>
+
+        <DivContainerImage>
+          <img src={logo} alt="logo"></img>
+        </DivContainerImage>
+        <DivText>
+          <p>Cadastrar</p>
+        </DivText>
+
+        <div>
+          <Form onSubmit={onSubmitForm}>
+            <DivInput>
+              <Input
+                placeholder="Nome e sobrenome"
+                value={form.name}
+                type={"text"}
+                name="name"
+                required
+                onChange={onChange}
+              ></Input>
+
+              <Input
+                placeholder="email@email.com"
+                value={form.email}
+                type="email"
+                name="email"
+                required
+                onChange={onChange}
+              ></Input>
 
 
-    <div>Página de cadastro dos usuários !</div>
+              <Input
+                placeholder="000.000.000-00"
+                value={form.cpf}
+                type="number"
+                name="cpf"
+                required
+                onChange={onChange}
+              ></Input>
 
-    <div>
-      <Form onSubmit={onSubmitForm}>
+              <InputGroup size="md">
+                <Input
+                  placeholder="Mínimo 6 caracteres"
+                  value={form.password}
+                  name="password"
+                  type={show ? "text" : "password"}
+                  required
+                  onChange={onChange}
+                />
+                <InputRightElement width="4.5rem">
+                  <div onClick={handleClick}>
+                    {show ? (
+                      <div>
+                        <Icon as={BsFillEyeSlashFill} />
+                      </div>
+                    ) : (
+                      <div>
+                        <Icon as={BsFillEyeFill} />
+                      </div>
+                    )}
+                  </div>
+                </InputRightElement>
+              </InputGroup>
 
-        <input placeholder='Name'
-        value={form.name}
-        type='text'
-        name='name'
-        required
-        onChange={onChange}
-        ></input>
+              <InputGroup size="md">
+                <Input
+                  placeholder="Digite novamente."
+                  value={form.passVerify}
+                  name="passVerify"
+                  type={ocultar ? "text" : "password"}
+                  required
+                  onChange={onChange}
+                />
+                <InputRightElement width="4.5rem">
+                  <div onClick={ocultarMostrar}>
+                    {ocultar ? (
+                      <div>
+                        <Icon as={BsFillEyeSlashFill} />
+                      </div>
+                    ) : (
+                      <div>
+                        <Icon as={BsFillEyeFill} />
+                      </div>
+                    )}
+                  </div>
+                </InputRightElement>
+              </InputGroup>
+            </DivInput>
+            <ButtonCadastrar type="submit">Criar</ButtonCadastrar>
+          </Form>
 
-        <input  placeholder='Email'
-        value={form.email}
-        type='email'
-        name='email'
-        required
-        onChange={onChange}
-        ></input>
-
-        <input  placeholder='Cpf'
-        value={form.cpf}
-        pattern={'[0-9]{3}\.[0-9]{3}\.[0-9]{3}-[0-9]{2}'}
-        title={'Seu cpf deve conter 11 números separados por pontos, ex: 123.456.789-10'}
-        minLength='11'
-        maxLength='11'
-        type='number'
-        name='cpf'
-        required
-        onChange={onChange}
-        ></input>
-
-        <input  placeholder='Senha'
-        value={form.password}
-        minLength={'8'}
-        maxLength={'15'}
-        title={'Sua senha deve conter entre 8 a 15 caracteres.'}
-        type='password'
-        name='password'
-        required
-        onChange={onChange}
-        ></input>
-
-        <input  placeholder='Confirme a senha'
-        value={form.confirmPass}
-        minLength={'8'}
-        maxLength={'15'}
-        type='password'
-        name='confirmPass'
-        required
-        onChange={onChange}
-        ></input>
-
-
-        <button type='submit'>Cadastrar</button>
-
-      </Form>
-      <div>Já possui uma conta ? Faça <strong onClick={() =>goToPage(Navigate, 'login')}>login</strong></div>
-
-    </div>
-
-  </DivContainer>
-
-  )
+          {/* <div>Já possui uma conta ? Faça <strong onClick={() =>goToPage(Navigate, 'login')}>login</strong></div> */}
+        </div>
+      </DivContainer>
+    </ChakraProvider>
+  );
 }
 
-export default SignupPage
+export default SignupPage;
+
