@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import styled from "styled-components";
 import useProtectedPage from "../../hooks/useProtected";
@@ -81,14 +81,33 @@ const ContainerMap = styled.div`
   gap: 12px;
 
   img {
-    min-width: 97px;
+    min-width: 105px;
+    max-width: 105px;
     min-height: 105px;
     max-height: 105px;
     border-top-left-radius: 8px;
     border-bottom-left-radius: 8px;
   }
 
-  div {
+  #quantity {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 33px;
+    height: 33px;
+    font-size: 16px;
+    color: #e86e5a;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 0 9px 16px;
+    padding: 7px 12px;
+    border-top-right-radius: 8px;
+    border-bottom-left-radius: 8px;
+    border: solid 1px #e86e5a;
+  }
+
+  #container-info {
     display: flex;
     flex-direction: column;
     gap: 4px;
@@ -131,7 +150,15 @@ function DetailRestPage() {
 
   const values = useContext(GlobalContext);
 
-  console.log(values.cartProducts);
+  const quantityCart = (arr, product) => {
+    var qtd = 0;
+    for (var i = 0; i < arr.length; i++) {
+      if (arr[i] === product) {
+        qtd++;
+      }
+    }
+    return qtd;
+  };
 
   return (
     <Container>
@@ -156,22 +183,27 @@ function DetailRestPage() {
             return (
               <ContainerMap>
                 <img src={product.photoUrl} alt="produto" />
-                <div>
+                <div id="container-info">
                   <p id="product-name">{product.name}</p>
                   <p id="product-description">{product.description}</p>
                   <p id="product-price">
                     <strong>R${product.price}</strong>
                   </p>
                 </div>
-                {values.cartProducts.includes(product) ? (
+                {values.cartProducts.includes(product) && (
+                  <div id="quantity">
+                    {quantityCart(values.cartProducts, product)}
+                  </div>
+                )}
+                {/* {values.cartProducts.includes(product) ? (
                   <button onClick={() => values.functionRemove(product.id)}>
                     Remover
                   </button>
-                ) : (
-                  <button onClick={() => values.functionAdd(product, 2)}>
-                    Adicionar
-                  </button>
-                )}
+                ) : ( */}
+                <button onClick={() => values.functionAdd(product)}>
+                  Adicionar
+                </button>
+                {/* )} */}
               </ContainerMap>
             );
           })}
