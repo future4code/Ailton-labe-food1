@@ -6,14 +6,17 @@ import useGetProfile from "../../../hooks/useGetProfile";
 import { useForm } from "../../../hooks/useForm";
 import goToPage from "../../../routes/coordinator";
 import { useNavigate } from "react-router-dom";
+import useProtectedPage from "../../../hooks/useProtected";
 import { Container } from "./style"
-
+import {MdArrowBackIos} from "react-icons/md";
+import {Icon} from '@chakra-ui/react'
 
 function EditInfoPage() {
   const token = localStorage.getItem("token");
 
   const profile = useGetProfile();
   const navigate = useNavigate();
+  useProtectedPage()
 
   const [form, onChange] = useForm({
     name: "",
@@ -21,29 +24,25 @@ function EditInfoPage() {
     cpf: "",
   });
 
-  const updateProfile = (e) => {
-    e.preventDefault();
-
+  const updateProfile = () => {
     axios
       .put(`${BASE_URL}/profile`, form, {
         headers: {
-          auth: token,  
+          auth: token,
         },
       })
-      .then((res) => {
-        console.log(res);
-      })
-      .catch((err) => {
-        console.log(err)
-      });
+      .then((res) => {})
+      .catch((err) => {});
   };
 
   return (
     <Container>
       <header>
         <div id="header">
-          <button onClick={() => goToPage(navigate, "profile")}>Voltar</button>
-          <p>Editar</p>
+          <div onClick={() => goToPage(navigate, "profile")}>
+            <Icon as={MdArrowBackIos}/>
+            </div>
+          <p><b>Editar</b></p>
         </div>
         <hr />
       </header>
@@ -54,25 +53,27 @@ function EditInfoPage() {
             value={form.name}
             onChange={onChange}
             placeholder={profile.name}
+            required
           />
           <input
             name="email"
             value={form.email}
             onChange={onChange}
             placeholder={profile.email}
+            required
           />
           <input
             name="cpf"
             value={form.cpf}
             onChange={onChange}
             placeholder={profile.cpf}
+            required
           />
-          <button onClick={() => updateProfile}>Salvar</button>
+          <button onClick={() => updateProfile()}>Salvar</button>
         </form>
       </main>
     </Container>
   );
-
 }
 
 export default EditInfoPage;
