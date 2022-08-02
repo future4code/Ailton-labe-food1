@@ -11,7 +11,7 @@ import {
   DivInput,
   DivCadastre,
   DivCliqueAqui,
-} from "./style";
+} from './styled'
 import { login } from "./../../services/user";
 import logo from "./../../assets/images/logo.svg";
 import Header from "../../components/Header/Login-Signup/header";
@@ -46,10 +46,13 @@ function LoginPage() {
   const [show, setShow] = React.useState(false);
   const handleClick = () => setShow(!show);
 
+
+
   const onSubmitForm = (e) => {
     e.preventDefault();
     login(form, cleanFields, Navigate, setIsLoading);
   };
+
 
   return (
     <ChakraProvider>
@@ -117,3 +120,4 @@ function LoginPage() {
 }
 
 export default LoginPage;
+

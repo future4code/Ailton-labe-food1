@@ -100,6 +100,7 @@ function SignupPage() {
                 onChange={onChange}
               ></Input>
 
+
               <Input
                 placeholder="000.000.000-00"
                 value={form.cpf}
@@ -168,3 +169,4 @@ function SignupPage() {
 }
 
 export default SignupPage;
+
