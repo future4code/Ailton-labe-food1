@@ -155,7 +155,7 @@ function ProfilePage() {
         <section id="container-adress">
           <div>
             <p id="adress-title">Endereço cadastrado</p>
-            <p id="adress-itself">Rua ablublebleble</p>
+            <p id="adress-itself">{profile.address}</p>
           </div>
           <button onClick={() => goToPage(navigate, "edit/end")}>cd</button>
         </section>

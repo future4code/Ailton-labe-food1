@@ -1,21 +1,8 @@
-
-import React from 'react'
-import { BrowserRouter, Routes, Route } from 'react-router-dom'
-import SignUpPage from './../pages/SignupPage/SignupPage'
-import LoginPage from './../pages/LoginPage/LoginPage'
-import AddressRegistrationFormPage from './../pages/AddressRegistrationFormPage/AddressRegistrationFormPage'
-import FeedPage from './../pages/FeedPage/FeedPage'
-import ProfilePage from './../pages/ProfilePage/ProfilePage'
-import EditInfoPage from './../pages/ProfilePage/EditInfoPage/EditInfoPage'
-import EditEndPage from './../pages/ProfilePage/EditEndePage/EditEndePage'
-import CartPage from './../pages/CartPage/CartPage'
-import DetailRestPage from './../pages/DetailRestPage/DetailRestPage'
-import ErrorPage from './../pages/ErrorPage/ErrorPage'
-
 import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import SignUpPage from "./../pages/SignupPage/SignupPage";
 import LoginPage from "./../pages/LoginPage/LoginPage";
+import AddressRegistrationFormPage from "./../pages/AddressRegistrationFormPage/AddressRegistrationFormPage";
 import FeedPage from "./../pages/FeedPage/FeedPage";
 import ProfilePage from "./../pages/ProfilePage/ProfilePage";
 import EditInfoPage from "./../pages/ProfilePage/EditInfoPage/EditInfoPage";
@@ -23,7 +10,6 @@ import EditEndPage from "./../pages/ProfilePage/EditEndePage/EditEndePage";
 import CartPage from "./../pages/CartPage/CartPage";
 import DetailRestPage from "./../pages/DetailRestPage/DetailRestPage";
 import ErrorPage from "./../pages/ErrorPage/ErrorPage";
-
 
 const Router = () => {
   return (
@@ -49,14 +35,7 @@ const Router = () => {
         <Route path="*" element={<ErrorPage />}></Route>
       </Routes>
     </BrowserRouter>
-
-  )
-}
-
-export default Router
-
   );
 };
 
 export default Router;
-
