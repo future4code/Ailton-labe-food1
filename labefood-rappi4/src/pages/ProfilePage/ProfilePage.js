@@ -1,11 +1,11 @@
-import axios from "axios";
+
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-import { BASE_URL } from "../../constants/Url/url";
 import { primaryColor } from "../../constants/colors/colors";
 import goToPage from "../../routes/coordinator";
 import { useNavigate } from "react-router-dom";
 import useGetProfile from "../../hooks/useGetProfile";
+import useProtectedPage from "../../hooks/useProtected";
 
 const Container = styled.div`
   height: 100%;
@@ -124,6 +124,7 @@ const ContainerMap = styled.div`
 function ProfilePage() {
 
   const navigate = useNavigate();
+  useProtectedPage()
   const arrayTest = [
     {
       name: "Bullguer Vila Madalena",
@@ -155,7 +156,7 @@ function ProfilePage() {
         <section id="container-adress">
           <div>
             <p id="adress-title">Endereço cadastrado</p>
-            <p id="adress-itself">Rua ablublebleble</p>
+            <p id="adress-itself">{profile.address}</p>
           </div>
           <button onClick={() => goToPage(navigate, "edit/end")}>cd</button>
         </section>
