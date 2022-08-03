@@ -13,10 +13,7 @@ export const ContainerRest = styled.div`
   border: 1px solid #dcdcdc;
   border-radius: 14px;
   height: 13rem;
-  `;
-
-
-
+`;
 
 export const DivCarousel = styled.div`
   display: flex;
@@ -25,14 +22,12 @@ export const DivCarousel = styled.div`
   justify-content: center;
 `;
 
-
-
 export const DivDetalhe = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
   margin: 10px;
-  color:#8E8E93;
+  color: #8e8e93;
 `;
 
 export const Form = styled.form`
@@ -52,12 +47,11 @@ export const Img = styled.img`
 export const H3 = styled.h3`
   margin: 10px;
   color: #e86e5a;
-  `;
+`;
 
 export const H1 = styled.h1`
   margin: 5px;
 `;
-
 
 export const ContainerLogo = styled.div`
   width: 328px;

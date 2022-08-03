@@ -10,10 +10,10 @@ import {
   DivText,
   DivInput,
   DivCadastre,
-  DivCliqueAqui
-} from './styled'
-import { login } from './../../services/user'
-import logo from './../../assets/images/logo.svg'
+  DivCliqueAqui,
+} from "./styled";
+import { login } from "./../../services/user";
+import logo from "./../../assets/images/logo.svg";
 import {
   ChakraProvider,
   Icon,
@@ -33,7 +33,6 @@ import {
 import { BsFillEyeSlashFill } from "react-icons/bs";
 import { BsFillEyeFill } from "react-icons/bs";
 import { LabelFloat } from "../../services/FloatingLabel";
-
 
 function LoginPage() {
   const Navigate = useNavigate();
@@ -114,7 +113,6 @@ function LoginPage() {
             </DivCliqueAqui>
           </DivCadastre>
         </div>
-        <splashScreen/>
       </DivContainer>
     </ChakraProvider>
   );
