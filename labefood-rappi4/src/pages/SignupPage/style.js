@@ -27,7 +27,7 @@ export const DivInput = styled.div`
   input {
     color: black;
     margin-bottom: 5%;
-    width: 75vw;
+    width: 100%;
   }
 `
 
