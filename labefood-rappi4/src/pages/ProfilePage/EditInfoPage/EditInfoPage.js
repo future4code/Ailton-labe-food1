@@ -7,17 +7,18 @@ import { useForm } from "../../../hooks/useForm";
 import goToPage from "../../../routes/coordinator";
 import { useNavigate } from "react-router-dom";
 import useProtectedPage from "../../../hooks/useProtected";
-import { Container } from "./style"
-import {MdArrowBackIos} from "react-icons/md";
-import {Icon} from '@chakra-ui/react'
-import Header from "../../../components/Header/Login-Signup/header"
+import { Container } from "./style";
+import { MdArrowBackIos } from "react-icons/md";
+import { Icon } from "@chakra-ui/react";
+import Header from "../../../components/Header/Login-Signup/header";
+import { LabelFloat } from "../../../services/FloatingLabel";
 
 function EditInfoPage() {
   const token = localStorage.getItem("token");
 
   const profile = useGetProfile();
   const navigate = useNavigate();
-  useProtectedPage()
+  useProtectedPage();
 
   const [form, onChange] = useForm({
     name: "",
@@ -38,7 +39,7 @@ function EditInfoPage() {
 
   return (
     <Container>
-      <Header page="profile" title="Editar"/>
+      <Header page="profile" title="Editar" />
       {/* <header>
         <div id="header">
           <div onClick={() => goToPage(navigate, "profile")}>
@@ -50,27 +51,36 @@ function EditInfoPage() {
       </header> */}
       <main>
         <form id="forms">
-          <input
-            name="name"
-            value={form.name}
-            onChange={onChange}
-            placeholder={profile.name}
-            required
-          />
-          <input
-            name="email"
-            value={form.email}
-            onChange={onChange}
-            placeholder={profile.email}
-            required
-          />
-          <input
-            name="cpf"
-            value={form.cpf}
-            onChange={onChange}
-            placeholder={profile.cpf}
-            required
-          />
+          <LabelFloat>
+            <input
+              name="name"
+              value={form.name}
+              onChange={onChange}
+              placeholder={profile.name}
+              required
+            />
+            <label>Nome *</label>
+            </LabelFloat>
+            <LabelFloat>
+            <input
+              name="email"
+              value={form.email}
+              onChange={onChange}
+              placeholder={profile.email}
+              required
+              />
+              <label>E-mail*</label>
+              </LabelFloat>
+              <LabelFloat>
+            <input
+              name="cpf"
+              value={form.cpf}
+              onChange={onChange}
+              placeholder={profile.cpf}
+              required
+              />
+              <label>CPF*</label>
+              </LabelFloat>
           <button onClick={() => updateProfile()}>Salvar</button>
         </form>
       </main>
