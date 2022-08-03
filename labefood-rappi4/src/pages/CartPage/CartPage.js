@@ -99,8 +99,9 @@ function CartPage() {
         <Texto4>Cartão</Texto4>
       </DivPagamento2>
 
-      <ButtonEntrar>Confirmar</ButtonEntrar>
-      <NavegationFeed page={"cart"} />
+      <ButtonEntrar><strong>Confirmar</strong></ButtonEntrar>
+      <NavegationFeed page={'cart'} />
+
     </Container>
   );
 }
