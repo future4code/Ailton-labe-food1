@@ -1,8 +1,8 @@
-import React from "react";
+import React, { useContext } from "react";
 import useProtectedPage from "../../hooks/useProtected";
 import NavegationFeed from "../../components/Footer/navegationFeed";
-import radiobutton from "../../assets/images/radiobutton.svg"
-import radiobutton2 from "../../assets/images/radiobutton2.svg"
+import radiobutton from "../../assets/images/radiobutton.svg";
+import radiobutton2 from "../../assets/images/radiobutton2.svg";
 import {
   Container,
   DivEndereco,
@@ -17,13 +17,26 @@ import {
   DivPagamento2,
   Hr,
   Texto4,
-  ButtonEntrar
+  ButtonEntrar,
+  ContainerRestInfo,
+  ContainerCards,
 } from "./styled";
 import Header from "./../../components/Header/Login-Signup/header";
-
+import { GlobalContext } from "../../Global/GlobalContext";
+import useGetProfileDetails from "../../hooks/useGetProfileDetails";
 
 function CartPage() {
   useProtectedPage();
+  const values = useContext(GlobalContext);
+  const profile = useGetProfileDetails();
+
+  // const novaArr = values.cartProducts.filter((obj, index) => {
+  //   if(obj[index] !== obj[index+1]) {
+  //     return obj
+  //   }
+  // })
+
+  // console.log(novaArr);
 
   return (
     <Container>
@@ -31,15 +44,45 @@ function CartPage() {
 
       <DivEndereco>
         <P>Endereço de entrega</P>
-        <p>Rua Alessandra Vieira, 42</p>
+        <p>
+          <strong>
+            {profile.street}, {profile.number}
+          </strong>
+        </p>
       </DivEndereco>
-      <Texto>Carrinho vazio</Texto>
+      {values.restaurant ? (
+        <ContainerRestInfo>
+          <p id="restaurant-name">{values.restaurant.name}</p>
+          <p>{values.restaurant.address}</p>
+          <div id="delivery-shipping">
+            <p>
+              {values.restaurant.deliveryTime - 10} -{" "}
+              {values.restaurant.deliveryTime} min
+            </p>
+          </div>
+        </ContainerRestInfo>
+      ) : (
+        <Texto>Carrinho vazio</Texto>
+      )}
+      <ContainerCards></ContainerCards>
       <DivTotal>
-        <Texto2>Frete R$ 0,00</Texto2>
+        {values.sumPrices ? (
+          <strong>
+            <Texto2>Frete R$ {values.restaurant.shipping},00</Texto2>
+          </strong>
+        ) : (
+          <Texto2>Frete R$ 0,00</Texto2>
+        )}
         <Subtotal>
           <p>SUBTOTAL</p>
           <PRed>
-            <strong>R$ 00,00</strong>
+            {values.sumPrices ? (
+              <strong>
+                R$ {values.restaurant.shipping + values.sumPrices},00
+              </strong>
+            ) : (
+              <strong>R$ 0,00</strong>
+            )}
           </PRed>
         </Subtotal>
       </DivTotal>
@@ -48,14 +91,17 @@ function CartPage() {
       </DivPagamento>
       <Hr />
       <DivPagamento>
-      <img src={radiobutton} alt="button"/><Texto4>Dinheiro</Texto4>
+        <img src={radiobutton} alt="button" />
+        <Texto4>Dinheiro</Texto4>
       </DivPagamento>
       <DivPagamento2>
-      <img src={radiobutton2} alt="button"/><Texto4>Cartão</Texto4>
+        <img src={radiobutton2} alt="button" />
+        <Texto4>Cartão</Texto4>
       </DivPagamento2>
 
       <ButtonEntrar><strong>Confirmar</strong></ButtonEntrar>
       <NavegationFeed page={'cart'} />
+
     </Container>
   );
 }

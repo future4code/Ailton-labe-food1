@@ -251,6 +251,7 @@ function DetailRestPage() {
 
   const addProductToCart = (product) => {
     values.functionAdd(product, number);
+    values.restaurantDetails(restDetails)
     setCheckToRenderContainerSelect(false);
   };
 
@@ -280,7 +281,6 @@ function DetailRestPage() {
         </ContainerRestInfo>
         <ContainerMainFood>
           <p>Principais</p>
-          Total: {values.sumPrices}
           <hr />
           {restDetails.products?.map((product) => {
             return (
