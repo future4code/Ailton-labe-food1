@@ -49,12 +49,12 @@ function FeedPage() {
           <ContainerLogo>
             <Img src={restaurant.logoUrl} alt="logo" />
           </ContainerLogo>
-          <H3>{restaurant.name} </H3>
+          <H3><b>{restaurant.name}</b></H3>
           <DivDetalhe>
             <p>
-              <strong>Entrega média em:</strong> {restaurant.deliveryTime} min
+              {restaurant.deliveryTime} - {restaurant.deliveryTime + 10} min
             </p>
-            <p>Frete:R$ {restaurant.shipping},00</p>
+            <p>Frete: R${restaurant.shipping},00</p>
           </DivDetalhe>
         </ContainerRest>
       );

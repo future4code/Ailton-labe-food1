@@ -13,7 +13,7 @@ export const ContainerRest = styled.div`
   border: 1px solid #dcdcdc;
   border-radius: 14px;
   height: 13rem;
-`;
+  `;
 
 
 
@@ -31,7 +31,8 @@ export const DivDetalhe = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin: 5px;
+  margin: 10px;
+  color:#8E8E93;
 `;
 
 export const Form = styled.form`
@@ -49,8 +50,9 @@ export const Img = styled.img`
   border-radius: 14px 14px 0px 0px;
 `;
 export const H3 = styled.h3`
-  margin: 5px;
-`;
+  margin: 10px;
+  color: #e86e5a;
+  `;
 
 export const H1 = styled.h1`
   margin: 5px;
