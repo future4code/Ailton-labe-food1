@@ -4,14 +4,12 @@ import { Navigate } from "react-router-dom";
 import { BASE_URL } from "./../constants/Url/url";
 import goToPage from "../routes/coordinator";
 
-
 export const login = (body, clear, Navigate, setIsLoading) => {
   axios
     .post(`${BASE_URL}/login`, body)
     .then((res) => {
-
-    console.log(res);
-      localStorage.setItem("token", res.data.token);
+      console.log(res);
+      localStorage.setItem('token', res.data.token)
       clear();
       setIsLoading(false);
       goToPage(Navigate, "");
@@ -21,18 +19,16 @@ export const login = (body, clear, Navigate, setIsLoading) => {
       alert(err);
     });
 };
-
 
 export const address = (body, clear, Navigate, setIsLoading) => {
   axios
     .put(`${BASE_URL}/address`, body, {
       headers: {
-        auth: localStorage.getItem('token')
-      }
+        auth: localStorage.getItem("token"),
+      },
     })
     .then((res) => {
-
-      localStorage.setItem('token', res.data.token)
+      localStorage.setItem("token", res.data.token);
       setIsLoading(false);
       clear();
       goToPage(Navigate, "");
@@ -42,18 +38,16 @@ export const address = (body, clear, Navigate, setIsLoading) => {
       alert(err);
     });
 };
-
 
 export const signup = (body, clear, Navigate, setIsLoading, verifyPass) => {
   if (body.password === verifyPass) {
     axios
       .post(`${BASE_URL}/signup`, body)
       .then((res) => {
-
         clear();
+        localStorage.setItem("token", res.data.token);
         setIsLoading(false);
         goToPage(Navigate, "address");
-
       })
       .catch((err) => {
         setIsLoading(false);
@@ -62,6 +56,4 @@ export const signup = (body, clear, Navigate, setIsLoading, verifyPass) => {
   } else {
     return alert("Senhas não coincidem");
   }
-
 };
-

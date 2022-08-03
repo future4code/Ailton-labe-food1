@@ -63,11 +63,6 @@ const ContainerMainFood = styled.div`
     border-bottom: solid 1px black;
     margin: 8px 0 12px 0;
   }
-
-  div {
-    height: 100%;
-    width: 100%;
-  }
 `;
 
 const ContainerMap = styled.div`
@@ -141,23 +136,124 @@ const ContainerMap = styled.div`
     text-align: center;
     color: #000;
   }
+
+  #button-remove {
+    border: solid 1px #e86e5a;
+    color: #e86e5a;
+  }
+`;
+
+const ContainerQuantity = styled.div`
+  position: fixed;
+  top: 0;
+  left: 0;
+  border: 1px solid black;
+  background-color: rgba(0, 0, 0, 0.5);
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 2;
+
+  #background-top {
+    height: 225px;
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+
+  #background-bottom {
+    height: 223px;
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+  }
+
+  #container-select {
+    width: 90%;
+    height: 216px;
+    background-color: white;
+    position: relative;
+
+    p {
+      width: 296px;
+      height: 18px;
+      margin: 40px 0 0 16px;
+      font-size: 16px;
+      letter-spacing: -0.39px;
+      text-align: center;
+      color: #000;
+    }
+
+    div {
+      width: 296px;
+      height: 56px;
+      margin: 30px 16px 0;
+      padding: 16px;
+      border-radius: 4px;
+      border: solid 1px #b8b8b8;
+    }
+
+    input {
+      color: black;
+      font-size: 16px;
+      letter-spacing: -0.39px;
+      height: 18px;
+    }
+
+    #button-add-to-cart {
+      bottom: 16px;
+      right: 11px;
+      border: none;
+      width: 200px;
+      letter-spacing: -0.39px;
+      font-size: 16px;
+      color: #4a90e2;
+    }
+  }
 `;
 
 function DetailRestPage() {
   useProtectedPage();
   const pathParams = useParams();
   const restDetails = useRestDetails(pathParams.id);
+  const [number, setNumber] = useState("");
+  const [checkToRenderContainerSelect, setCheckToRenderContainerSelect] =
+    useState(false);
+  const [arrayCheckId, setArrayCheckId] = useState([]);
 
   const values = useContext(GlobalContext);
 
   const quantityCart = (arr, product) => {
     var qtd = 0;
     for (var i = 0; i < arr.length; i++) {
-      if (arr[i] === product) {
+      if (arr[i].product === product) {
         qtd++;
       }
     }
     return qtd;
+  };
+
+  const showToAddQuantity = (postId) => {
+    setArrayCheckId(postId);
+    setNumber("");
+    setCheckToRenderContainerSelect(true);
+  };
+
+  const addProductToCart = (product) => {
+    values.functionAdd(product, number);
+    setCheckToRenderContainerSelect(false);
+  };
+
+  const checkProduct = (product) => {
+    for (let i = 0; i < values.cartProducts.length; i++) {
+      if (values.cartProducts[i].product === product) {
+        return true;
+      }
+    }
   };
 
   return (
@@ -178,10 +274,11 @@ function DetailRestPage() {
         </ContainerRestInfo>
         <ContainerMainFood>
           <p>Principais</p>
+          Total: {values.sumPrices}
           <hr />
           {restDetails.products?.map((product) => {
             return (
-              <ContainerMap>
+              <ContainerMap key={product.id}>
                 <img src={product.photoUrl} alt="produto" />
                 <div id="container-info">
                   <p id="product-name">{product.name}</p>
@@ -190,20 +287,61 @@ function DetailRestPage() {
                     <strong>R${product.price}</strong>
                   </p>
                 </div>
-                {values.cartProducts.includes(product) && (
+                {checkProduct(product) && (
                   <div id="quantity">
                     {quantityCart(values.cartProducts, product)}
                   </div>
                 )}
-                {/* {values.cartProducts.includes(product) ? (
-                  <button onClick={() => values.functionRemove(product.id)}>
+                {arrayCheckId.includes(product.id) &&
+                  checkToRenderContainerSelect && (
+                    <ContainerQuantity>
+                      <div
+                        id="background-top"
+                        onClick={() =>
+                          setCheckToRenderContainerSelect(
+                            !checkToRenderContainerSelect
+                          )
+                        }
+                      ></div>
+                      <div
+                        id="background-bottom"
+                        onClick={() =>
+                          setCheckToRenderContainerSelect(
+                            !checkToRenderContainerSelect
+                          )
+                        }
+                      ></div>
+                      <div id="container-select">
+                        <p>Selecione a quantidade desejada</p>
+                        <div>
+                          <form onSubmit={() => addProductToCart(product)}>
+                            <input
+                              required
+                              type="number"
+                              value={number}
+                              onChange={(e) => setNumber(e.target.value)}
+                              placeholder="0"
+                            />
+                            <button id="button-add-to-cart" type="submit">
+                              ADICIONAR AO CARRINHO
+                            </button>
+                          </form>
+                        </div>
+                      </div>
+                    </ContainerQuantity>
+                  )}
+                {checkProduct(product) ? (
+                  <button
+                    id="button-remove"
+                    onClick={() => values.functionRemove(product)}
+                  >
                     Remover
                   </button>
-                ) : ( */}
-                <button onClick={() => values.functionAdd(product)}>
-                  Adicionar
-                </button>
-                {/* )} */}
+                ) : (
+                  <button onClick={() => showToAddQuantity(product.id)}>
+                    Adicionar
+                  </button>
+                )}
               </ContainerMap>
             );
           })}

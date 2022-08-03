@@ -21,7 +21,6 @@ function Header(props) {
           ></ImageBack>
           <TextAling>{props.title}</TextAling>
         </DivCentralize>
-
         <hr></hr>
       </DivContainerHeader>
     </ChakraProvider>
