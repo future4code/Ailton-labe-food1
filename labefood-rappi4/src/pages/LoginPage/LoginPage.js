@@ -10,10 +10,11 @@ import {
   DivText,
   DivInput,
   DivCadastre,
-  DivCliqueAqui
-} from './styled'
-import { login } from './../../services/user'
-import logo from './../../assets/images/logo.svg'
+  DivCliqueAqui,
+  InputLogin,
+} from "./styled";
+import { login } from "./../../services/user";
+import logo from "./../../assets/images/logo.svg";
 import {
   ChakraProvider,
   Icon,
@@ -33,7 +34,6 @@ import {
 import { BsFillEyeSlashFill } from "react-icons/bs";
 import { BsFillEyeFill } from "react-icons/bs";
 import { LabelFloat } from "../../services/FloatingLabel";
-
 
 function LoginPage() {
   const Navigate = useNavigate();
@@ -67,6 +67,7 @@ function LoginPage() {
             <DivInput>
               <LabelFloat>
                 <input
+                 pattern={'[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$'}
                   placeholder="email@email.com"
                   value={form.email}
                   type={"email"}
@@ -77,18 +78,19 @@ function LoginPage() {
                 <label>E-mail*</label>
               </LabelFloat>
 
-              <InputGroup size="md">
+              <InputGroup>
                 <LabelFloat>
-                  <input
+                    <input
                     placeholder="Mínimo de 6 caracteres"
+                    minLength={'6'}
                     value={form.password}
                     name="password"
                     type={show ? "text" : "password"}
                     required
                     onChange={onChange}
-                  />
-                  <label>Senha*</label>
-                  <InputRightElement width="4.5rem">
+                  ></input>
+                    <label>Senha*</label>
+                  <InputRightElement marginBlock={2}>
                     <div onClick={handleClick}>
                       {show ? (
                         <div>
@@ -105,16 +107,18 @@ function LoginPage() {
               </InputGroup>
             </DivInput>
 
-            <ButtonEntrar type="submit">Entrar</ButtonEntrar>
+            <ButtonEntrar type="submit">
+              <strong>Entrar</strong>
+            </ButtonEntrar>
           </Form>
           <DivCadastre>
-            Não possui cadastro?
+            <strong>Não possui cadastro?</strong>
             <DivCliqueAqui onClick={() => goToPage(Navigate, "signup")}>
               Clique aqui.{" "}
             </DivCliqueAqui>
           </DivCadastre>
         </div>
-        <splashScreen/>
+        <splashScreen />
       </DivContainer>
     </ChakraProvider>
   );
