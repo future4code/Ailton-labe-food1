@@ -11,14 +11,13 @@ import CartPage from './../pages/CartPage/CartPage'
 import DetailRestPage from './../pages/DetailRestPage/DetailRestPage'
 import ErrorPage from './../pages/ErrorPage/ErrorPage'
 
-
 const Router = () => {
   return (
     <BrowserRouter>
       <Routes>
         <Route path="/login" element={<LoginPage />}></Route>
         <Route path="/signup" element={<SignUpPage />}></Route>
-        <Route path="/address" element={<AddressRegistrationFormPage />}></Route>
+        <Route path="/address" element={<AddressRegistrationFormPage />} />
         <Route path="/" element={<FeedPage />}></Route>
         <Route path="profile" element={<ProfilePage />}></Route>
         <Route path="/edit/inf" element={<EditInfoPage />}></Route>
@@ -28,12 +27,7 @@ const Router = () => {
         <Route path="*" element={<ErrorPage />}></Route>
       </Routes>
     </BrowserRouter>
-
   )
 }
 
 export default Router
-
-
-
-
