@@ -118,7 +118,6 @@ function LoginPage() {
             </DivCliqueAqui>
           </DivCadastre>
         </div>
-        <splashScreen />
       </DivContainer>
     </ChakraProvider>
   );

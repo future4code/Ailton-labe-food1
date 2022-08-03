@@ -18,7 +18,7 @@ function Header(props) {
             src={back}
             onClick={() => goToPage(navigate, `${props.page}`)}
           ></ImageBack>
-          {/* <p>{props.title}</p> */}
+          <p>{props.title}</p>
         </div>
         <hr></hr>
       </DivContainerHeader>
