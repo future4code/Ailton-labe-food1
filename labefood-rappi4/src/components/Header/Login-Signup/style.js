@@ -2,6 +2,7 @@ import styled from 'styled-components'
 
 export const DivContainerHeader = styled.div`
   width: 100vw;
+  height: 6vh;
   margin-bottom: 20px;
 
   -webkit-backdrop-filter: blur(10px);
