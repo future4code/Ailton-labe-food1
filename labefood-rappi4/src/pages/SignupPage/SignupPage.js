@@ -123,7 +123,7 @@ function SignupPage() {
               </LabelFloat>
 
 
-              <InputGroup size="md">
+              <InputGroup w={'300px'}>
                 <LabelFloat>
                 <input
                   placeholder="Mínimo 6 caracteres"
@@ -137,7 +137,8 @@ function SignupPage() {
                 <label>Senha*</label>
                 </LabelFloat>
 
-                <InputRightElement marginBlock={4}>
+                <InputRightElement marginBlock={4}
+                marginRight={2}>
                   <div onClick={handleClick}>
                     {show ? (
                       <div>
@@ -152,7 +153,7 @@ function SignupPage() {
                 </InputRightElement>
               </InputGroup>
 
-              <InputGroup size="md">
+              <InputGroup w={'300px'}>
                 <LabelFloat>
                 <input
                   placeholder="Digite novamente."
@@ -166,7 +167,8 @@ function SignupPage() {
                 <label>Confirmar*</label>
                 </LabelFloat>
                 <InputRightElement
-                marginBlock={4}>
+                marginBlock={4}
+                marginRight={2}>
                   <div onClick={ocultarMostrar}>
                     {ocultar ? (
                       <div>
