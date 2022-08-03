@@ -38,6 +38,7 @@ export const Container = styled.div`
       align-items: center;
       border-radius: 4px;
       width: 90%;
+      color: black;
 
     }
     button {
@@ -55,3 +56,4 @@ export const Container = styled.div`
     }
   }
 `;
+

@@ -81,7 +81,7 @@ function EditInfoPage() {
               />
               <label>CPF*</label>
               </LabelFloat>
-          <button onClick={() => updateProfile()}>Salvar</button>
+          <button onClick={() => updateProfile()}><strong>Salvar</strong></button>
         </form>
       </main>
     </Container>

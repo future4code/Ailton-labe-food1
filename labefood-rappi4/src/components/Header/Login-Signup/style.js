@@ -4,7 +4,6 @@ export const DivContainerHeader = styled.div`
   width: 100vw;
   height: 6vh;
   margin-bottom: 20px;
-
   -webkit-backdrop-filter: blur(10px);
   backdrop-filter: blur(10px);
   /* box-shadow: 0 0.5px 0 0 rgba(0, 0, 0, 0.25); */
@@ -28,3 +27,14 @@ export const ImageBack = styled.img`
   left: 0; */
 `
 
+export const TextAling = styled.p`
+
+font-weight: bold;
+margin-left: 30%;
+`
+
+export const DivCentralize = styled.div`
+
+display: flex;
+
+`

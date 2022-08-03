@@ -42,6 +42,7 @@ function EditEndePage() {
         <form id="forms">
           <LabelFloat>
             <input
+               type="text"
               name="street"
               value={form.street}
               onChange={onChange}
@@ -67,7 +68,7 @@ function EditEndePage() {
               value={form.complement}
               onChange={onChange}
               placeholder="Apto./Bloco"
-            />
+            ></input>
             <label>Complemento*</label>
           </LabelFloat>
           <LabelFloat>
@@ -100,7 +101,7 @@ function EditEndePage() {
             />
             <label>Estado*</label>
           </LabelFloat>
-          <button onClick={() => onSubmit()}>Salvar</button>
+          <button onClick={() => onSubmit()}><strong>Salvar</strong></button>
           {/* ADICIONAR FUNÇÃO DE ADD ADRESS NO ONCLICK*/}
         </form>
       </main>

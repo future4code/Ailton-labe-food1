@@ -12,6 +12,9 @@ import {
   H3,
   ContainerRest,
   DivCarousel,
+  ButtonOnActive,
+  DivHamburguer,
+  DivRestaurantesMapeados,
 } from "./style";
 import {
   ChakraProvider,
@@ -65,7 +68,12 @@ function FeedPage() {
   };
 
   const handleClick = (e) => {
-    setFiltredRestaurant(e.target.innerText);
+    if(e.target.innerText === 'Burguer'){
+      setFiltredRestaurant('Hamburguer')
+    }else{
+
+      setFiltredRestaurant(e.target.innerText);
+    }
   };
 
   return (
@@ -98,20 +106,20 @@ function FeedPage() {
             currentSlide={2}
           >
             <Slider onClick={(e) => handleClick(e)}>
-              <Slide index={0}>Árabe</Slide>
-              <Slide index={1}>Asiática</Slide>
-              <Slide index={3}>Italiana</Slide>
-              <Slide index={4}>Sorvetes</Slide>
-              <Slide index={5}>Carnes</Slide>
-              <Slide index={6}>Baiana</Slide>
-              <Slide index={7}>Mexicana</Slide>
-              <Slide index={2}>Hamburguer</Slide>
+              <Slide index={0}><ButtonOnActive>Árabe</ButtonOnActive></Slide>
+              <Slide index={1}><ButtonOnActive>Asiática</ButtonOnActive></Slide>
+              <Slide index={2}><ButtonOnActive>Baiana</ButtonOnActive></Slide>
+              <Slide index={3}><ButtonOnActive>Carnes</ButtonOnActive></Slide>
+              <Slide index={4}><ButtonOnActive>Burguer</ButtonOnActive></Slide>
+              <Slide index={5}><ButtonOnActive>Italiana</ButtonOnActive></Slide>
+              <Slide index={6}><ButtonOnActive>Mexicana</ButtonOnActive></Slide>
+              <Slide index={7}><ButtonOnActive>Sorvetes</ButtonOnActive></Slide>
             </Slider>
           </CarouselProvider>
         </div>
 
         {cardRestaurant?.length !== 0 ? (
-          cardRestaurant
+         <DivRestaurantesMapeados>{cardRestaurant}</DivRestaurantesMapeados> 
         ) : (
           <p>Restaurante não encontrado!</p>
         )}

@@ -28,9 +28,9 @@ function AddressRegistrationFormPage() {
 
   return (
     <DivContainer>
-      <div>
+
         <Header page="signup" />
-      </div>
+
       <DivTittle>
         <p>Meu Endereço</p>
       </DivTittle>
