@@ -31,6 +31,7 @@ import {
 } from '@chakra-ui/react'
 import { BsFillEyeSlashFill } from 'react-icons/bs'
 import { BsFillEyeFill } from 'react-icons/bs'
+import {LabelFloat} from './../../services/FloatingLabel'
 
 function SignupPage() {
   const Navigate = useNavigate()
@@ -82,43 +83,61 @@ function SignupPage() {
         <div>
           <Form onSubmit={onSubmitForm}>
             <DivInput>
-              <Input
+              <LabelFloat>
+              <input
                 placeholder="Nome e sobrenome"
                 value={form.name}
                 type={'text'}
                 name="name"
                 required
                 onChange={onChange}
-              ></Input>
+              ></input>
+              <label>Nome*</label>
+            </LabelFloat>
 
-              <Input
+            <LabelFloat>
+              <input
+              pattern={'[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$'}
                 placeholder="email@email.com"
                 value={form.email}
                 type="email"
                 name="email"
                 required
                 onChange={onChange}
-              ></Input>
+              ></input>
+              <label>E-mail*</label>
+            </LabelFloat>
 
-              <Input
+              <LabelFloat>
+              <input
+                pattern={'[0-9]{3}\.[0-9]{3}\.[0-9]{3}-[0-9]{2}'}
+                maxLength={'11'}
                 placeholder="000.000.000-00"
                 value={form.cpf}
                 type="number"
                 name="cpf"
                 required
                 onChange={onChange}
-              ></Input>
+              ></input>
+              <label>CPF*</label>
+              </LabelFloat>
+
 
               <InputGroup size="md">
-                <Input
+                <LabelFloat>
+                <input
                   placeholder="Mínimo 6 caracteres"
+                  minLength={'6'}
                   value={form.password}
                   name="password"
                   type={show ? 'text' : 'password'}
                   required
                   onChange={onChange}
-                />
-                <InputRightElement width="4.5rem">
+                ></input>
+                <label>Senha*</label>
+                </LabelFloat>
+
+                <InputRightElement marginBlock={4}>
                   <div onClick={handleClick}>
                     {show ? (
                       <div>
@@ -134,15 +153,20 @@ function SignupPage() {
               </InputGroup>
 
               <InputGroup size="md">
-                <Input
+                <LabelFloat>
+                <input
                   placeholder="Digite novamente."
+                  minLength={'6'}
                   value={form.passVerify}
                   name="passVerify"
                   type={ocultar ? 'text' : 'password'}
                   required
                   onChange={onChange}
-                />
-                <InputRightElement width="4.5rem">
+                ></input>
+                <label>Confirmar*</label>
+                </LabelFloat>
+                <InputRightElement
+                marginBlock={4}>
                   <div onClick={ocultarMostrar}>
                     {ocultar ? (
                       <div>
@@ -157,7 +181,7 @@ function SignupPage() {
                 </InputRightElement>
               </InputGroup>
             </DivInput>
-            <ButtonCadastrar type="submit">Criar</ButtonCadastrar>
+            <ButtonCadastrar type="submit"><strong>Criar</strong></ButtonCadastrar>
           </Form>
 
           {/* <div>Já possui uma conta ? Faça <strong onClick={() =>goToPage(Navigate, 'login')}>login</strong></div> */}

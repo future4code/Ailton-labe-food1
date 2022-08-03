@@ -4,7 +4,7 @@ export const LabelFloat = styled.div`
   position: relative;
   width: 100%;
   height: 50px;
-  margin: 20px 10px;
+  margin: 10px 10px;
   border: none;
 
   label {
