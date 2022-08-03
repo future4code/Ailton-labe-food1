@@ -16,7 +16,7 @@ const Router = () => {
   return (
     <BrowserRouter>
       <Routes>
-      <Route index element={<SplashScreen />}></Route>
+        <Route path="splash" element={<SplashScreen />}></Route>
         <Route path="/login" element={<LoginPage />}></Route>
         <Route path="/signup" element={<SignUpPage />}></Route>
         <Route path="/address" element={<AddressRegistrationFormPage />}></Route>
