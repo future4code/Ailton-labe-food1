@@ -24,6 +24,8 @@ import { BsSearch } from "react-icons/bs";
 import { CarouselProvider, Slider, Slide } from "pure-react-carousel";
 import "pure-react-carousel/dist/react-carousel.es.css";
 import "./Example.css";
+import useProtectedAdress from "../../hooks/useProtectedAdress"
+import NavegationFeed from "../../components/Footer/navegationFeed"
 
 function FeedPage() {
   const res = useRequestData([], `${BASE_URL}/restaurants`);
@@ -31,7 +33,7 @@ function FeedPage() {
   const [search, setSearch] = useState("");
   useProtectedPage();
   const [filtredRestaurant, setFiltredRestaurant] = useState("");
-
+  useProtectedAdress()
 
   const cardRestaurant = res.restaurants
     ?.filter((restaurant) => {
@@ -114,6 +116,7 @@ function FeedPage() {
           <p>Restaurante não encontrado!</p>
         )}
       </DivContainer>
+      <NavegationFeed page={'feed'} />
     </ChakraProvider>
   );
 }
