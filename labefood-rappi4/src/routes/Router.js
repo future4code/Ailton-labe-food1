@@ -12,6 +12,7 @@ import DetailRestPage from './../pages/DetailRestPage/DetailRestPage'
 import ErrorPage from './../pages/ErrorPage/ErrorPage'
 import SplashScreen from '../pages/SplashScreen/splashScreen'
 
+
 const Router = () => {
   return (
     <BrowserRouter>
@@ -19,7 +20,7 @@ const Router = () => {
         <Route path="splash" element={<SplashScreen />}></Route>
         <Route path="/login" element={<LoginPage />}></Route>
         <Route path="/signup" element={<SignUpPage />}></Route>
-        <Route path="/address" element={<AddressRegistrationFormPage />}></Route>
+        <Route path="/address" element={<AddressRegistrationFormPage />} />
         <Route path="/" element={<FeedPage />}></Route>
         <Route path="profile" element={<ProfilePage />}></Route>
         <Route path="/edit/inf" element={<EditInfoPage />}></Route>
@@ -29,12 +30,7 @@ const Router = () => {
         <Route path="*" element={<ErrorPage />}></Route>
       </Routes>
     </BrowserRouter>
-
   )
 }
 
 export default Router
-
-
-
-

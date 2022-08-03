@@ -30,7 +30,6 @@ function AddressRegistrationFormPage() {
     <DivContainer>
       <div>
         <Header page="signup" />
-        {/* Lembrar de avisar que foi feito uma props */}
       </div>
       <DivTittle>
         <p>Meu Endereço</p>

@@ -8,14 +8,17 @@ import { useNavigate } from 'react-router-dom'
 import goToPage from '../../../routes/coordinator'
 
 function Header(props) {
-  const Navigate = useNavigate()
+  const navigate = useNavigate()
 
   return (
     <ChakraProvider>
       <DivContainerHeader>
         <div>
-          <ImageBack src={back} onClick={() => goToPage(Navigate, `${props.page}`)}></ImageBack>
-          <p>{props.title}</p>
+          <ImageBack
+            src={back}
+            onClick={() => goToPage(navigate, `${props.page}`)}
+          ></ImageBack>
+          {/* <p>{props.title}</p> */}
         </div>
         <hr></hr>
       </DivContainerHeader>
