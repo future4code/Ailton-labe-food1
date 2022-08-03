@@ -84,17 +84,16 @@ export const Subtotal = styled.div`
 `;
 
 export const Hr = styled.hr`
-    width: 90%;
-    border-bottom: solid 1px black;
-    margin: 8px 0 12px 0;
-  
-`
+  width: 90%;
+  border-bottom: solid 1px black;
+  margin: 8px 0 12px 0;
+`;
 
 export const DivPagamento = styled.div`
   width: 100vw;
   display: flex;
   padding-left: 1rem;
- padding-top: 1rem;
+  padding-top: 1rem;
   align-items: center;
 `;
 
@@ -110,8 +109,39 @@ export const ButtonEntrar = styled.button`
   height: 42px;
   width: 328px;
   border-radius: 4px;
-  
+
   position: absolute;
   bottom: -150px;
-`
+`;
 
+export const ContainerRestInfo = styled.div`
+  width: 90%;
+  margin-top: 0.8rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+
+  #restaurant-name {
+    color: #e86e5a;
+    font-size: 16px;
+  }
+
+  #delivery-shipping {
+    display: flex;
+    gap: 2rem;
+  }
+
+  p {
+    color: #b8b8b8;
+    font-size: 16px;
+  }
+`;
+
+export const ContainerCards = styled.div`
+  border: 1px solid black;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+`;
