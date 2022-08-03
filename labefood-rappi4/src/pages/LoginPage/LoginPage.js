@@ -1,7 +1,7 @@
-import React, { useState } from 'react'
-import { useForm } from './../../hooks/useForm'
-import { useNavigate } from 'react-router-dom'
-import goToPage from './../../routes/coordinator'
+import React, { useState } from "react";
+import { useForm } from "./../../hooks/useForm";
+import { useNavigate } from "react-router-dom";
+import goToPage from "./../../routes/coordinator";
 import {
   Form,
   DivContainer,
@@ -10,11 +10,11 @@ import {
   DivText,
   DivInput,
   DivCadastre,
-  DivCliqueAqui
-} from './styled'
-import { login } from './../../services/user'
-import logo from './../../assets/images/logo.svg'
-import Header from '../../components/Header/Login-Signup/header'
+  DivCliqueAqui,
+} from "./styled";
+import { login } from "./../../services/user";
+import logo from "./../../assets/images/logo.svg";
+import Header from "../../components/Header/Login-Signup/header";
 import {
   ChakraProvider,
   Icon,
@@ -29,28 +29,28 @@ import {
   FormLabel,
   FormErrorMessage,
   FormHelperText,
-  Button
-} from '@chakra-ui/react'
-import { BsFillEyeSlashFill } from 'react-icons/bs'
-import { BsFillEyeFill } from 'react-icons/bs'
-import { LabelFloat } from '../../services/FloatingLabel'
+  Button,
+} from "@chakra-ui/react";
+import { BsFillEyeSlashFill } from "react-icons/bs";
+import { BsFillEyeFill } from "react-icons/bs";
+import { LabelFloat } from "../../services/FloatingLabel";
 
 function LoginPage() {
-  const Navigate = useNavigate()
+  const Navigate = useNavigate();
 
   const [form, onChange, cleanFields] = useForm({
-    email: '',
-    password: ''
-  })
-  const [isLoading, setIsLoading] = useState(false)
+    email: "",
+    password: "",
+  });
+  const [isLoading, setIsLoading] = useState(false);
 
-  const [show, setShow] = React.useState(false)
-  const handleClick = () => setShow(!show)
+  const [show, setShow] = React.useState(false);
+  const handleClick = () => setShow(!show);
 
   const onSubmitForm = (e) => {
-    e.preventDefault()
-    login(form, cleanFields, Navigate, setIsLoading)
-  }
+    e.preventDefault();
+    login(form, cleanFields, Navigate, setIsLoading);
+  };
 
   return (
     <ChakraProvider>
@@ -73,7 +73,7 @@ function LoginPage() {
                 <input
                   placeholder="email@email.com"
                   value={form.email}
-                  type={'email'}
+                  type={"email"}
                   name="email"
                   required
                   onChange={onChange}
@@ -87,7 +87,7 @@ function LoginPage() {
                     placeholder="Mínimo de 6 caracteres"
                     value={form.password}
                     name="password"
-                    type={show ? 'text' : 'password'}
+                    type={show ? "text" : "password"}
                     required
                     onChange={onChange}
                   />
@@ -113,14 +113,14 @@ function LoginPage() {
           </Form>
           <DivCadastre>
             Não possui cadastro?
-            <DivCliqueAqui onClick={() => goToPage(Navigate, 'signup')}>
-              Clique aqui.{' '}
+            <DivCliqueAqui onClick={() => goToPage(Navigate, "signup")}>
+              Clique aqui.{" "}
             </DivCliqueAqui>
           </DivCadastre>
         </div>
       </DivContainer>
     </ChakraProvider>
-  )
+  );
 }
 
-export default LoginPage
+export default LoginPage;
