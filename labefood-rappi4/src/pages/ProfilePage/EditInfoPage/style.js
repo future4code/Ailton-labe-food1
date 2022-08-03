@@ -28,8 +28,31 @@ export const Container = styled.div`
     #forms {
       display: flex;
       flex-direction: column;
+      align-content: center;
+      justify-content: center;
+      margin-left: 10px;
+      margin-top: 30px;
+    }
+    input {
+      display: flex;
+      flex-direction: column;
       align-items: center;
-      gap: 15px;
+      border-radius: 4px;
+      width: 90%;
+
+    }
+    button {
+      background-color: #E86E5A;
+      width: 90%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      border-radius: 4px;
+      color: #000000;
+      height: 42px;
+      margin-left: 10px;
+      margin-top: 5px;
     }
   }
 `;
