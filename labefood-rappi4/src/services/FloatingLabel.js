@@ -14,7 +14,7 @@ export const LabelFloat = styled.div`
     left: 15px;
     color: #b8b8b8;
     font-size: 12px;
-    width: 80px;
+    width: 100px;
     padding-left: 5px;
   }
 
