@@ -177,6 +177,7 @@ const ContainerQuantity = styled.div`
     height: 216px;
     background-color: white;
     position: relative;
+    
 
     p {
       width: 296px;
@@ -197,11 +198,16 @@ const ContainerQuantity = styled.div`
       border: solid 1px #b8b8b8;
     }
 
-    input {
-      color: black;
+    form {
+      display: flex;
+      justify-content: space-between;
+      width: 25vw;
+      height: 5vh;
+    
+      /* color: black;
       font-size: 16px;
       letter-spacing: -0.39px;
-      height: 18px;
+      height: 18px; */
     }
 
     #button-add-to-cart {
@@ -315,13 +321,28 @@ function DetailRestPage() {
                         <p>Selecione a quantidade desejada</p>
                         <div>
                           <form onSubmit={() => addProductToCart(product)}>
-                            <input
+                            {/* <input
                               required
                               type="number"
                               value={number}
                               onChange={(e) => setNumber(e.target.value)}
                               placeholder="0"
-                            />
+                            /> */}
+                            <select 
+                            required
+                            value={number} 
+                            onChange={(e) => setNumber(e.target.value)}>
+                              <option>1</option>
+                              <option>2</option>
+                              <option>3</option>
+                              <option>4</option>
+                              <option>5</option>
+                              <option>6</option>
+                              <option>7</option>
+                              <option>8</option>
+                              <option>9</option>
+                              <option>10</option>
+                            </select>
                             <button id="button-add-to-cart" type="submit">
                               ADICIONAR AO CARRINHO
                             </button>

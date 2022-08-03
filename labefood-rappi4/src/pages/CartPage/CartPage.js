@@ -54,7 +54,7 @@ function CartPage() {
       <img src={radiobutton2} alt="button"/><Texto4>Cartão</Texto4>
       </DivPagamento2>
 
-      <ButtonEntrar>Confirmar</ButtonEntrar>
+      <ButtonEntrar><strong>Confirmar</strong></ButtonEntrar>
       <NavegationFeed page={'cart'} />
     </Container>
   );
