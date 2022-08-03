@@ -1,5 +1,5 @@
 import React from 'react'
-import { DivContainerHeader, ImageBack } from './style'
+import { DivContainerHeader, ImageBack, TextAling, DivCentralize } from './style'
 import { ChakraProvider } from '@chakra-ui/react'
 import { Icon } from '@chakra-ui/react'
 import { BsFillPersonFill } from 'react-icons/bs'
@@ -13,13 +13,14 @@ function Header(props) {
   return (
     <ChakraProvider>
       <DivContainerHeader>
-        <div>
+
+        <DivCentralize>
           <ImageBack
             src={back}
             onClick={() => goToPage(navigate, `${props.page}`)}
           ></ImageBack>
-          <p>{props.title}</p>
-        </div>
+          <TextAling>{props.title}</TextAling>
+        </DivCentralize>
         <hr></hr>
       </DivContainerHeader>
     </ChakraProvider>

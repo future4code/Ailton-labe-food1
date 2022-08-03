@@ -2,7 +2,6 @@ import styled from "styled-components";
 import { primaryColor, secondColor } from "./../../constants/colors/colors";
 
 export const DivContainer = styled.div`
-  min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -13,13 +12,17 @@ export const ContainerRest = styled.div`
   border: 1px solid #dcdcdc;
   border-radius: 14px;
   height: 13rem;
-`;
+
+  /* margin-bottom: 14%; */
+  margin-top: -3%;
+  `;
 
 export const DivCarousel = styled.div`
   display: flex;
   gap: 1rem;
   width: 100vw;
   justify-content: center;
+
 `;
 
 export const DivDetalhe = styled.div`
@@ -65,3 +68,31 @@ export const Input = styled.input`
   border-radius: 8px;
   border: 1px solid #dcdcdc;
 `;
+
+export const ButtonOnActive = styled.button`
+
+&:active{
+  color: #e86e5a;
+}
+&:hover{
+  color: #e86e5a;
+}
+
+`
+
+
+export const DivHamburguer = styled.div`
+
+/* background-color: blue; */
+
+`
+export const DivRestaurantesMapeados = styled.div`
+
+display: flex;
+gap: 1rem;
+flex-direction: column;
+justify-content: center;
+padding-bottom: 16%;
+
+
+`
