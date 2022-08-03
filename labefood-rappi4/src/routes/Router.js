@@ -10,11 +10,14 @@ import EditEndPage from './../pages/ProfilePage/EditEndePage/EditEndePage'
 import CartPage from './../pages/CartPage/CartPage'
 import DetailRestPage from './../pages/DetailRestPage/DetailRestPage'
 import ErrorPage from './../pages/ErrorPage/ErrorPage'
+import SplashScreen from '../pages/SplashScreen/splashScreen'
+
 
 const Router = () => {
   return (
     <BrowserRouter>
       <Routes>
+        <Route path="splash" element={<SplashScreen />}></Route>
         <Route path="/login" element={<LoginPage />}></Route>
         <Route path="/signup" element={<SignUpPage />}></Route>
         <Route path="/address" element={<AddressRegistrationFormPage />} />

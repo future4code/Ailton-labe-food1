@@ -23,6 +23,8 @@ export const DivContainerHeader = styled.div`
 
 export const ImageBack = styled.img`
   padding: 2%;
+
   /* position: absolute;
   left: 0; */
 `
+

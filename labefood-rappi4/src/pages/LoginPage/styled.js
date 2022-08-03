@@ -9,7 +9,8 @@ export const DivContainerImage = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 6%;
+  padding: 18%;
+  
 `
 
 export const DivText = styled.div`

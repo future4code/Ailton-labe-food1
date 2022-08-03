@@ -1,29 +1,30 @@
-import React, { useState } from 'react'
-import { useForm } from '../../hooks/useForm'
-import { useNavigate } from 'react-router-dom'
-import { address } from '../../services/user'
-import { Form, DivContainer } from './styled'
-import goToPage from '../../routes/coordinator'
-import { LabelFloat } from '../../services/FloatingLabel'
-import { ButtonSave, DivTittle } from './styled'
-import Header from '../../components/Header/Login-Signup/header'
+import React, { useState } from "react";
+import { useForm } from "../../hooks/useForm";
+import { useNavigate } from "react-router-dom";
+import { address } from "../../services/user";
+import { Form, DivContainer } from "./styled";
+import goToPage from "../../routes/coordinator";
+import { LabelFloat } from "../../services/FloatingLabel";
+import { ButtonSave, DivTittle } from "./styled";
+import Header from "../../components/Header/Login-Signup/header";
 
 function AddressRegistrationFormPage() {
-  const Navigate = useNavigate()
-  const [isLoading, setIsLoading] = useState(false)
+  const Navigate = useNavigate();
+  const [isLoading, setIsLoading] = useState(false);
   const [form, onChange, clean] = useForm({
-    street: '',
-    number: '',
-    neighbourhood: '',
-    city: '',
-    state: '',
-    complement: ''
-  })
+    street: "",
+    number: "",
+    neighbourhood: "",
+    city: "",
+    state: "",
+    complement: "",
+  });
 
   const onSubmit = (e) => {
-    e.preventDefault()
-    address(form, clean, 'firstTime', Navigate, setIsLoading)
-  }
+    e.preventDefault();
+    address(form, clean, Navigate, setIsLoading);
+  };
+
 
   return (
     <DivContainer>
@@ -40,7 +41,7 @@ function AddressRegistrationFormPage() {
             <input
               placeholder="Rua/Av."
               value={form.street}
-              type={'text'}
+              type={"text"}
               name="street"
               required
               onChange={onChange}
@@ -66,7 +67,6 @@ function AddressRegistrationFormPage() {
               value={form.complement}
               type="text"
               name="complement"
-              required
               onChange={onChange}
             ></input>
             <label>Apto./ Bloco</label>
@@ -113,7 +113,7 @@ function AddressRegistrationFormPage() {
         </Form>
       </div>
     </DivContainer>
-  )
+  );
 }
 
-export default AddressRegistrationFormPage
+export default AddressRegistrationFormPage;

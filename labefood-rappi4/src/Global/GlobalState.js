@@ -6,19 +6,14 @@ export default function GlobalState(props) {
 
   const [cartProducts, setCartProducts] = useState([]);
 
-  const addProductToCart = (product, number) => {
-    if (number > 0 ) {
-      for (let i = 0; i < number; i++) {
-        let addingNewProduct = [...cartProducts, product];
-        setCartProducts(addingNewProduct);
-      }
-    } 
-    // else {
-    //   let addingNewProduct = [...cartProducts, product];
-    //   setCartProducts(addingNewProduct);
-    // }
+  //   ADICIONAR PRODUTO AO CARRINHO
+  const addProductToCart = (product) => {
+    let addingNewProduct = [...cartProducts, product];
+    setCartProducts(addingNewProduct);
   };
 
+  
+  // REMOVE PRODUTO DO CARRINHO
   const removeProductFromCart = (id) => {
     const arrayProductRemoved = cartProducts.filter((product) => {
       return id !== product.id;
