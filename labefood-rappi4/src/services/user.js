@@ -28,10 +28,10 @@ export const address = (body, clear, Navigate, setIsLoading) => {
       },
     })
     .then((res) => {
-      console.log(res);
+      localStorage.setItem('token', res.data.token)
       setIsLoading(false);
       clear();
-      goToPage(Navigate, "address");
+      goToPage(Navigate, "");
     })
     .catch((err) => {
       setIsLoading(false);

@@ -1,13 +1,14 @@
-
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { primaryColor } from "../../constants/colors/colors";
 import goToPage from "../../routes/coordinator";
 import { useNavigate } from "react-router-dom";
 import useGetProfile from "../../hooks/useGetProfile";
+import useGetProfileDetails from "../../hooks/useGetProfileDetails";
 import useProtectedPage from "../../hooks/useProtected";
 import { BsPencil } from "react-icons/bs";
 import { Button, Icon, InputRightElement } from "@chakra-ui/react";
+import NavegationFeed from "../../components/Footer/navegationFeed"
 
 const DivEdicao = styled.div`
   position: absolute;
@@ -138,7 +139,7 @@ const ContainerMap = styled.div`
 
 function ProfilePage() {
   const navigate = useNavigate();
-  useProtectedPage()
+  useProtectedPage();
   const arrayTest = [
     {
       name: "Bullguer Vila Madalena",
@@ -146,7 +147,7 @@ function ProfilePage() {
       price: 67,
     },
   ];
-
+  
   const profile = useGetProfile();
 
   return (
@@ -185,7 +186,9 @@ function ProfilePage() {
           </div>
         </section>
         <section id="order-history">
-          <p><b>Histórico de pedidos</b></p>
+          <p>
+            <b>Histórico de pedidos</b>
+          </p>
           <hr />
           {arrayTest.map((obj) => {
             return (
@@ -201,6 +204,7 @@ function ProfilePage() {
           })}
         </section>
       </main>
+      <NavegationFeed page={'profile'}/>
     </Container>
   );
 }
