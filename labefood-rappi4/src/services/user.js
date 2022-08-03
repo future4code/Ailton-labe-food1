@@ -46,7 +46,7 @@ export const signup = (body, clear, Navigate, setIsLoading, verifyPass) => {
       .then((res) => {
         clear();
         setIsLoading(false);
-        goToPage(Navigate, "login");
+        goToPage(Navigate, "address");
       })
       .catch((err) => {
         setIsLoading(false);
