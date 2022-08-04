@@ -96,3 +96,30 @@ padding-bottom: 16%;
 
 
 `
+
+export const DivPedidoFinal = styled.div`
+
+position: fixed;
+bottom: 6%;
+width: 100%;
+height: 118px;
+background-color: #e86e5a;
+display: flex;
+column-gap: 5%;
+div{
+  margin-top: 5%;
+}
+p{
+  color: white;
+}
+
+`
+export const ImageClock = styled.img`
+
+margin-left: 4vw;
+margin-top: 2vh;
+
+
+
+
+`
