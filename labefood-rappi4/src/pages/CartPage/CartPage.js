@@ -154,7 +154,6 @@ function CartPage() {
       console.log(err)
     })
   }
-
   return (
     <Container>
       <Header page="" title="Carrinho" />

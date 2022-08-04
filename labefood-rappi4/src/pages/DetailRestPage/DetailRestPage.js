@@ -265,7 +265,7 @@ function DetailRestPage() {
 
   return (
     <Container>
-      <Header page="" title="Restaurant" />
+      <Header page="" title="Restaurante" />
       <main>
         <img id="rest-logo" src={restDetails.logoUrl} alt="logo" />
         <ContainerRestInfo>

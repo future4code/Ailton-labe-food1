@@ -145,7 +145,7 @@ export const ContainerCards = styled.div`
   width: 100%;
   height: 100%;
   align-items: center;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
+  border: 1px solid black;
+  width: 100vw;
+  min-height: 20vh;
 `;
