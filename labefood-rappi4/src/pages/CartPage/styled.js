@@ -1,11 +1,15 @@
 import styled from "styled-components";
 
 export const Container = styled.div`
-  min-height: 100%;
+  min-height: 93vh;
+  height: 100%;
   width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
+  position: relative;
+  margin-bottom: 3rem;
+  padding-bottom: 4rem;
 `;
 
 export const Main = styled.div`
@@ -64,14 +68,14 @@ export const Texto4 = styled.p`
 
 export const DivTotal = styled.div`
   width: 100vw;
-  height: 12vh;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
   align-items: flex-end;
   padding-left: 1rem;
-  margin-top: 3rem;
   gap: 5px;
+  margin-top: 5px;
+  font-size: 16px;
 `;
 
 export const Subtotal = styled.div`
@@ -111,7 +115,7 @@ export const ButtonEntrar = styled.button`
   border-radius: 4px;
 
   position: absolute;
-  bottom: -150px;
+  bottom: 2%;
 `;
 
 export const ContainerRestInfo = styled.div`
@@ -138,9 +142,9 @@ export const ContainerRestInfo = styled.div`
 `;
 
 export const ContainerCards = styled.div`
-  border: 1px solid black;
   width: 100%;
   height: 100%;
+  align-items: center;
   display: flex;
   flex-direction: column;
   gap: 10px;

@@ -177,7 +177,6 @@ const ContainerQuantity = styled.div`
     height: 216px;
     background-color: white;
     position: relative;
-    
 
     p {
       width: 296px;
@@ -203,7 +202,7 @@ const ContainerQuantity = styled.div`
       justify-content: space-between;
       width: 25vw;
       height: 5vh;
-    
+
       /* color: black;
       font-size: 16px;
       letter-spacing: -0.39px;
@@ -251,17 +250,18 @@ function DetailRestPage() {
 
   const addProductToCart = (product) => {
     values.functionAdd(product, number);
-    values.restaurantDetails(restDetails)
+    values.restaurantDetails(restDetails);
     setCheckToRenderContainerSelect(false);
   };
 
   const checkProduct = (product) => {
-    for (let i = 0; i < values.cartProducts.length; i++) {
-      if (values.cartProducts[i].product === product) {
+    for (let i = 0; i < values.arrUnique.length; i++) {
+      if (values.arrUnique[i].product === product) {
         return true;
       }
     }
   };
+
 
   return (
     <Container>
@@ -321,17 +321,11 @@ function DetailRestPage() {
                         <p>Selecione a quantidade desejada</p>
                         <div>
                           <form onSubmit={() => addProductToCart(product)}>
-                            {/* <input
+                            <select
                               required
-                              type="number"
                               value={number}
                               onChange={(e) => setNumber(e.target.value)}
-                              placeholder="0"
-                            /> */}
-                            <select 
-                            required
-                            value={number} 
-                            onChange={(e) => setNumber(e.target.value)}>
+                            >
                               <option>1</option>
                               <option>2</option>
                               <option>3</option>
