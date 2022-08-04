@@ -17,7 +17,6 @@ const UseGetPlaceOrder = () => {
           },
         })
         .then((res) => {
-            console.log(res)
             setData(res.data);
         })
         .catch((err) => {

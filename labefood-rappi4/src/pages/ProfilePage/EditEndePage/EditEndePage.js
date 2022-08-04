@@ -31,13 +31,6 @@ function EditEndePage() {
   return (
     <Container>
       <Header page="profile" title="Endereço" />
-      {/* <header>
-        <div id="header">
-          <button onClick={() => goToPage(navigate, "profile")}>Voltar</button>
-          <p>Endereço</p>
-        </div>
-        <hr />
-      </header> */}
       <main>
         <form id="forms">
           <LabelFloat>

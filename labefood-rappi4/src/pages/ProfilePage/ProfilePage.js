@@ -8,7 +8,7 @@ import useGetProfileDetails from "../../hooks/useGetProfileDetails";
 import useProtectedPage from "../../hooks/useProtected";
 import { BsPencil } from "react-icons/bs";
 import { Button, Icon, InputRightElement } from "@chakra-ui/react";
-import NavegationFeed from "../../components/Footer/navegationFeed"
+import NavegationFeed from "../../components/Footer/navegationFeed";
 import useGetOrdersHistory from "../../hooks/useGetOrdersHistory";
 
 const DivEdicao = styled.div`
@@ -141,35 +141,26 @@ const ContainerMap = styled.div`
 function ProfilePage() {
   const navigate = useNavigate();
   useProtectedPage();
-  const arrayTest = [
-    {
-      name: "Bullguer Vila Madalena",
-      date: "23 outubro 2019",
-      price: 67,
-    },
-  ];
-  
+
   const profile = useGetProfile();
   const history = useGetOrdersHistory();
 
-  
+  console.log(new Date(1659480153095));
+
   const orderHistory = history?.orders?.map((order) => {
-    return(
+    return (
       <ContainerMap key={order.restaurantName}>
-      <p id="order-name">{order.restaurantName}</p>
-      {/* <p id="order-date">{obj.date}</p> */}
-      <p id="order-price">
-        <strong>SUBTOTAL R$</strong>
-        {order.totalPrice},00
-      </p>
-    </ContainerMap>
+        <p id="order-name">{order.restaurantName}</p>
+        {/* <p id="order-date">{obj.date}</p> */}
+        <p id="order-price">
+          <strong>SUBTOTAL R$</strong>
+          {order.totalPrice},00
+        </p>
+      </ContainerMap>
+    );
+  });
 
-
-    )
-  })
-
-
-  console.log(history.orders)
+  console.log(history.orders);
   return (
     <Container>
       <header>
@@ -225,7 +216,7 @@ function ProfilePage() {
           })} */}
         </section>
       </main>
-      <NavegationFeed page={'profile'}/>
+      <NavegationFeed page={"profile"} />
     </Container>
   );
 }

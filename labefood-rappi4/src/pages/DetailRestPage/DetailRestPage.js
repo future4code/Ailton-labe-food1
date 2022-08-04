@@ -188,27 +188,6 @@ const ContainerQuantity = styled.div`
       color: #000;
     }
 
-    div {
-      width: 296px;
-      height: 56px;
-      margin: 30px 16px 0;
-      padding: 16px;
-      border-radius: 4px;
-      border: solid 1px #b8b8b8;
-    }
-
-    form {
-      display: flex;
-      justify-content: space-between;
-      width: 25vw;
-      height: 5vh;
-
-      /* color: black;
-      font-size: 16px;
-      letter-spacing: -0.39px;
-      height: 18px; */
-    }
-
     #button-add-to-cart {
       bottom: 16px;
       right: 11px;
@@ -217,6 +196,29 @@ const ContainerQuantity = styled.div`
       letter-spacing: -0.39px;
       font-size: 16px;
       color: #4a90e2;
+    }
+  }
+`;
+
+const ContainerForm = styled.div`
+  width: 296px;
+  height: 56px;
+  margin: 30px 16px 0;
+  padding: 16px;
+  border-radius: 4px;
+  border: solid 1px #b8b8b8;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  form {
+    display: flex;
+    width: 100%;
+    height: 5vh;
+
+    select {
+      width: 100%;
+      font-size: 18px;
     }
   }
 `;
@@ -242,6 +244,8 @@ function DetailRestPage() {
     return qtd;
   };
 
+  console.log(restDetails);
+
   const showToAddQuantity = (postId) => {
     setArrayCheckId(postId);
     setNumber("");
@@ -262,6 +266,110 @@ function DetailRestPage() {
     }
   };
 
+  const renderProductsMap = (
+    category1,
+    category2,
+    category3,
+    category4,
+    category5,
+    category6,
+    category7,
+    category8
+  ) => {
+    return restDetails.products
+      ?.filter((product) => {
+        return (
+          product.category === category1 ||
+          product.category === category2 ||
+          product.category === category3 ||
+          product.category === category4 ||
+          product.category === category5 ||
+          product.category === category6 ||
+          product.category === category7 ||
+          product.category === category8
+        );
+      })
+      .map((product) => {
+        return (
+          <ContainerMap key={product.id}>
+            <img src={product.photoUrl} alt="produto" />
+            <div id="container-info">
+              <p id="product-name">{product.name}</p>
+              <p id="product-description">{product.description}</p>
+              <p id="product-price">
+                <strong>R${product.price}</strong>
+              </p>
+            </div>
+            {checkProduct(product) && (
+              <div id="quantity">
+                {quantityCart(values.cartProducts, product)}
+              </div>
+            )}
+            {arrayCheckId.includes(product.id) && checkToRenderContainerSelect && (
+              <ContainerQuantity>
+                <div
+                  id="background-top"
+                  onClick={() =>
+                    setCheckToRenderContainerSelect(
+                      !checkToRenderContainerSelect
+                    )
+                  }
+                ></div>
+                <div
+                  id="background-bottom"
+                  onClick={() =>
+                    setCheckToRenderContainerSelect(
+                      !checkToRenderContainerSelect
+                    )
+                  }
+                ></div>
+                <div id="container-select">
+                  <p>Selecione a quantidade desejada</p>
+                  <ContainerForm>
+                    <form onSubmit={() => addProductToCart(product)}>
+                      <select
+                        required
+                        value={number}
+                        onChange={(e) => setNumber(e.target.value)}
+                      >
+                        <option>0</option>
+                        <option>1</option>
+                        <option>2</option>
+                        <option>3</option>
+                        <option>4</option>
+                        <option>5</option>
+                        <option>6</option>
+                        <option>7</option>
+                        <option>8</option>
+                        <option>9</option>
+                        <option>10</option>
+                      </select>
+                      <button id="button-add-to-cart" type="submit">
+                        ADICIONAR AO CARRINHO
+                      </button>
+                    </form>
+                  </ContainerForm>
+                </div>
+              </ContainerQuantity>
+            )}
+            {checkProduct(product) ? (
+              <button
+                id="button-remove"
+                onClick={() => values.functionRemove(product)}
+              >
+                Remover
+              </button>
+            ) : (
+              <button onClick={() => showToAddQuantity(product.id)}>
+                Adicionar
+              </button>
+            )}
+          </ContainerMap>
+        );
+      });
+  };
+
+  console.log(values.arrUnique);
 
   return (
     <Container>
@@ -282,84 +390,19 @@ function DetailRestPage() {
         <ContainerMainFood>
           <p>Principais</p>
           <hr />
-          {restDetails.products?.map((product) => {
-            return (
-              <ContainerMap key={product.id}>
-                <img src={product.photoUrl} alt="produto" />
-                <div id="container-info">
-                  <p id="product-name">{product.name}</p>
-                  <p id="product-description">{product.description}</p>
-                  <p id="product-price">
-                    <strong>R${product.price}</strong>
-                  </p>
-                </div>
-                {checkProduct(product) && (
-                  <div id="quantity">
-                    {quantityCart(values.cartProducts, product)}
-                  </div>
-                )}
-                {arrayCheckId.includes(product.id) &&
-                  checkToRenderContainerSelect && (
-                    <ContainerQuantity>
-                      <div
-                        id="background-top"
-                        onClick={() =>
-                          setCheckToRenderContainerSelect(
-                            !checkToRenderContainerSelect
-                          )
-                        }
-                      ></div>
-                      <div
-                        id="background-bottom"
-                        onClick={() =>
-                          setCheckToRenderContainerSelect(
-                            !checkToRenderContainerSelect
-                          )
-                        }
-                      ></div>
-                      <div id="container-select">
-                        <p>Selecione a quantidade desejada</p>
-                        <div>
-                          <form onSubmit={() => addProductToCart(product)}>
-                            <select
-                              required
-                              value={number}
-                              onChange={(e) => setNumber(e.target.value)}
-                            >
-                              <option>1</option>
-                              <option>2</option>
-                              <option>3</option>
-                              <option>4</option>
-                              <option>5</option>
-                              <option>6</option>
-                              <option>7</option>
-                              <option>8</option>
-                              <option>9</option>
-                              <option>10</option>
-                            </select>
-                            <button id="button-add-to-cart" type="submit">
-                              ADICIONAR AO CARRINHO
-                            </button>
-                          </form>
-                        </div>
-                      </div>
-                    </ContainerQuantity>
-                  )}
-                {checkProduct(product) ? (
-                  <button
-                    id="button-remove"
-                    onClick={() => values.functionRemove(product)}
-                  >
-                    Remover
-                  </button>
-                ) : (
-                  <button onClick={() => showToAddQuantity(product.id)}>
-                    Adicionar
-                  </button>
-                )}
-              </ContainerMap>
-            );
-          })}
+          {renderProductsMap(
+            "Lanche",
+            "Pastel",
+            "Salgado",
+            "Lanche",
+            "Pizza",
+            "Refeição",
+            "Sorvete",
+            "Doce"
+          )}
+          <p>Acompanhamentos</p>
+          <hr />
+          {renderProductsMap("Acompanhamento", "Bebida", "Outros")}
         </ContainerMainFood>
       </main>
     </Container>

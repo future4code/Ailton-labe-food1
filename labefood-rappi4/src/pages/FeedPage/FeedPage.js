@@ -39,7 +39,6 @@ function FeedPage() {
   const [filtredRestaurant, setFiltredRestaurant] = useState("");
   useProtectedAdress()
  const data = getPlaceOrder()
-// console.log(data)
 
   const cardRestaurant = res.restaurants
     ?.filter((restaurant) => {
