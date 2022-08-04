@@ -11,15 +11,28 @@ import { Button, Icon, InputRightElement } from "@chakra-ui/react";
 import NavegationFeed from "../../components/Footer/navegationFeed";
 import useGetOrdersHistory from "../../hooks/useGetOrdersHistory";
 
+
+const Divhistory = styled.div`
+
+display: flex;
+gap: 1rem;
+flex-direction: column;
+justify-content: center;
+padding-bottom: 16%;
+
+
+`
+
 const DivEdicao = styled.div`
   position: absolute;
   top: 3px;
   right: 20px;
 `;
 const Container = styled.div`
-  height: 100%;
+  min-height: 100%;
   display: flex;
   flex-direction: column;
+  
 
   header {
     display: flex;
@@ -148,19 +161,26 @@ function ProfilePage() {
   console.log(new Date(1659480153095));
 
   const orderHistory = history?.orders?.map((order) => {
-    return (
-      <ContainerMap key={order.restaurantName}>
-        <p id="order-name">{order.restaurantName}</p>
-        {/* <p id="order-date">{obj.date}</p> */}
-        <p id="order-price">
-          <strong>SUBTOTAL R$</strong>
-          {order.totalPrice},00
-        </p>
-      </ContainerMap>
-    );
-  });
 
-  console.log(history.orders);
+    let date = new Intl.DateTimeFormat('pt-BR', { year: 'numeric', month: '2-digit', day: '2-digit' }).format(order.createdAt)
+
+    return(
+      <ContainerMap key={order.createdAt}>
+      <p id="order-name">{order.restaurantName}</p>
+      <p id="order-date">{date}</p>
+      <p id="order-price">
+        <strong>SUBTOTAL R$</strong>
+        {order.totalPrice},00
+      </p>
+    </ContainerMap>
+
+
+    )
+  })
+
+
+ 
+
   return (
     <Container>
       <header>
@@ -201,19 +221,9 @@ function ProfilePage() {
             <b>Histórico de pedidos</b>
           </p>
           <hr />
+          <Divhistory>
           {orderHistory}
-          {/* {arrayTest.map((obj) => {
-            return (
-              <ContainerMap key={obj.name}>
-                <p id="order-name">{obj.name}</p>
-                <p id="order-date">{obj.date}</p>
-                <p id="order-price">
-                  <strong>SUBTOTAL R$</strong>
-                  {obj.price},00
-                </p>
-              </ContainerMap>
-            );
-          })} */}
+          </Divhistory>
         </section>
       </main>
       <NavegationFeed page={"profile"} />

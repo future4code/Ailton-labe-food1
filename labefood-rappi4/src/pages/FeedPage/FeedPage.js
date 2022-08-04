@@ -15,6 +15,8 @@ import {
   ButtonOnActive,
   DivHamburguer,
   DivRestaurantesMapeados,
+  DivPedidoFinal,
+  ImageClock
 } from "./style";
 import {
   ChakraProvider,
@@ -30,6 +32,7 @@ import "./Example.css";
 import useProtectedAdress from "../../hooks/useProtectedAdress"
 import NavegationFeed from "../../components/Footer/navegationFeed"
 import getPlaceOrder from './../../hooks/useGetPlaceOrder'
+import clock from './../../assets/images/clock.svg'
 
 function FeedPage() {
   const res = useRequestData([], `${BASE_URL}/restaurants`);
@@ -39,6 +42,20 @@ function FeedPage() {
   const [filtredRestaurant, setFiltredRestaurant] = useState("");
   useProtectedAdress()
  const data = getPlaceOrder()
+
+  const cardPedidoFinal = () => {
+    return (
+      <DivPedidoFinal>
+        <div><ImageClock src={clock}></ImageClock></div>
+       <div>
+        <p>Pedido em andamento</p>
+        <h2><strong>{data.order.restaurantName}</strong></h2>
+        <strong>SUBTOTAL R${data.order.totalPrice},00</strong>
+        </div> 
+        </DivPedidoFinal>
+    )
+  }
+
 
   const cardRestaurant = res.restaurants
     ?.filter((restaurant) => {
@@ -126,6 +143,13 @@ function FeedPage() {
           <p>Restaurante não encontrado!</p>
         )}
       </DivContainer>
+
+      {data.order ? 
+      (cardPedidoFinal())
+      :
+      null}
+
+
       <NavegationFeed page={'feed'} />
     </ChakraProvider>
   );
