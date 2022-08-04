@@ -130,7 +130,8 @@ function CartPage() {
     }).then((res) => {
       console.log(res)
     }).catch((err) => {
-      alert('Já existe pedido em andamento.')
+      // alert('Já existe pedido em andamento.')
+      console.log(err.response.message)
     })
   }
 

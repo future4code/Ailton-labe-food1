@@ -9,6 +9,7 @@ import useProtectedPage from "../../hooks/useProtected";
 import { BsPencil } from "react-icons/bs";
 import { Button, Icon, InputRightElement } from "@chakra-ui/react";
 import NavegationFeed from "../../components/Footer/navegationFeed"
+import useGetOrdersHistory from "../../hooks/useGetOrdersHistory";
 
 const DivEdicao = styled.div`
   position: absolute;
@@ -149,7 +150,26 @@ function ProfilePage() {
   ];
   
   const profile = useGetProfile();
+  const history = useGetOrdersHistory();
 
+  
+  const orderHistory = history?.orders?.map((order) => {
+    return(
+      <ContainerMap key={order.restaurantName}>
+      <p id="order-name">{order.restaurantName}</p>
+      {/* <p id="order-date">{obj.date}</p> */}
+      <p id="order-price">
+        <strong>SUBTOTAL R$</strong>
+        {order.totalPrice},00
+      </p>
+    </ContainerMap>
+
+
+    )
+  })
+
+
+  console.log(history.orders)
   return (
     <Container>
       <header>
@@ -190,7 +210,8 @@ function ProfilePage() {
             <b>Histórico de pedidos</b>
           </p>
           <hr />
-          {arrayTest.map((obj) => {
+          {orderHistory}
+          {/* {arrayTest.map((obj) => {
             return (
               <ContainerMap key={obj.name}>
                 <p id="order-name">{obj.name}</p>
@@ -201,7 +222,7 @@ function ProfilePage() {
                 </p>
               </ContainerMap>
             );
-          })}
+          })} */}
         </section>
       </main>
       <NavegationFeed page={'profile'}/>
