@@ -144,17 +144,18 @@ function CartPage() {
 
 
   // TRANSFORMAR EM HOOK E RENDERIZAR NO FEED (IGUAL USEPROTECT) PARA RENDERIZAR O PEDIDO EM ANDAMENTO FIXO
-  const getPlaceOrder = () => {
-    axios.get(`${BASE_URL}/active-order`, {
-      headers: {
-        auth: token,
-      }
-    }).then((res) => {
-      console.log(res)
-    }).catch((err) => {
-      console.log(err)
-    })
-  }
+  // const getPlaceOrder = () => {
+  //   axios.get(`${BASE_URL}/active-order`, {
+  //     headers: {
+  //       auth: token,
+  //     }
+  //   }).then((res) => {
+  //     console.log(res)
+  //   }).catch((err) => {
+  //     console.log(err)
+  //   })
+  // }
+  
   return (
     <Container>
       <Header page="" title="Carrinho" />

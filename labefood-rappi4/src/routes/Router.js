@@ -12,6 +12,7 @@ import DetailRestPage from './../pages/DetailRestPage/DetailRestPage'
 import ErrorPage from './../pages/ErrorPage/ErrorPage'
 import SplashScreen from './../pages/SplashScreen/splashScreen'
 
+
 const Router = () => {
   return (
     <BrowserRouter>
