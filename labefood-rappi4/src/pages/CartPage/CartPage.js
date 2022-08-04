@@ -29,6 +29,7 @@ import styled from "styled-components";
 import axios from "axios";
 import { BASE_URL } from "../../constants/Url/url";
 
+
 const ContainerMap = styled.div`
   display: flex;
   border: solid 1px #b8b8b8;
