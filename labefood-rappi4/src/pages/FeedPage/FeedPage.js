@@ -29,6 +29,7 @@ import "pure-react-carousel/dist/react-carousel.es.css";
 import "./Example.css";
 import useProtectedAdress from "../../hooks/useProtectedAdress"
 import NavegationFeed from "../../components/Footer/navegationFeed"
+import getPlaceOrder from './../../hooks/useGetPlaceOrder'
 
 function FeedPage() {
   const res = useRequestData([], `${BASE_URL}/restaurants`);
@@ -37,6 +38,8 @@ function FeedPage() {
   useProtectedPage();
   const [filtredRestaurant, setFiltredRestaurant] = useState("");
   useProtectedAdress()
+ const data = getPlaceOrder()
+// console.log(data)
 
   const cardRestaurant = res.restaurants
     ?.filter((restaurant) => {
