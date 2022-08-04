@@ -21,7 +21,7 @@ export default function GlobalState(props) {
         },
       })
       .then((res) => {
-        console.log(res)
+        alert('Pedido realizado com sucesso')
         setArrUnique([])
         setCartProducts([])
         setRestaurant('')
