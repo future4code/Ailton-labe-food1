@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import useProtectedPage from "../../hooks/useProtected";
 import NavegationFeed from "../../components/Footer/navegationFeed";
 import radiobutton from "../../assets/images/radiobutton.svg";
@@ -24,20 +24,10 @@ import {
 import Header from "./../../components/Header/Login-Signup/header";
 import { GlobalContext } from "../../Global/GlobalContext";
 import useGetProfileDetails from "../../hooks/useGetProfileDetails";
+import { MdNoMeals } from "react-icons/md";
 import styled from "styled-components";
-
-
-const ContainerMainFood = styled.div`
-  width: 90%;
-  height: 100%;
-  margin-top: 1rem;
-
-  hr {
-    width: 100%;
-    border-bottom: solid 1px black;
-    margin: 8px 0 12px 0;
-  }
-`;
+import axios from "axios";
+import { BASE_URL } from "../../constants/Url/url";
 
 const ContainerMap = styled.div`
   display: flex;
@@ -48,6 +38,7 @@ const ContainerMap = styled.div`
   align-items: center;
   border-radius: 8px;
   gap: 12px;
+  width: 90%;
 
   img {
     min-width: 105px;
@@ -117,125 +108,52 @@ const ContainerMap = styled.div`
   }
 `;
 
-const ContainerQuantity = styled.div`
-  position: fixed;
-  top: 0;
-  left: 0;
-  border: 1px solid black;
-  background-color: rgba(0, 0, 0, 0.5);
-  height: 100vh;
-  width: 100vw;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 2;
-
-  #background-top {
-    height: 225px;
-    width: 100%;
-    position: absolute;
-    top: 0;
-    left: 0;
-  }
-
-  #background-bottom {
-    height: 223px;
-    width: 100%;
-    position: absolute;
-    bottom: 0;
-    left: 0;
-  }
-
-  #container-select {
-    width: 90%;
-    height: 216px;
-    background-color: white;
-    position: relative;
-    
-
-    p {
-      width: 296px;
-      height: 18px;
-      margin: 40px 0 0 16px;
-      font-size: 16px;
-      letter-spacing: -0.39px;
-      text-align: center;
-      color: #000;
-    }
-
-    div {
-      width: 296px;
-      height: 56px;
-      margin: 30px 16px 0;
-      padding: 16px;
-      border-radius: 4px;
-      border: solid 1px #b8b8b8;
-    }
-
-    form {
-      display: flex;
-      justify-content: space-between;
-      width: 25vw;
-      height: 5vh;
-    
-      /* color: black;
-      font-size: 16px;
-      letter-spacing: -0.39px;
-      height: 18px; */
-    }
-
-    #button-add-to-cart {
-      bottom: 16px;
-      right: 11px;
-      border: none;
-      width: 200px;
-      letter-spacing: -0.39px;
-      font-size: 16px;
-      color: #4a90e2;
-    }
-  }
-`;
-
 function CartPage() {
   useProtectedPage();
   const values = useContext(GlobalContext);
   const profile = useGetProfileDetails();
-//   const uniqueIds = []
+  const [currentPaymentMethod, setCurrentPaymentMethod] = useState('money');
+  const [bodyPlaceOrder, setBodyPlaceOrder] = useState({});
+  const token = localStorage.getItem("token");
 
-// const uniqueProducts = values.cartProducts.filter((product) => {
-//     const isDuplicate = uniqueIds.includes(product.id);
-
-//     if (!isDuplicate) {
-//       uniqueIds.push(product.id)
-
-//       return true;
-//     }
-
-//       return false
-
-// })
-//       console.log(uniqueProducts)
-
-  const setProductsCart = new Set ();
-  const filterProducts = values.cartProducts.filter((product) => {
-    const duplicatedProduct = setProductsCart.has(product.product.id);
-    setProductsCart.add(product.product.id);
-
-    if(!duplicatedProduct) {
-      return true
-    }
-
-    return false
+  const productsArray = values.arrUnique.map((obj) => {
+    return {id: obj.product.id, quantity: obj.quantity}
   })
 
 
+  const placeOrder = () => {
+    setBodyOrderPlace()
+    axios.post(`${BASE_URL}/restaurants/${values.restaurant.id}/order`, bodyPlaceOrder, {
+      headers: {
+        auth: token,
+      }
+    }).then((res) => {
+      console.log(res)
+    }).catch((err) => {
+      alert('Já existe pedido em andamento.')
+    })
+  }
 
-  console.log(values)
+  const setBodyOrderPlace = () => {
+    setBodyPlaceOrder({
+      products: productsArray,
+      paymentMethod: currentPaymentMethod,
+    })
+  }
 
-  console.log(filterProducts);
 
-
-
+  // TRANSFORMAR EM HOOK E RENDERIZAR NO FEED (IGUAL USEPROTECT) PARA RENDERIZAR O PEDIDO EM ANDAMENTO FIXO
+  const getPlaceOrder = () => {
+    axios.get(`${BASE_URL}/active-order`, {
+      headers: {
+        auth: token,
+      }
+    }).then((res) => {
+      console.log(res)
+    }).catch((err) => {
+      console.log(err)
+    })
+  }
   return (
     <Container>
       <Header page="" title="Carrinho" />
@@ -263,22 +181,30 @@ function CartPage() {
         <Texto>Carrinho vazio</Texto>
       )}
       <ContainerCards>
-
-      {filterProducts.map((product) => {
-        return ( <ContainerMap key={product.id}>
-        <img src={product.photoUrl} alt="produto" />
-        <div id="container-info">
-          <p id="product-name">{product.name}</p>
-          <p id="product-description">{product.description}</p>
-          <p id="product-price">
-            <strong>R${product.price}</strong>
-          </p>
-        </div>
-        </ContainerMap>
-        )
-      })}
+        {values.arrUnique.map((obj) => {
+          return (
+            <ContainerMap key={obj.product.id}>
+              <img src={obj.product.photoUrl} alt="produto" />
+              <div id="container-info">
+                <p id="product-name">{obj.product.name}</p>
+                <p id="product-description">{obj.product.description}</p>
+                <p id="obj.product-price">
+                  <strong>
+                    R${Math.round(obj.product.price * obj.quantity)}
+                  </strong>
+                </p>
+              </div>
+              <div id="quantity">{obj.quantity}</div>
+              <button
+                id="button-remove"
+                onClick={() => values.functionRemove(obj.product)}
+              >
+                Remover
+              </button>
+            </ContainerMap>
+          );
+        })}
       </ContainerCards>
-      
       <DivTotal>
         {values.sumPrices ? (
           <strong>
@@ -292,7 +218,8 @@ function CartPage() {
           <PRed>
             {values.sumPrices ? (
               <strong>
-                R$ {values.restaurant.shipping + values.sumPrices},00
+                R$ {Math.round(values.restaurant.shipping + values.sumPrices)}
+                ,00
               </strong>
             ) : (
               <strong>R$ 0,00</strong>
@@ -305,17 +232,34 @@ function CartPage() {
       </DivPagamento>
       <Hr />
       <DivPagamento>
-        <img src={radiobutton} alt="button" />
+        {currentPaymentMethod === 'money' ? (
+          <img
+            src={radiobutton}
+            alt="button"
+            onClick={() => setCurrentPaymentMethod("")}
+          />
+        ) : (
+          <img
+            src={radiobutton2}
+            alt="button"
+            onClick={() => setCurrentPaymentMethod('money')}
+          />
+        )}
         <Texto4>Dinheiro</Texto4>
       </DivPagamento>
       <DivPagamento2>
-        <img src={radiobutton2} alt="button" />
+        {currentPaymentMethod === 'creditcard' ? (
+          <img src={radiobutton} alt="button" onClick={() => setCurrentPaymentMethod("")}/>
+        ) : (
+          <img src={radiobutton2} alt="button" onClick={() => setCurrentPaymentMethod('creditcard')}/>
+        )}
         <Texto4>Cartão</Texto4>
       </DivPagamento2>
 
-      <ButtonEntrar><strong>Confirmar</strong></ButtonEntrar>
-      <NavegationFeed page={'cart'} />
-
+      <ButtonEntrar onClick={() => placeOrder()}>
+        <strong>Confirmar</strong>
+      </ButtonEntrar>
+      <NavegationFeed page={"cart"} />
     </Container>
   );
 }

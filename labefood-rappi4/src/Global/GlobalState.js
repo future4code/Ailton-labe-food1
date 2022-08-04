@@ -7,8 +7,8 @@ export default function GlobalState(props) {
   const Provider = GlobalContext.Provider;
 
   const [cartProducts, setCartProducts] = useState([]);
-  const [totalPrice, setTotalPrice] = useState([]);
-  const [restaurant, setRestaurant] = useState('');
+  const [arrUnique, setArrUnique] = useState([]);
+  const [restaurant, setRestaurant] = useState("");
 
   //   ADICIONAR PRODUTO AO CARRINHO
   const addProductToCart = (product, number) => {
@@ -16,11 +16,11 @@ export default function GlobalState(props) {
       cartProducts.push({ product: product, price: product.price });
     }
 
-    let addingNewPrice = [
-      ...totalPrice,
-      { product: product, totalPrice: number * product.price },
+    let addingNewProduct = [
+      ...arrUnique,
+      { product: product, quantity: number },
     ];
-    setTotalPrice(addingNewPrice);
+    setArrUnique(addingNewProduct);
   };
 
   const sumPrices = cartProducts
@@ -35,13 +35,16 @@ export default function GlobalState(props) {
       return product !== obj.product;
     });
     setCartProducts(arrayProductRemoved);
+
+    const arrayCartRemoved = arrUnique.filter((obj) => {
+      return product !== obj.product;
+    });
+    setArrUnique(arrayCartRemoved);
   };
 
   const restaurantDetails = (rest) => {
-    setRestaurant(rest)
-  }
-
-  console.log(restaurant)
+    setRestaurant(rest);
+  };
 
   const values = {
     functionAdd: addProductToCart,
@@ -50,6 +53,7 @@ export default function GlobalState(props) {
     sumPrices: sumPrices,
     restaurantDetails: restaurantDetails,
     restaurant: restaurant,
+    arrUnique: arrUnique,
   };
 
   return <Provider value={values}>{props.children}</Provider>;
