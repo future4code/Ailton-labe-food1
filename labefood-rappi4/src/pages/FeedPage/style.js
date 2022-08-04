@@ -15,14 +15,13 @@ export const ContainerRest = styled.div`
 
   /* margin-bottom: 14%; */
   margin-top: -3%;
-  `;
+`;
 
 export const DivCarousel = styled.div`
   display: flex;
   gap: 1rem;
   width: 100vw;
   justify-content: center;
-
 `;
 
 export const DivDetalhe = styled.div`
@@ -70,56 +69,90 @@ export const Input = styled.input`
 `;
 
 export const ButtonOnActive = styled.button`
-
-&:active{
-  color: #e86e5a;
-}
-&:hover{
-  color: #e86e5a;
-}
-
-`
-
+  &:active {
+    color: ${(props) => {
+      switch (props.color) {
+        case "Árabe":
+          return "#e86e5a";
+        case "Asiática":
+          return "#e86e5a";
+        case "Baiana":
+          return "#e86e5a";
+        case "Carnes":
+          return "#e86e5a";
+        case "Hamburguer":
+          return "#e86e5a";
+        case "Italiana":
+          return "#e86e5a";
+        case "Mexicana":
+          return "#e86e5a";
+        case "Sorvetes":
+          return "#e86e5a";
+        default:
+          return null;
+      }
+    }};
+  }
+  &:hover {
+    color: ${(props) => {
+      switch (props.color) {
+        case "Árabe":
+          return "#e86e5a";
+        case "Asiática":
+          return "#e86e5a";
+        case "Baiana":
+          return "#e86e5a";
+        case "Carnes":
+          return "#e86e5a";
+        case "Hamburguer":
+          return "#e86e5a";
+        case "Italiana":
+          return "#e86e5a";
+        case "Mexicana":
+          return "#e86e5a";
+        case "Sorvetes":
+          return "#e86e5a";
+        default:
+          return null;
+      }
+    }};
+  }
+`;
 
 export const DivHamburguer = styled.div`
-
-/* background-color: blue; */
-
-`
+  /* background-color: blue; */
+`;
 export const DivRestaurantesMapeados = styled.div`
-
-display: flex;
-gap: 1rem;
-flex-direction: column;
-justify-content: center;
-padding-bottom: 16%;
-
-
-`
+  display: flex;
+  gap: 1rem;
+  flex-direction: column;
+  justify-content: center;
+  padding-bottom: 16%;
+`;
 
 export const DivPedidoFinal = styled.div`
-
-position: fixed;
-bottom: 6%;
-width: 100%;
-height: 118px;
-background-color: #e86e5a;
-display: flex;
-column-gap: 5%;
-div{
-  margin-top: 5%;
-}
-p{
-  color: white;
-}
-
-`
+  position: fixed;
+  bottom: 6%;
+  width: 100%;
+  height: 118px;
+  background-color: #e86e5a;
+  display: flex;
+  column-gap: 5%;
+  div {
+    margin-top: 5%;
+  }
+  p {
+    color: white;
+  }
+`;
 export const ImageClock = styled.img`
+  margin-left: 4vw;
+  margin-top: 2vh;
+`;
 
-margin-left: 4vw;
-margin-top: 2vh;
-
-
-
-
-`
+export const ContainerResetFilter = styled.div`
+  position: absolute;
+  height: 300px;
+  width: 100%;
+  background-color: red;
+`;
