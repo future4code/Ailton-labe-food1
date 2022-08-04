@@ -43,7 +43,6 @@ function FeedPage() {
   useProtectedAdress()
  const data = getPlaceOrder()
 
-
   const cardPedidoFinal = () => {
     return (
       <DivPedidoFinal>
@@ -56,7 +55,6 @@ function FeedPage() {
         </DivPedidoFinal>
     )
   }
-
 
 
   const cardRestaurant = res.restaurants

@@ -8,7 +8,7 @@ import useGetProfileDetails from "../../hooks/useGetProfileDetails";
 import useProtectedPage from "../../hooks/useProtected";
 import { BsPencil } from "react-icons/bs";
 import { Button, Icon, InputRightElement } from "@chakra-ui/react";
-import NavegationFeed from "../../components/Footer/navegationFeed"
+import NavegationFeed from "../../components/Footer/navegationFeed";
 import useGetOrdersHistory from "../../hooks/useGetOrdersHistory";
 
 
@@ -154,19 +154,14 @@ const ContainerMap = styled.div`
 function ProfilePage() {
   const navigate = useNavigate();
   useProtectedPage();
-  const arrayTest = [
-    {
-      name: "Bullguer Vila Madalena",
-      date: "23 outubro 2019",
-      price: 67,
-    },
-  ];
-  
+
   const profile = useGetProfile();
   const history = useGetOrdersHistory();
 
-  
+  console.log(new Date(1659480153095));
+
   const orderHistory = history?.orders?.map((order) => {
+
     let date = new Intl.DateTimeFormat('pt-BR', { year: 'numeric', month: '2-digit', day: '2-digit' }).format(order.createdAt)
 
     return(
@@ -186,7 +181,6 @@ function ProfilePage() {
 
  
 
-  
   return (
     <Container>
       <header>
@@ -232,7 +226,7 @@ function ProfilePage() {
           </Divhistory>
         </section>
       </main>
-      <NavegationFeed page={'profile'}/>
+      <NavegationFeed page={"profile"} />
     </Container>
   );
 }
