@@ -57,7 +57,7 @@ export const ButtonCadastrar = styled.button`
 
 background-color: #e86e5a;
 height: 42px;
-width: 75%;
+width: 70%;
 border-radius: 4px;
 margin-left: 5%;
 `

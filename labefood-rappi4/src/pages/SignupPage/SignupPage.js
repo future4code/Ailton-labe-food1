@@ -83,6 +83,8 @@ function SignupPage() {
         <div>
           <Form onSubmit={onSubmitForm}>
             <DivInput>
+
+              <InputGroup>
               <LabelFloat>
               <input
                 placeholder="Nome e sobrenome"
@@ -94,9 +96,12 @@ function SignupPage() {
               ></input>
               <label>Nome*</label>
             </LabelFloat>
+            </InputGroup>
 
+
+            <InputGroup>
             <LabelFloat>
-              <input
+              <Input
               pattern={'[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$'}
                 placeholder="email@email.com"
                 value={form.email}
@@ -104,12 +109,14 @@ function SignupPage() {
                 name="email"
                 required
                 onChange={onChange}
-              ></input>
+              ></Input>
               <label>E-mail*</label>
             </LabelFloat>
+            </InputGroup>
 
+              <InputGroup>
               <LabelFloat>
-              <input
+              <Input
                 pattern={'[0-9]{3}\.[0-9]{3}\.[0-9]{3}-[0-9]{2}'}
                 maxLength={'11'}
                 placeholder="000.000.000-00"
@@ -118,14 +125,14 @@ function SignupPage() {
                 name="cpf"
                 required
                 onChange={onChange}
-              ></input>
+              ></Input>
               <label>CPF*</label>
               </LabelFloat>
+              </InputGroup>
 
-
-              <InputGroup w={'300px'}>
+              <InputGroup>
                 <LabelFloat>
-                <input
+                <Input
                   placeholder="Mínimo 6 caracteres"
                   minLength={'6'}
                   value={form.password}
@@ -133,10 +140,12 @@ function SignupPage() {
                   type={show ? 'text' : 'password'}
                   required
                   onChange={onChange}
-                ></input>
+                ></Input>
                 <label>Senha*</label>
                 </LabelFloat>
+                {/* </InputGroup> */}
 
+                {/* <InputGroup> */}
                 <InputRightElement marginBlock={4}
                 marginRight={2}>
                   <div onClick={handleClick}>
@@ -151,11 +160,12 @@ function SignupPage() {
                     )}
                   </div>
                 </InputRightElement>
-              </InputGroup>
+                </InputGroup>
+              
 
-              <InputGroup w={'300px'}>
+              <InputGroup>
                 <LabelFloat>
-                <input
+                <Input
                   placeholder="Digite novamente."
                   minLength={'6'}
                   value={form.passVerify}
@@ -163,7 +173,7 @@ function SignupPage() {
                   type={ocultar ? 'text' : 'password'}
                   required
                   onChange={onChange}
-                ></input>
+                ></Input>
                 <label>Confirmar*</label>
                 </LabelFloat>
                 <InputRightElement
@@ -184,6 +194,7 @@ function SignupPage() {
               </InputGroup>
             </DivInput>
             <ButtonCadastrar type="submit"><strong>Criar</strong></ButtonCadastrar>
+
           </Form>
 
           {/* <div>Já possui uma conta ? Faça <strong onClick={() =>goToPage(Navigate, 'login')}>login</strong></div> */}
