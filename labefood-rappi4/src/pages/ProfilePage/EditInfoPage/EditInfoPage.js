@@ -40,6 +40,7 @@ function EditInfoPage() {
         <form id="forms">
           <LabelFloat>
             <input
+              minLength={"3"}
               name="name"
               value={form.name}
               onChange={onChange}
@@ -50,6 +51,7 @@ function EditInfoPage() {
           </LabelFloat>
           <LabelFloat>
             <input
+              type="email"
               name="email"
               value={form.email}
               onChange={onChange}
@@ -60,11 +62,14 @@ function EditInfoPage() {
           </LabelFloat>
           <LabelFloat>
             <input
+              pattern={'[0-9]{3}\.?[0-9]{3}\.?[0-9]{3}\-?[0-9]{2}'}
+              maxLength={"11"}
               name="cpf"
               value={form.cpf}
               onChange={onChange}
               placeholder={profile.cpf}
               required
+              title={'Este número precisa ter 11 caracteres.'}
             />
             <label>CPF*</label>
           </LabelFloat>
