@@ -34,15 +34,22 @@ import useProtectedAdress from "../../hooks/useProtectedAdress";
 import NavegationFeed from "../../components/Footer/navegationFeed";
 import getPlaceOrder from "./../../hooks/useGetPlaceOrder";
 import clock from "./../../assets/images/clock.svg";
+import styled from "styled-components";
+import { Spinner } from "@chakra-ui/react";
 
 function FeedPage() {
-  const res = useRequestData([], `${BASE_URL}/restaurants`);
+  useProtectedPage();
+  useProtectedAdress();
+
   const navigate = useNavigate();
   const [search, setSearch] = useState("");
-  useProtectedPage();
   const [filtredRestaurant, setFiltredRestaurant] = useState("");
-  useProtectedAdress();
-  const data = getPlaceOrder();
+
+  const [restaurants, isLoadingRestaurant] = useRequestData(
+    [],
+    `${BASE_URL}/restaurants`
+  );
+  const [ data, isLoadingOrder ] = getPlaceOrder();
 
   const cardPedidoFinal = () => {
     return (
@@ -52,16 +59,24 @@ function FeedPage() {
         </div>
         <div>
           <p>Pedido em andamento</p>
-          <h2>
-            <strong>{data.order.restaurantName}</strong>
-          </h2>
-          <strong>SUBTOTAL R${data.order.totalPrice},00</strong>
+          {isLoadingOrder ? (
+            <div id="spinner">
+              <Spinner width="15px" height="15px" />
+            </div>
+          ) : (
+            <div>
+              <h2>
+                <strong>{data.order.restaurantName}</strong>
+              </h2>
+              <strong>SUBTOTAL R${data.order.totalPrice}</strong>
+            </div>
+          )}
         </div>
       </DivPedidoFinal>
     );
   };
 
-  const cardRestaurant = res.restaurants
+  const cardRestaurant = restaurants
     ?.filter((restaurant) => {
       return restaurant.name.toLowerCase().includes(search.toLowerCase());
     })
@@ -110,8 +125,6 @@ function FeedPage() {
       setFiltredRestaurant(e.target.innerText);
     }
   };
-
-  // console.log(filtredRestaurant)
 
   return (
     <ChakraProvider>
@@ -185,14 +198,16 @@ function FeedPage() {
           </CarouselProvider>
         </div>
 
-        {cardRestaurant?.length !== 0 ? (
+        {isLoadingRestaurant && <Spinner />}
+        {!isLoadingRestaurant && cardRestaurant.length > 0 && (
           <DivRestaurantesMapeados>{cardRestaurant}</DivRestaurantesMapeados>
-        ) : (
+        )}
+        {!isLoadingRestaurant && cardRestaurant.length === 0 && (
           <p>Restaurante não encontrado!</p>
         )}
       </DivContainer>
 
-      {data.order ? cardPedidoFinal() : null}
+      {data.order && cardPedidoFinal() }
 
       <NavegationFeed page={"feed"} />
     </ChakraProvider>

@@ -144,6 +144,12 @@ export const DivPedidoFinal = styled.div`
   p {
     color: white;
   }
+
+  #spinner {
+    display: flex;
+    color: white;
+    justify-content: center;
+  }
 `;
 export const ImageClock = styled.img`
   margin-left: 4vw;
