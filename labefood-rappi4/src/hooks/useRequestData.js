@@ -18,7 +18,7 @@ const useRequestData = (initialData, url) => {
         
       })
       .catch((err) => {
-        console.log(err);
+
       });
   });
 

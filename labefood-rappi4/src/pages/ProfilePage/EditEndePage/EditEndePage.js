@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from "react";
-import styled from "styled-components";
 import useGetProfileDetails from "../../../hooks/useGetProfileDetails";
 import { useForm } from "../../../hooks/useForm";
-import goToPage from "../../../routes/coordinator";
+
 import { useNavigate } from "react-router-dom";
 import { Container } from "./style";
 import { address } from "../../../services/user";
@@ -35,7 +34,7 @@ function EditEndePage() {
         <form id="forms">
           <LabelFloat>
             <input
-               type="text"
+              type="text"
               name="street"
               value={form.street}
               onChange={onChange}
@@ -94,8 +93,9 @@ function EditEndePage() {
             />
             <label>Estado*</label>
           </LabelFloat>
-          <button onClick={() => onSubmit()}><strong>Salvar</strong></button>
-          {/* ADICIONAR FUNÇÃO DE ADD ADRESS NO ONCLICK*/}
+          <button onClick={() => onSubmit()}>
+            <strong>Salvar</strong>
+          </button>
         </form>
       </main>
     </Container>

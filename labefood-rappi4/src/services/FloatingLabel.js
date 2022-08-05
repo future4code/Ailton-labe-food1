@@ -27,7 +27,7 @@ export const LabelFloat = styled.div`
     font-size: 18px;
     border-radius: 2px;
     border: solid 1px #b8b8b8;
-    color: #d0d0d0;
+    color: black;
     ::placeholder {
       color: #d0d0d0;
       opacity: 1;

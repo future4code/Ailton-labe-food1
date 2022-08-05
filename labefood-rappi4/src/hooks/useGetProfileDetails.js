@@ -18,7 +18,7 @@ const useGetProfileDetails = () => {
           setData(res.data.address)
         })
         .catch((err) => {
-          console.log(err);
+
         });
     };
     getProfileDetails();

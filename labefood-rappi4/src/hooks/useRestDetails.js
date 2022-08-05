@@ -18,7 +18,7 @@ const useRestDetails = (id) => {
           setData(res.data.restaurant)
         })
         .catch((err) => {
-          console.log(err);
+
         });
     };
     getRestDetails();
