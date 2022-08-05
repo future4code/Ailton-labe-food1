@@ -33,3 +33,6 @@ Mensagem Pedido
 Funciona:
 Após finalizar compra, o usuário é redirecionado para o feed, sendo impossibilitado de comprar até o período de entrega ser concretizado. Durante este período fica em exibição na tela feed do usuário a mensagem com os dados da compra tais quais: Valor total, restaurante e tempo de entrega.
 Prints do LabeFoods:
+
+<p>Batalha</p>
+<img src="https://user-images.githubusercontent.com/104648703/183157511-afe568e4-a311-476c-805d-90e28271de9a.jpeg" alt="tela-batalha" width="350px" height="200px"/>
