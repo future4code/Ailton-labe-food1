@@ -28,13 +28,10 @@ export const ImageBack = styled.img`
 `
 
 export const TextAling = styled.p`
-
-font-weight: bold;
-margin-left: 30%;
+  font-weight: bold;
+  margin-left: 30%;
 `
 
 export const DivCentralize = styled.div`
-
-display: flex;
-
+  display: flex;
 `

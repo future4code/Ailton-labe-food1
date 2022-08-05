@@ -1,5 +1,10 @@
 import React from 'react'
-import { DivContainerHeader, ImageBack, TextAling, DivCentralize } from './style'
+import {
+  DivContainerHeader,
+  ImageBack,
+  TextAling,
+  DivCentralize
+} from './style'
 import { ChakraProvider } from '@chakra-ui/react'
 import { Icon } from '@chakra-ui/react'
 import { BsFillPersonFill } from 'react-icons/bs'
@@ -13,7 +18,6 @@ function Header(props) {
   return (
     <ChakraProvider>
       <DivContainerHeader>
-
         <DivCentralize>
           <ImageBack
             src={back}
