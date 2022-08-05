@@ -18,18 +18,22 @@ export const ImageBack = styled.img`
 `
 
 export const TextAling = styled.p`
+
    font-size: 16px;
     color: black;
     font-weight: bold;
     display: flex;
     align-items: center;
 
+
 `
 
 
 export const DivCentralize = styled.div`
 
+
 display: flex;
+
 
 
 `
