@@ -4,9 +4,12 @@ import { BASE_URL } from "../constants/Url/url";
 
 const useGetOrdersHistory = () => {
 
+  const [isLoading, setIsLoading] = useState(false)
   const [OrdersHistory, setOrdersHistory] = useState({});
+
   useEffect(() => {
     const getHistory = () => {
+      setIsLoading(true)
       const token = localStorage.getItem("token");
       axios
         .get(`${BASE_URL}/orders/history`, {
@@ -16,13 +19,16 @@ const useGetOrdersHistory = () => {
         })
         .then((res) => { 
             setOrdersHistory(res.data);
+            setIsLoading(false)
         })
-        .catch((err) => {});
+        .catch((err) => {
+          setIsLoading(false)
+        });
     };
     getHistory();
   }, []);
 
-  return OrdersHistory
+  return [ OrdersHistory, isLoading ]
 };
 
 export default useGetOrdersHistory;

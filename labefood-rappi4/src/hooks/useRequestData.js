@@ -3,10 +3,12 @@ import axios from "axios";
 
 const useRequestData = (initialData, url) => {
   const [data, setData] = useState(initialData);
+  const [isLoading, setIsLoading] = useState(false);
   const token = localStorage.getItem('token')
   
     
   useEffect(() => {
+    setIsLoading(true)
     axios
       .get(url, {
         headers: {
@@ -14,15 +16,16 @@ const useRequestData = (initialData, url) => {
         },
       })
       .then((response) => {
-        setData(response.data);
+        setData(response.data.restaurants);
+        setIsLoading(false)
         
       })
       .catch((err) => {
-
+        setIsLoading(false)
       });
-  });
+  },[])
 
-  return data;
+  return [ data, isLoading ] 
 };
 
 
