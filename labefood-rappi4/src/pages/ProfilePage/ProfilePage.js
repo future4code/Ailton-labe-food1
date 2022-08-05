@@ -4,24 +4,20 @@ import { primaryColor } from "../../constants/colors/colors";
 import goToPage from "../../routes/coordinator";
 import { useNavigate } from "react-router-dom";
 import useGetProfile from "../../hooks/useGetProfile";
-import useGetProfileDetails from "../../hooks/useGetProfileDetails";
+
 import useProtectedPage from "../../hooks/useProtected";
 import { BsPencil } from "react-icons/bs";
-import { Button, Icon, InputRightElement } from "@chakra-ui/react";
+import { Icon } from "@chakra-ui/react";
 import NavegationFeed from "../../components/Footer/navegationFeed";
 import useGetOrdersHistory from "../../hooks/useGetOrdersHistory";
 
-
 const Divhistory = styled.div`
-
-display: flex;
-gap: 1rem;
-flex-direction: column;
-justify-content: center;
-padding-bottom: 16%;
-
-
-`
+  display: flex;
+  gap: 1rem;
+  flex-direction: column;
+  justify-content: center;
+  padding-bottom: 16%;
+`;
 
 const DivEdicao = styled.div`
   position: absolute;
@@ -32,7 +28,6 @@ const Container = styled.div`
   min-height: 100%;
   display: flex;
   flex-direction: column;
-  
 
   header {
     display: flex;
@@ -158,28 +153,24 @@ function ProfilePage() {
   const profile = useGetProfile();
   const history = useGetOrdersHistory();
 
-  console.log(new Date(1659480153095));
-
   const orderHistory = history?.orders?.map((order) => {
+    let date = new Intl.DateTimeFormat("pt-BR", {
+      year: "numeric",
+      month: "2-digit",
+      day: "2-digit",
+    }).format(order.createdAt);
 
-    let date = new Intl.DateTimeFormat('pt-BR', { year: 'numeric', month: '2-digit', day: '2-digit' }).format(order.createdAt)
-
-    return(
+    return (
       <ContainerMap key={order.createdAt}>
-      <p id="order-name">{order.restaurantName}</p>
-      <p id="order-date">{date}</p>
-      <p id="order-price">
-        <strong>SUBTOTAL R$</strong>
-        {order.totalPrice},00
-      </p>
-    </ContainerMap>
-
-
-    )
-  })
-
-
- 
+        <p id="order-name">{order.restaurantName}</p>
+        <p id="order-date">{date}</p>
+        <p id="order-price">
+          <strong>SUBTOTAL R$</strong>
+          {order.totalPrice},00
+        </p>
+      </ContainerMap>
+    );
+  });
 
   return (
     <Container>
@@ -221,9 +212,7 @@ function ProfilePage() {
             <b>Histórico de pedidos</b>
           </p>
           <hr />
-          <Divhistory>
-          {orderHistory}
-          </Divhistory>
+          <Divhistory>{orderHistory}</Divhistory>
         </section>
       </main>
       <NavegationFeed page={"profile"} />

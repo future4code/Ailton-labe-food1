@@ -8,7 +8,7 @@ export const login = (body, clear, Navigate, setIsLoading) => {
   axios
     .post(`${BASE_URL}/login`, body)
     .then((res) => {
-      console.log(res);
+
       localStorage.setItem('token', res.data.token)
       clear();
       alert(`Login realizado com sucesso`)

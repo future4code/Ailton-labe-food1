@@ -244,8 +244,6 @@ function DetailRestPage() {
     return qtd;
   };
 
-  console.log(restDetails);
-
   const showToAddQuantity = (postId) => {
     setArrayCheckId(postId);
     setNumber("");
@@ -368,8 +366,6 @@ function DetailRestPage() {
         );
       });
   };
-
-  console.log(values.arrUnique);
 
   return (
     <Container>

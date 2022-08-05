@@ -6,35 +6,30 @@ export const DivContainerHeader = styled.div`
   margin-bottom: 20px;
   -webkit-backdrop-filter: blur(10px);
   backdrop-filter: blur(10px);
-  /* box-shadow: 0 0.5px 0 0 rgba(0, 0, 0, 0.25); */
-  div {
-    display: flex;
-    align-items: center;
-    justify-content: left;
-    /* height: 100%; */
-
-    p {
-      font-size: 16px;
-      color: black;
-    }
-  }
+display: flex;
+justify-content: center;
 `
 
 export const ImageBack = styled.img`
   padding: 2%;
+  position: absolute;
+  left: 2%;
 
-  /* position: absolute;
-  left: 0; */
 `
 
 export const TextAling = styled.p`
+   font-size: 16px;
+    color: black;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
 
-font-weight: bold;
-margin-left: 30%;
 `
+
 
 export const DivCentralize = styled.div`
 
 display: flex;
+
 
 `
