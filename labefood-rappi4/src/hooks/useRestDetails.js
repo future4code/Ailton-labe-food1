@@ -21,8 +21,8 @@ const useRestDetails = (id) => {
           setIsLoading(false)
         })
         .catch((err) => {
-          console.log(err);
           setIsLoading(false)
+
         });
     };
     getRestDetails();

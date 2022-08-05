@@ -3,7 +3,6 @@ import { useForm } from "../../hooks/useForm";
 import { useNavigate } from "react-router-dom";
 import { address } from "../../services/user";
 import { Form, DivContainer } from "./styled";
-import goToPage from "../../routes/coordinator";
 import { LabelFloat } from "../../services/FloatingLabel";
 import { ButtonSave, DivTittle } from "./styled";
 import Header from "../../components/Header/Login-Signup/header";
@@ -25,11 +24,9 @@ function AddressRegistrationFormPage() {
     address(form, clean, Navigate, setIsLoading);
   };
 
-
   return (
     <DivContainer>
-
-        <Header page="signup" />
+      <Header page="signup" />
 
       <DivTittle>
         <p>Meu Endereço</p>

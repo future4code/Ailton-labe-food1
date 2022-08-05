@@ -11,25 +11,14 @@ import {
   DivInput,
   DivCadastre,
   DivCliqueAqui,
-  InputLogin,
 } from "./styled";
 import { login } from "./../../services/user";
 import logo from "./../../assets/images/logo.svg";
 import {
   ChakraProvider,
   Icon,
-  Stack,
-  Input,
   InputGroup,
-  InputLeftElement,
   InputRightElement,
-  extendTheme,
-  Select,
-  FormControl,
-  FormLabel,
-  FormErrorMessage,
-  FormHelperText,
-  Button,
 } from "@chakra-ui/react";
 import { BsFillEyeSlashFill } from "react-icons/bs";
 import { BsFillEyeFill } from "react-icons/bs";
@@ -43,7 +32,6 @@ function LoginPage() {
     password: "",
   });
   const [isLoading, setIsLoading] = useState(false);
-
   const [show, setShow] = React.useState(false);
   const handleClick = () => setShow(!show);
 
@@ -65,31 +53,33 @@ function LoginPage() {
         <div>
           <Form onSubmit={onSubmitForm}>
             <DivInput>
-              <LabelFloat>
-                <input
-                 pattern={'[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$'}
-                  placeholder="email@email.com"
-                  value={form.email}
-                  type={"email"}
-                  name="email"
-                  required
-                  onChange={onChange}
-                ></input>
-                <label>E-mail*</label>
-              </LabelFloat>
+              <InputGroup>
+                <LabelFloat>
+                  <input
+                    pattern={"[a-z0-9._%+-]+@[a-z0-9.-]+.[a-z]{2,}$"}
+                    placeholder="email@email.com"
+                    value={form.email}
+                    type={"email"}
+                    name="email"
+                    required
+                    onChange={onChange}
+                  ></input>
+                  <label>E-mail*</label>
+                </LabelFloat>
+              </InputGroup>
 
               <InputGroup>
                 <LabelFloat>
-                    <input
+                  <input
                     placeholder="Mínimo de 6 caracteres"
-                    minLength={'6'}
+                    minLength={"6"}
                     value={form.password}
                     name="password"
                     type={show ? "text" : "password"}
                     required
                     onChange={onChange}
                   ></input>
-                    <label>Senha*</label>
+                  <label>Senha*</label>
                   <InputRightElement marginBlock={2}>
                     <div onClick={handleClick}>
                       {show ? (

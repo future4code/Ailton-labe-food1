@@ -11,13 +11,10 @@ import {
   DivDetalhe,
   H3,
   ContainerRest,
-  DivCarousel,
   ButtonOnActive,
-  DivHamburguer,
   DivRestaurantesMapeados,
   DivPedidoFinal,
   ImageClock,
-  ContainerResetFilter,
 } from "./style";
 import {
   ChakraProvider,
@@ -112,7 +109,6 @@ function FeedPage() {
   };
 
   const handleClick = (e) => {
-    console.log(e.target.innerText);
     if (e.target.innerText === "Burguer") {
       if (filtredRestaurant !== "Hamburguer") {
         setFiltredRestaurant("Hamburguer");

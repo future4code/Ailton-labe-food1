@@ -119,9 +119,7 @@ export const ButtonOnActive = styled.button`
   }
 `;
 
-export const DivHamburguer = styled.div`
-  /* background-color: blue; */
-`;
+
 export const DivRestaurantesMapeados = styled.div`
   display: flex;
   gap: 1rem;

@@ -1,7 +1,5 @@
 import React, { useState } from "react";
-import { AiOutlineConsoleSql } from "react-icons/ai";
 import { GlobalContext } from "./GlobalContext";
-import useRestDetails from "../hooks/useRestDetails";
 import axios from "axios";
 import { BASE_URL } from "../constants/Url/url";
 
@@ -21,20 +19,18 @@ export default function GlobalState(props) {
         },
       })
       .then((res) => {
-        alert('Pedido realizado com sucesso')
-        setArrUnique([])
-        setCartProducts([])
-        setRestaurant('')
+        alert("Pedido realizado com sucesso");
+        setArrUnique([]);
+        setCartProducts([]);
+        setRestaurant("");
       })
       .catch((err) => {
-        console.log(err)
-        if(err.message === "Request failed with status code 409") {
-          alert('Já existe um pedido em andamento')
+        if (err.message === "Request failed with status code 409") {
+          alert("Já existe um pedido em andamento");
         }
       });
   };
 
-  //   ADICIONAR PRODUTO AO CARRINHO
   const addProductToCart = (product, number) => {
     for (let i = 0; i < number; i++) {
       cartProducts.push({ product: product, price: product.price });
@@ -53,7 +49,6 @@ export default function GlobalState(props) {
     })
     .reduce((curr, prev) => curr + prev, 0);
 
-  // REMOVE PRODUTO DO CARRINHO
   const removeProductFromCart = (product) => {
     const arrayProductRemoved = cartProducts.filter((obj) => {
       return product !== obj.product;

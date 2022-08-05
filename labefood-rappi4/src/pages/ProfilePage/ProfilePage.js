@@ -10,9 +10,19 @@ import NavegationFeed from "../../components/Footer/navegationFeed";
 import useGetOrdersHistory from "../../hooks/useGetOrdersHistory";
 import { Divhistory, DivEdicao, Container, ContainerMap, LoadingInfo, LoadingHistory } from "./style";
 
+const ButtonLogout = styled.button`
+  margin-right: 10px;
+  background-color: #e86e5a;
+  height: 30px;
+  width: 20%;
+  border: none;
+  border-radius: 4px;
+  margin-left: 5%;
+`
+
 function ProfilePage() {
-  const navigate = useNavigate();
-  useProtectedPage();
+  const navigate = useNavigate()
+  useProtectedPage()
 
   const profile = useGetProfile();
   const [ history, isLoading ] = useGetOrdersHistory();
@@ -33,15 +43,21 @@ function ProfilePage() {
           {order.totalPrice},00
         </p>
       </ContainerMap>
-    );
-  });
+    )
+  })
+
+  const logoutProfile = () => {
+    localStorage.removeItem('token')
+    goToPage(navigate, 'login')
+  }
 
   return (
     <Container>
       <header>
         <p>
-          <b>Meu Perfil</b>
+          <Tittle>Meu Perfil</Tittle>
         </p>
+        <ButtonLogout onClick={() => logoutProfile()}>Logout</ButtonLogout>
       </header>
       <main>
         <section id="info-profile">
@@ -56,7 +72,7 @@ function ProfilePage() {
               <Spinner width='10px' height='10px'/>
             </LoadingInfo>
           )}
-          <DivEdicao onClick={() => goToPage(navigate, "edit/inf")}>
+          <DivEdicao onClick={() => goToPage(navigate, 'edit/inf')}>
             <div>
               <Icon as={BsPencil} />
             </div>
@@ -67,7 +83,7 @@ function ProfilePage() {
             <p id="adress-title">Endereço cadastrado</p>
             <p id="adress-itself">{profile.address}</p>
           </div>
-          <div onClick={() => goToPage(navigate, "edit/end")}>
+          <div onClick={() => goToPage(navigate, 'edit/end')}>
             <div>
               <Icon as={BsPencil} />
             </div>
@@ -87,9 +103,9 @@ function ProfilePage() {
           )}
         </section>
       </main>
-      <NavegationFeed page={"profile"} />
+      <NavegationFeed page={'profile'} />
     </Container>
-  );
+  )
 }
 
-export default ProfilePage;
+export default ProfilePage
