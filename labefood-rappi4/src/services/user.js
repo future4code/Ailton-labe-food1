@@ -11,7 +11,6 @@ export const login = (body, clear, Navigate, setIsLoading) => {
 
       localStorage.setItem('token', res.data.token)
       clear();
-      alert(`Login realizado com sucesso`)
       setIsLoading(false);
       goToPage(Navigate, "");
     })

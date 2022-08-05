@@ -25,6 +25,7 @@ import {
 import Header from "./../../components/Header/Login-Signup/header";
 import { GlobalContext } from "../../Global/GlobalContext";
 import useGetProfileDetails from "../../hooks/useGetProfileDetails";
+import { useNavigate } from "react-router-dom";
 
 function CartPage() {
   useProtectedPage();
@@ -32,6 +33,7 @@ function CartPage() {
   const profile = useGetProfileDetails();
   const [currentPaymentMethod, setCurrentPaymentMethod] = useState("money");
   const [bodyPlaceOrder, setBodyPlaceOrder] = useState({});
+  const navigate = useNavigate();
 
   const productsArray = values.arrUnique.map((obj) => {
     return { id: obj.product.id, quantity: obj.quantity };
@@ -45,7 +47,7 @@ function CartPage() {
       });
     };
     setBodyOrderPlace();
-  }, [currentPaymentMethod]);
+  }, [currentPaymentMethod, values.arrUnique]);
 
   return (
     <Container>
@@ -53,11 +55,13 @@ function CartPage() {
 
       <DivEndereco>
         <P>Endereço de entrega</P>
-        <p>
-          <strong>
-            {profile.street}, {profile.number}
-          </strong>
-        </p>
+        {profile.street && profile.number && (
+          <p>
+            <strong>
+              {profile.street}, {profile.number}
+            </strong>
+          </p>
+        )}
       </DivEndereco>
       {values.restaurant ? (
         <ContainerRestInfo>
@@ -157,7 +161,7 @@ function CartPage() {
         <Texto4>Cartão</Texto4>
       </DivPagamento2>
 
-      <ButtonEntrar onClick={() => values.placeOrder(bodyPlaceOrder)}>
+      <ButtonEntrar onClick={() => values.placeOrder(bodyPlaceOrder, navigate)}>
         <strong>Confirmar</strong>
       </ButtonEntrar>
       <NavegationFeed page={"cart"} />

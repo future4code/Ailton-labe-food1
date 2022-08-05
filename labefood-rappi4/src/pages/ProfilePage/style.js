@@ -22,14 +22,14 @@ export const Container = styled.div`
   header {
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: space-between;
     width: 100%;
     height: 8vh;
     border-bottom: 1px solid grey;
     margin-bottom: 2px;
 
     p {
-      margin: 0;
+      margin-left: 35%;
     }
   }
 
@@ -151,3 +151,17 @@ export const LoadingHistory = styled.div`
   align-items: end;
   justify-content: center;
 `;
+
+export const Tittle = styled.b`
+  margin-left: 15px;
+`
+
+export const ButtonLogout = styled.button`
+  margin-right: 10px;
+  background-color: #e86e5a;
+  height: 30px;
+  width: 20%;
+  border: none;
+  border-radius: 4px;
+  margin-left: 5%;
+`

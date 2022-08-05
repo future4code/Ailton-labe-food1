@@ -8,24 +8,23 @@ import { BsPencil } from "react-icons/bs";
 import { Icon, Spinner } from "@chakra-ui/react";
 import NavegationFeed from "../../components/Footer/navegationFeed";
 import useGetOrdersHistory from "../../hooks/useGetOrdersHistory";
-import { Divhistory, DivEdicao, Container, ContainerMap, LoadingInfo, LoadingHistory } from "./style";
-
-const ButtonLogout = styled.button`
-  margin-right: 10px;
-  background-color: #e86e5a;
-  height: 30px;
-  width: 20%;
-  border: none;
-  border-radius: 4px;
-  margin-left: 5%;
-`
+import {
+  Divhistory,
+  DivEdicao,
+  Container,
+  ContainerMap,
+  LoadingInfo,
+  LoadingHistory,
+  Tittle,
+  ButtonLogout,
+} from "./style";
 
 function ProfilePage() {
-  const navigate = useNavigate()
-  useProtectedPage()
+  const navigate = useNavigate();
+  useProtectedPage();
 
   const profile = useGetProfile();
-  const [ history, isLoading ] = useGetOrdersHistory();
+  const [history, isLoading] = useGetOrdersHistory();
 
   const orderHistory = history?.orders?.map((order) => {
     let date = new Intl.DateTimeFormat("pt-BR", {
@@ -40,16 +39,16 @@ function ProfilePage() {
         <p id="order-date">{date}</p>
         <p id="order-price">
           <strong>SUBTOTAL R$</strong>
-          {order.totalPrice},00
+          {order.totalPrice}
         </p>
       </ContainerMap>
-    )
-  })
+    );
+  });
 
   const logoutProfile = () => {
-    localStorage.removeItem('token')
-    goToPage(navigate, 'login')
-  }
+    localStorage.removeItem("token");
+    goToPage(navigate, "login");
+  };
 
   return (
     <Container>
@@ -69,10 +68,10 @@ function ProfilePage() {
             </div>
           ) : (
             <LoadingInfo>
-              <Spinner width='10px' height='10px'/>
+              <Spinner width="10px" height="10px" />
             </LoadingInfo>
           )}
-          <DivEdicao onClick={() => goToPage(navigate, 'edit/inf')}>
+          <DivEdicao onClick={() => goToPage(navigate, "edit/inf")}>
             <div>
               <Icon as={BsPencil} />
             </div>
@@ -83,7 +82,7 @@ function ProfilePage() {
             <p id="adress-title">Endereço cadastrado</p>
             <p id="adress-itself">{profile.address}</p>
           </div>
-          <div onClick={() => goToPage(navigate, 'edit/end')}>
+          <div onClick={() => goToPage(navigate, "edit/end")}>
             <div>
               <Icon as={BsPencil} />
             </div>
@@ -96,16 +95,16 @@ function ProfilePage() {
           <hr />
           {isLoading ? (
             <LoadingHistory>
-              <Spinner width='20px' height='20px'/>
+              <Spinner width="20px" height="20px" />
             </LoadingHistory>
           ) : (
             <Divhistory>{orderHistory}</Divhistory>
           )}
         </section>
       </main>
-      <NavegationFeed page={'profile'} />
+      <NavegationFeed page={"profile"} />
     </Container>
-  )
+  );
 }
 
-export default ProfilePage
+export default ProfilePage;

@@ -46,7 +46,7 @@ function FeedPage() {
     [],
     `${BASE_URL}/restaurants`
   );
-  const [ data, isLoadingOrder ] = getPlaceOrder();
+  const [data, isLoadingOrder] = getPlaceOrder();
 
   const cardPedidoFinal = () => {
     return (
@@ -117,6 +117,7 @@ function FeedPage() {
       }
     } else if (e.target.innerText === filtredRestaurant) {
       setFiltredRestaurant("");
+    } else if (e.target.innerText === "") {
     } else {
       setFiltredRestaurant(e.target.innerText);
     }
@@ -203,7 +204,7 @@ function FeedPage() {
         )}
       </DivContainer>
 
-      {data.order && cardPedidoFinal() }
+      {data.order && cardPedidoFinal()}
 
       <NavegationFeed page={"feed"} />
     </ChakraProvider>

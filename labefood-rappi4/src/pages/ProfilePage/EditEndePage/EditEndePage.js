@@ -34,6 +34,7 @@ function EditEndePage() {
         <form id="forms">
           <LabelFloat>
             <input
+              minLength={"5"}
               type="text"
               name="street"
               value={form.street}
@@ -61,10 +62,11 @@ function EditEndePage() {
               onChange={onChange}
               placeholder="Apto./Bloco"
             ></input>
-            <label>Complemento*</label>
+            <label>Complemento</label>
           </LabelFloat>
           <LabelFloat>
             <input
+              minLength={"3"}
               name="neighbourhood"
               value={form.neighbourhood}
               onChange={onChange}
@@ -75,6 +77,7 @@ function EditEndePage() {
           </LabelFloat>
           <LabelFloat>
             <input
+              minLength={"2"}
               name="city"
               value={form.city}
               onChange={onChange}
@@ -85,6 +88,7 @@ function EditEndePage() {
           </LabelFloat>
           <LabelFloat>
             <input
+              minLength={"2"}
               name="state"
               value={form.state}
               onChange={onChange}

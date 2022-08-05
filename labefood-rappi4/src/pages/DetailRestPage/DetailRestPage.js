@@ -5,7 +5,15 @@ import useRestDetails from "../../hooks/useRestDetails";
 import Header from "../../components/Header/Login-Signup/header";
 import { GlobalContext } from "../../Global/GlobalContext";
 import { Spinner } from "@chakra-ui/react";
-import { Container, ContainerRestInfo, ContainerMainFood, ContainerMap, ContainerQuantity, ContainerForm, Loading } from "./style"
+import {
+  Container,
+  ContainerRestInfo,
+  ContainerMainFood,
+  ContainerMap,
+  ContainerQuantity,
+  ContainerForm,
+  Loading,
+} from "./style";
 
 function DetailRestPage() {
   useProtectedPage();
