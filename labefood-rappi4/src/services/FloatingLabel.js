@@ -28,5 +28,18 @@ export const LabelFloat = styled.div`
     border-radius: 2px;
     border: solid 1px #b8b8b8;
     color: #d0d0d0;
+    ::placeholder {
+      color: #d0d0d0;
+      opacity: 1;
+    }
+    :-ms-input-placeholder {
+      /* Internet Explorer 10-11 */
+      color: #d0d0d0;;
+    }
+
+    ::-ms-input-placeholder {
+      /* Microsoft Edge */
+      color: #d0d0d0;;
+    }
   }
 `;

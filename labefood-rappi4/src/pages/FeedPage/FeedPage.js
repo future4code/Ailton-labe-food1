@@ -15,6 +15,9 @@ import {
   ButtonOnActive,
   DivHamburguer,
   DivRestaurantesMapeados,
+  DivPedidoFinal,
+  ImageClock,
+  ContainerResetFilter,
 } from "./style";
 import {
   ChakraProvider,
@@ -27,32 +30,58 @@ import { BsSearch } from "react-icons/bs";
 import { CarouselProvider, Slider, Slide } from "pure-react-carousel";
 import "pure-react-carousel/dist/react-carousel.es.css";
 import "./Example.css";
-import useProtectedAdress from "../../hooks/useProtectedAdress"
-import NavegationFeed from "../../components/Footer/navegationFeed"
+import useProtectedAdress from "../../hooks/useProtectedAdress";
+import NavegationFeed from "../../components/Footer/navegationFeed";
+import getPlaceOrder from "./../../hooks/useGetPlaceOrder";
+import clock from "./../../assets/images/clock.svg";
 
 function FeedPage() {
   const res = useRequestData([], `${BASE_URL}/restaurants`);
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const [search, setSearch] = useState("");
   useProtectedPage();
   const [filtredRestaurant, setFiltredRestaurant] = useState("");
-  useProtectedAdress()
+  useProtectedAdress();
+  const data = getPlaceOrder();
+
+  const cardPedidoFinal = () => {
+    return (
+      <DivPedidoFinal>
+        <div>
+          <ImageClock src={clock}></ImageClock>
+        </div>
+        <div>
+          <p>Pedido em andamento</p>
+          <h2>
+            <strong>{data.order.restaurantName}</strong>
+          </h2>
+          <strong>SUBTOTAL R${data.order.totalPrice},00</strong>
+        </div>
+      </DivPedidoFinal>
+    );
+  };
 
   const cardRestaurant = res.restaurants
     ?.filter((restaurant) => {
       return restaurant.name.toLowerCase().includes(search.toLowerCase());
     })
     .filter((restaurant) => {
-      return restaurant.category === filtredRestaurant || filtredRestaurant === ""
-
+      return (
+        restaurant.category === filtredRestaurant || filtredRestaurant === ""
+      );
     })
     .map((restaurant) => {
       return (
-        <ContainerRest key={restaurant.id} onClick={() => goToPage(navigate, `res/${restaurant.id}`)}>
+        <ContainerRest
+          key={restaurant.id}
+          onClick={() => goToPage(navigate, `res/${restaurant.id}`)}
+        >
           <ContainerLogo>
             <Img src={restaurant.logoUrl} alt="logo" />
           </ContainerLogo>
-          <H3><b>{restaurant.name}</b></H3>
+          <H3>
+            <b>{restaurant.name}</b>
+          </H3>
           <DivDetalhe>
             <p>
               {restaurant.deliveryTime} - {restaurant.deliveryTime + 10} min
@@ -68,13 +97,21 @@ function FeedPage() {
   };
 
   const handleClick = (e) => {
-    if(e.target.innerText === 'Burguer'){
-      setFiltredRestaurant('Hamburguer')
-    }else{
-
+    console.log(e.target.innerText);
+    if (e.target.innerText === "Burguer") {
+      if (filtredRestaurant !== "Hamburguer") {
+        setFiltredRestaurant("Hamburguer");
+      } else {
+        setFiltredRestaurant("");
+      }
+    } else if (e.target.innerText === filtredRestaurant) {
+      setFiltredRestaurant("");
+    } else {
       setFiltredRestaurant(e.target.innerText);
     }
   };
+
+  // console.log(filtredRestaurant)
 
   return (
     <ChakraProvider>
@@ -106,25 +143,58 @@ function FeedPage() {
             currentSlide={2}
           >
             <Slider onClick={(e) => handleClick(e)}>
-              <Slide index={0}><ButtonOnActive>Árabe</ButtonOnActive></Slide>
-              <Slide index={1}><ButtonOnActive>Asiática</ButtonOnActive></Slide>
-              <Slide index={2}><ButtonOnActive>Baiana</ButtonOnActive></Slide>
-              <Slide index={3}><ButtonOnActive>Carnes</ButtonOnActive></Slide>
-              <Slide index={4}><ButtonOnActive>Burguer</ButtonOnActive></Slide>
-              <Slide index={5}><ButtonOnActive>Italiana</ButtonOnActive></Slide>
-              <Slide index={6}><ButtonOnActive>Mexicana</ButtonOnActive></Slide>
-              <Slide index={7}><ButtonOnActive>Sorvetes</ButtonOnActive></Slide>
+              <Slide index={0}>
+                <ButtonOnActive color={filtredRestaurant}>Árabe</ButtonOnActive>
+              </Slide>
+              <Slide index={1}>
+                <ButtonOnActive color={filtredRestaurant}>
+                  Asiática
+                </ButtonOnActive>
+              </Slide>
+              <Slide index={2}>
+                <ButtonOnActive color={filtredRestaurant}>
+                  Baiana
+                </ButtonOnActive>
+              </Slide>
+              <Slide index={3}>
+                <ButtonOnActive color={filtredRestaurant}>
+                  Carnes
+                </ButtonOnActive>
+              </Slide>
+              <Slide index={4}>
+                <ButtonOnActive color={filtredRestaurant}>
+                  Burguer
+                </ButtonOnActive>
+              </Slide>
+              <Slide index={5}>
+                <ButtonOnActive color={filtredRestaurant}>
+                  Italiana
+                </ButtonOnActive>
+              </Slide>
+              <Slide index={6}>
+                <ButtonOnActive color={filtredRestaurant}>
+                  Mexicana
+                </ButtonOnActive>
+              </Slide>
+              <Slide index={7}>
+                <ButtonOnActive color={filtredRestaurant}>
+                  Sorvetes
+                </ButtonOnActive>
+              </Slide>
             </Slider>
           </CarouselProvider>
         </div>
 
         {cardRestaurant?.length !== 0 ? (
-         <DivRestaurantesMapeados>{cardRestaurant}</DivRestaurantesMapeados> 
+          <DivRestaurantesMapeados>{cardRestaurant}</DivRestaurantesMapeados>
         ) : (
           <p>Restaurante não encontrado!</p>
         )}
       </DivContainer>
-      <NavegationFeed page={'feed'} />
+
+      {data.order ? cardPedidoFinal() : null}
+
+      <NavegationFeed page={"feed"} />
     </ChakraProvider>
   );
 }

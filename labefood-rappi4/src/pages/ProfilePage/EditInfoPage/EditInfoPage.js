@@ -40,15 +40,6 @@ function EditInfoPage() {
   return (
     <Container>
       <Header page="profile" title="Editar" />
-      {/* <header>
-        <div id="header">
-          <div onClick={() => goToPage(navigate, "profile")}>
-            <Icon as={MdArrowBackIos}/>
-            </div>
-          <p><b>Editar</b></p>
-        </div>
-        <hr />
-      </header> */}
       <main>
         <form id="forms">
           <LabelFloat>
