@@ -148,7 +148,7 @@ export const ContainerCards = styled.div`
   flex-direction: column;
   align-items: center;
   width: 100vw;
-  min-height: 20vh;
+  min-height: 6vh;
 `;
 
 export const ContainerMap = styled.div`
