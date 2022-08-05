@@ -4,10 +4,6 @@ import { BASE_URL } from "./Url/url";
 
 function cardRestaurant() {
 
-
-
-    
-
   return <div>cardRestaurant</div>;
 }
 

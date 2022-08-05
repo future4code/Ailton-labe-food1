@@ -1,15 +1,11 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import styled from "styled-components";
 import { BASE_URL } from "../../../constants/Url/url";
 import useGetProfile from "../../../hooks/useGetProfile";
 import { useForm } from "../../../hooks/useForm";
-import goToPage from "../../../routes/coordinator";
 import { useNavigate } from "react-router-dom";
 import useProtectedPage from "../../../hooks/useProtected";
 import { Container } from "./style";
-import { MdArrowBackIos } from "react-icons/md";
-import { Icon } from "@chakra-ui/react";
 import Header from "../../../components/Header/Login-Signup/header";
 import { LabelFloat } from "../../../services/FloatingLabel";
 
@@ -51,28 +47,30 @@ function EditInfoPage() {
               required
             />
             <label>Nome *</label>
-            </LabelFloat>
-            <LabelFloat>
+          </LabelFloat>
+          <LabelFloat>
             <input
               name="email"
               value={form.email}
               onChange={onChange}
               placeholder={profile.email}
               required
-              />
-              <label>E-mail*</label>
-              </LabelFloat>
-              <LabelFloat>
+            />
+            <label>E-mail*</label>
+          </LabelFloat>
+          <LabelFloat>
             <input
               name="cpf"
               value={form.cpf}
               onChange={onChange}
               placeholder={profile.cpf}
               required
-              />
-              <label>CPF*</label>
-              </LabelFloat>
-          <button onClick={() => updateProfile()}><strong>Salvar</strong></button>
+            />
+            <label>CPF*</label>
+          </LabelFloat>
+          <button onClick={() => updateProfile()}>
+            <strong>Salvar</strong>
+          </button>
         </form>
       </main>
     </Container>

@@ -1,15 +1,16 @@
-import React, { useEffect, useState } from 'react'
-import styled from 'styled-components'
-import { primaryColor } from '../../constants/colors/colors'
-import goToPage from '../../routes/coordinator'
-import { useNavigate } from 'react-router-dom'
-import useGetProfile from '../../hooks/useGetProfile'
-import useGetProfileDetails from '../../hooks/useGetProfileDetails'
-import useProtectedPage from '../../hooks/useProtected'
-import { BsPencil } from 'react-icons/bs'
-import { Button, Icon, InputRightElement } from '@chakra-ui/react'
-import NavegationFeed from '../../components/Footer/navegationFeed'
-import useGetOrdersHistory from '../../hooks/useGetOrdersHistory'
+
+import React, { useEffect, useState } from "react";
+import styled from "styled-components";
+import { primaryColor } from "../../constants/colors/colors";
+import goToPage from "../../routes/coordinator";
+import { useNavigate } from "react-router-dom";
+import useGetProfile from "../../hooks/useGetProfile";
+import useProtectedPage from "../../hooks/useProtected";
+import { BsPencil } from "react-icons/bs";
+import { Icon } from "@chakra-ui/react";
+import NavegationFeed from "../../components/Footer/navegationFeed";
+import useGetOrdersHistory from "../../hooks/useGetOrdersHistory";
+
 
 const Divhistory = styled.div`
   display: flex;
@@ -17,7 +18,9 @@ const Divhistory = styled.div`
   flex-direction: column;
   justify-content: center;
   padding-bottom: 16%;
-`
+
+`;
+
 
 const DivEdicao = styled.div`
   position: absolute;
@@ -165,14 +168,14 @@ function ProfilePage() {
   const profile = useGetProfile()
   const history = useGetOrdersHistory()
 
-  console.log(new Date(1659480153095))
 
   const orderHistory = history?.orders?.map((order) => {
-    let date = new Intl.DateTimeFormat('pt-BR', {
-      year: 'numeric',
-      month: '2-digit',
-      day: '2-digit'
-    }).format(order.createdAt)
+    let date = new Intl.DateTimeFormat("pt-BR", {
+      year: "numeric",
+      month: "2-digit",
+      day: "2-digit",
+    }).format(order.createdAt);
+
 
     return (
       <ContainerMap key={order.createdAt}>
@@ -183,6 +186,7 @@ function ProfilePage() {
           {order.totalPrice},00
         </p>
       </ContainerMap>
+
     )
   })
 
@@ -190,6 +194,7 @@ function ProfilePage() {
     localStorage.removeItem('token')
     goToPage(navigate, 'login')
   }
+
 
   return (
     <Container>
