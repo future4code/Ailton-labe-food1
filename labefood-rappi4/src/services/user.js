@@ -11,12 +11,13 @@ export const login = (body, clear, Navigate, setIsLoading) => {
       console.log(res);
       localStorage.setItem('token', res.data.token)
       clear();
+      alert(`Login realizado com sucesso`)
       setIsLoading(false);
       goToPage(Navigate, "");
     })
     .catch((err) => {
       setIsLoading(false);
-      alert(err);
+      alert(`Usuário ou senha inválido!`);
     });
 };
 
@@ -30,12 +31,15 @@ export const address = (body, clear, Navigate, setIsLoading) => {
     .then((res) => {
       localStorage.setItem("token", res.data.token);
       setIsLoading(false);
+      alert(`Conta cadastrada com sucesso!`)
       clear();
       goToPage(Navigate, "");
     })
     .catch((err) => {
+
       setIsLoading(false);
-      alert(err);
+      alert('Aconteceu algum erro. Tente novamente!');
+     
     });
 };
 
