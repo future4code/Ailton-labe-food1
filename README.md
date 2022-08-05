@@ -35,4 +35,4 @@ Após finalizar compra, o usuário é redirecionado para o feed, sendo impossibi
 Prints do LabeFoods:
 
 <p>Batalha</p>
-<img src="https://user-images.githubusercontent.com/104648703/183157511-afe568e4-a311-476c-805d-90e28271de9a.jpeg" alt="tela-batalha" width="350px" height="200px"/>
+<img src="https://user-images.githubusercontent.com/104648703/183157511-afe568e4-a311-476c-805d-90e28271de9a.jpeg" alt="tela-batalha" width="150px" height="350px"/>
