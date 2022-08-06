@@ -1,5 +1,5 @@
-import React, { useContext, useState } from "react";
-import { useParams } from "react-router-dom";
+import React, { useContext, useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 import useProtectedPage from "../../hooks/useProtected";
 import useRestDetails from "../../hooks/useRestDetails";
 import Header from "../../components/Header/Login-Signup/header";
@@ -17,20 +17,22 @@ import {
 
 function DetailRestPage() {
   useProtectedPage();
+  const navigate = useNavigate();
   const pathParams = useParams();
   const restDetails = useRestDetails(pathParams.id);
   const [number, setNumber] = useState("");
   const [checkToRenderContainerSelect, setCheckToRenderContainerSelect] =
     useState(false);
   const [arrayCheckId, setArrayCheckId] = useState([]);
-
   const values = useContext(GlobalContext);
 
-  const quantityCart = (arr, product) => {
+  const carrinho = JSON.parse(localStorage.getItem("cartShop") || "[]");
+
+  const quantityCart = (arr, id) => {
     var qtd = 0;
     for (var i = 0; i < arr.length; i++) {
-      if (arr[i].product === product) {
-        qtd++;
+      if (arr[i].products.id === id) {
+        qtd = arr[i].quantity;
       }
     }
     return qtd;
@@ -43,15 +45,16 @@ function DetailRestPage() {
   };
 
   const addProductToCart = (product) => {
-    values.functionAdd(product, number);
-    values.restaurantDetails(restDetails);
+    values.functionAdd(product, number, restDetails, navigate);
     setCheckToRenderContainerSelect(false);
   };
 
-  const checkProduct = (product) => {
-    for (let i = 0; i < values.arrUnique.length; i++) {
-      if (values.arrUnique[i].product === product) {
-        return true;
+  const checkProduct = (id) => {
+    if (carrinho) {
+      for (let i = 0; i < carrinho.length; i++) {
+        if (carrinho[i].products.id === id) {
+          return true;
+        }
       }
     }
   };
@@ -90,10 +93,8 @@ function DetailRestPage() {
                 <strong>R${product.price}</strong>
               </p>
             </div>
-            {checkProduct(product) && (
-              <div id="quantity">
-                {quantityCart(values.cartProducts, product)}
-              </div>
+            {checkProduct(product.id) && (
+              <div id="quantity">{quantityCart(carrinho, product.id)}</div>
             )}
             {arrayCheckId.includes(product.id) && checkToRenderContainerSelect && (
               <ContainerQuantity>
@@ -116,7 +117,7 @@ function DetailRestPage() {
                 <div id="container-select">
                   <p>Selecione a quantidade desejada</p>
                   <ContainerForm>
-                    <form onSubmit={() => addProductToCart(product)}>
+                    <form>
                       <select
                         required
                         value={number}
@@ -134,7 +135,11 @@ function DetailRestPage() {
                         <option>9</option>
                         <option>10</option>
                       </select>
-                      <button id="button-add-to-cart" type="submit">
+                      <button
+                        id="button-add-to-cart"
+                        type="button"
+                        onClick={() => addProductToCart(product)}
+                      >
                         ADICIONAR AO CARRINHO
                       </button>
                     </form>
@@ -142,10 +147,10 @@ function DetailRestPage() {
                 </div>
               </ContainerQuantity>
             )}
-            {checkProduct(product) ? (
+            {checkProduct(product.id) ? (
               <button
                 id="button-remove"
-                onClick={() => values.functionRemove(product)}
+                onClick={() => values.functionRemove(product.id)}
               >
                 Remover
               </button>

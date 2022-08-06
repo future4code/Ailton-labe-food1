@@ -35,8 +35,11 @@ function CartPage() {
   const [bodyPlaceOrder, setBodyPlaceOrder] = useState({});
   const navigate = useNavigate();
 
-  const productsArray = values.arrUnique.map((obj) => {
-    return { id: obj.product.id, quantity: obj.quantity };
+  const carrinho = JSON.parse(localStorage.getItem("cartShop") || "[]");
+  const currentRest = JSON.parse(localStorage.getItem("restaurant"));
+
+  const productsArray = carrinho.map((obj) => {
+    return { id: obj.products.id, quantity: obj.quantity };
   });
 
   useEffect(() => {
@@ -47,7 +50,7 @@ function CartPage() {
       });
     };
     setBodyOrderPlace();
-  }, [currentPaymentMethod, values.arrUnique]);
+  }, [currentPaymentMethod]);
 
   return (
     <Container>
@@ -63,14 +66,14 @@ function CartPage() {
           </p>
         )}
       </DivEndereco>
-      {values.restaurant ? (
+      {currentRest ? (
         <ContainerRestInfo>
-          <p id="restaurant-name">{values.restaurant.name}</p>
-          <p>{values.restaurant.address}</p>
+          <p id="restaurant-name">{currentRest.name}</p>
+          <p>{currentRest.address}</p>
           <div id="delivery-shipping">
             <p>
-              {values.restaurant.deliveryTime - 10} -{" "}
-              {values.restaurant.deliveryTime} min
+              {currentRest.deliveryTime - 10} -{" "}
+              {currentRest.deliveryTime} min
             </p>
           </div>
         </ContainerRestInfo>
@@ -78,23 +81,23 @@ function CartPage() {
         <Texto>Carrinho vazio</Texto>
       )}
       <ContainerCards>
-        {values.arrUnique.map((obj) => {
+        {carrinho.map((obj) => {
           return (
-            <ContainerMap key={obj.product.id}>
-              <img src={obj.product.photoUrl} alt="produto" />
+            <ContainerMap key={obj.products.id}>
+              <img src={obj.products.photoUrl} alt="produto" />
               <div id="container-info">
-                <p id="product-name">{obj.product.name}</p>
-                <p id="product-description">{obj.product.description}</p>
+                <p id="product-name">{obj.products.name}</p>
+                <p id="product-description">{obj.products.description}</p>
                 <p id="obj.product-price">
                   <strong>
-                    R${Math.round(obj.product.price * obj.quantity)}
+                    R${Math.round(obj.products.price * obj.quantity)}
                   </strong>
                 </p>
               </div>
               <div id="quantity">{obj.quantity}</div>
               <button
                 id="button-remove"
-                onClick={() => values.functionRemove(obj.product)}
+                onClick={() => values.functionRemove(obj.products.id)}
               >
                 Remover
               </button>
@@ -105,7 +108,7 @@ function CartPage() {
       <DivTotal>
         {values.sumPrices ? (
           <strong>
-            <Texto2>Frete R$ {values.restaurant.shipping},00</Texto2>
+            <Texto2>Frete R$ {currentRest.shipping},00</Texto2>
           </strong>
         ) : (
           <Texto2>Frete R$ 0,00</Texto2>
@@ -115,7 +118,7 @@ function CartPage() {
           <PRed>
             {values.sumPrices ? (
               <strong>
-                R$ {Math.round(values.restaurant.shipping + values.sumPrices)}
+                R$ {Math.round(currentRest.shipping + values.sumPrices)}
                 ,00
               </strong>
             ) : (

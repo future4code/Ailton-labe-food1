@@ -98,7 +98,13 @@ function ProfilePage() {
               <Spinner width="20px" height="20px" />
             </LoadingHistory>
           ) : (
-            <Divhistory>{orderHistory}</Divhistory>
+            <div>
+              {orderHistory == "" ? (
+                <p>Você ainda não fez nenhum pedido.</p>
+              ) : (
+                <Divhistory>{orderHistory}</Divhistory>
+              )}
+            </div>
           )}
         </section>
       </main>
