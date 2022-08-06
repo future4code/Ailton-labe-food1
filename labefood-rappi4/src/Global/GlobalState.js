@@ -3,79 +3,83 @@ import { GlobalContext } from "./GlobalContext";
 import axios from "axios";
 import { BASE_URL } from "../constants/Url/url";
 import goToPage from "../routes/coordinator";
-import { useNavigate } from "react-router-dom";
+import { alertSweet } from "../services/alertSweet/alertSweet";
+import { alertCart } from "../services/alertSweet/alertCart"
 
 export default function GlobalState(props) {
   const Provider = GlobalContext.Provider;
   const [cartProducts, setCartProducts] = useState([]);
-  const [arrUnique, setArrUnique] = useState([]);
-  const [restaurant, setRestaurant] = useState("");
   const token = localStorage.getItem("token");
+  const [carrinho, setCarrinho] = useState([]);
+  const currentRest = JSON.parse(localStorage.getItem("restaurant"));
 
   const placeOrder = (body, navigate) => {
     axios
-      .post(`${BASE_URL}/restaurants/${values.restaurant.id}/order`, body, {
+      .post(`${BASE_URL}/restaurants/${currentRest.id}/order`, body, {
         headers: {
           auth: token,
         },
       })
       .then((res) => {
-        alert("Pedido realizado com sucesso!");
-        setArrUnique([]);
+        alertSweet("success", "Deu Certo!", "Pedido realizado com sucesso!");
         setCartProducts([]);
-        setRestaurant("");
+        localStorage.removeItem("cartShop")
+        localStorage.removeItem("restaurant")
         goToPage(navigate, "");
       })
       .catch((err) => {
         if (err.message === "Request failed with status code 409") {
-          alert("Já existe um pedido em andamento");
-        } else if (
-          err.request.response === '{"message":"Produto não encontrado"}'
-        ) {
-          setArrUnique([]);
-          setCartProducts([]);
-          setRestaurant("");
-          alert(
-            "Só é permitido a compra de produtos do mesmo estabelecimento por vez."
-          );
+          alertSweet("warning", "Alerta!", "Já existe um pedido em andamento.");
         }
       });
   };
 
-  const addProductToCart = (product, number) => {
-    for (let i = 0; i < number; i++) {
-      cartProducts.push({ product: product, price: product.price });
-    }
-
-    if (number !== "0" && number !== "") {
-      let addingNewProduct = [
-        ...arrUnique,
-        { product: product, quantity: number },
-      ];
-      setArrUnique(addingNewProduct);
+  const checkRestaurant = () => {
+    if (carrinho.length === 1) {
+      localStorage.removeItem("restaurant");
     }
   };
 
-  const sumPrices = cartProducts
+
+  const addProductToCart = (product, number, rest, navigate) => {
+    if (currentRest === null || rest.id === currentRest.id) {
+      const localStorageCarrinho = JSON.parse(
+        localStorage.getItem("cartShop") || "[]"
+      );
+
+      localStorageCarrinho.push({ products: product, quantity: number });
+
+      localStorage.setItem("cartShop", JSON.stringify(localStorageCarrinho));
+
+      setCarrinho(JSON.parse(localStorage.getItem("cartShop")));
+      restaurantDetails(rest)
+    } else {
+      alertCart(currentRest, navigate);
+    }
+  };
+
+  const removeProductFromCart = (id) => {
+    const localStorageCarrinho = JSON.parse(localStorage.getItem("cartShop"));
+
+    const arrayProductRemoved = localStorageCarrinho.filter((obj) => {
+      return id !== obj.products.id;
+    });
+
+    localStorage.setItem("cartShop", JSON.stringify(arrayProductRemoved));
+    setCarrinho(JSON.parse(localStorage.getItem("cartShop")));
+
+    checkRestaurant();
+  };
+
+  const carrinhoArray = JSON.parse(localStorage.getItem("cartShop") || "[]");
+  const sumPrices = carrinhoArray
     .map((obj) => {
-      return obj.price;
+      return obj.products.price * obj.quantity;
     })
     .reduce((curr, prev) => curr + prev, 0);
 
-  const removeProductFromCart = (product) => {
-    const arrayProductRemoved = cartProducts.filter((obj) => {
-      return product !== obj.product;
-    });
-    setCartProducts(arrayProductRemoved);
-
-    const arrayCartRemoved = arrUnique.filter((obj) => {
-      return product !== obj.product;
-    });
-    setArrUnique(arrayCartRemoved);
-  };
-
   const restaurantDetails = (rest) => {
-    setRestaurant(rest);
+    localStorage.setItem("restaurant", JSON.stringify(rest));
   };
 
   const values = {
@@ -83,9 +87,6 @@ export default function GlobalState(props) {
     functionRemove: removeProductFromCart,
     cartProducts: cartProducts,
     sumPrices: sumPrices,
-    restaurantDetails: restaurantDetails,
-    restaurant: restaurant,
-    arrUnique: arrUnique,
     placeOrder: placeOrder,
   };
 

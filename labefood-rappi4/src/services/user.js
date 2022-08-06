@@ -3,6 +3,7 @@ import axios from "axios";
 import { Navigate } from "react-router-dom";
 import { BASE_URL } from "./../constants/Url/url";
 import goToPage from "../routes/coordinator";
+import { alertSweet } from "./alertSweet/alertSweet";
 
 export const login = (body, clear, Navigate, setIsLoading) => {
   axios
@@ -16,7 +17,7 @@ export const login = (body, clear, Navigate, setIsLoading) => {
     })
     .catch((err) => {
       setIsLoading(false);
-      alert(`Usuário ou senha inválido!`);
+      alertSweet("error", "Falhou!", "Usuário ou senha inválido.")
     });
 };
 
@@ -30,14 +31,13 @@ export const address = (body, clear, Navigate, setIsLoading) => {
     .then((res) => {
       localStorage.setItem("token", res.data.token);
       setIsLoading(false);
-      alert(`Conta cadastrada com sucesso!`)
+      alertSweet("success", "Deu Certo!", "Conta cadastrada com sucesso!")
       clear();
       goToPage(Navigate, "");
     })
     .catch((err) => {
-
       setIsLoading(false);
-      alert('Aconteceu algum erro. Tente novamente!');
+      alertSweet("error", "Falhou!", "Tente novamente.")
      
     });
 };
@@ -54,9 +54,8 @@ export const signup = (body, clear, Navigate, setIsLoading, verifyPass) => {
       })
       .catch((err) => {
         setIsLoading(false);
-        alert(err);
       });
   } else {
-    return alert("Senhas não coincidem");
+    return alertSweet("error", "Falhou!", "Senhas não coincidem")
   }
 };
