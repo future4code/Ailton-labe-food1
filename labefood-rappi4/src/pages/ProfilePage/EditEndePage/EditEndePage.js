@@ -1,8 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import useGetProfileDetails from "../../../hooks/useGetProfileDetails";
 import { useForm } from "../../../hooks/useForm";
-
-import { useNavigate } from "react-router-dom";
 import { Container } from "./style";
 import { address } from "../../../services/user";
 import useProtectedPage from "../../../hooks/useProtected";
@@ -11,7 +9,6 @@ import { LabelFloat } from "../../../services/FloatingLabel";
 
 function EditEndePage() {
   const profileDetails = useGetProfileDetails();
-  const navigate = useNavigate();
   useProtectedPage();
 
   const [form, onChange, cleanFields] = useForm({

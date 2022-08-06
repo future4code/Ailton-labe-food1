@@ -4,11 +4,10 @@ import { BASE_URL } from "../constants/Url/url";
 
 const useRestDetails = (id) => {
   const [data, setData] = useState({});
-  const [isLoading, setIsLoading] = useState(false)
+  const [products, setProducts] = useState([])
 
   useEffect(() => {
     const getRestDetails = () => {
-      setIsLoading(true)
       const token = localStorage.getItem("token");
       axios
         .get(`${BASE_URL}/restaurants/${id}`, {
@@ -18,17 +17,16 @@ const useRestDetails = (id) => {
         })
         .then((res) => {
           setData(res.data.restaurant)
-          setIsLoading(false)
+          setProducts(res.data.restaurant.products)
         })
         .catch((err) => {
-          setIsLoading(false)
 
         });
     };
     getRestDetails();
   }, []);
 
-  return data;
+  return [data, products]
 };
 
 export default useRestDetails;

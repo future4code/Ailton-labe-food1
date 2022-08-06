@@ -31,13 +31,12 @@ function LoginPage() {
     email: "",
     password: "",
   });
-  const [isLoading, setIsLoading] = useState(false);
   const [show, setShow] = React.useState(false);
   const handleClick = () => setShow(!show);
 
   const onSubmitForm = (e) => {
     e.preventDefault();
-    login(form, cleanFields, Navigate, setIsLoading);
+    login(form, cleanFields, Navigate);
   };
 
   return (

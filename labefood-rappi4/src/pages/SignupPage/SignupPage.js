@@ -33,7 +33,6 @@ function SignupPage() {
   const [ocultar, setOcultar] = useState(false);
   const ocultarMostrar = () => setOcultar(!ocultar);
 
-  const [isLoading, setIsLoading] = useState(false);
   const [form, onChange, cleanFields] = useForm({
     name: "",
     email: "",
@@ -54,7 +53,7 @@ function SignupPage() {
       password: form.password,
     };
 
-    signup(body, cleanFields, Navigate, setIsLoading, passVerify);
+    signup(body, cleanFields, Navigate, passVerify);
   };
 
   return (
@@ -106,7 +105,7 @@ function SignupPage() {
               <InputGroup>
                 <LabelFloat>
                   <Input
-                    pattern={'[0-9]{3}\.?[0-9]{3}\.?[0-9]{3}\-?[0-9]{2}'}
+                    pattern={"[0-9]{3}.?[0-9]{3}.?[0-9]{3}-?[0-9]{2}"}
                     maxLength={"11"}
                     placeholder="000.000.000-00"
                     value={form.cpf}
