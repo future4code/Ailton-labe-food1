@@ -1,9 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import axios from "axios";
 import { BASE_URL } from "../../../constants/Url/url";
 import useGetProfile from "../../../hooks/useGetProfile";
 import { useForm } from "../../../hooks/useForm";
-import { useNavigate } from "react-router-dom";
 import useProtectedPage from "../../../hooks/useProtected";
 import { Container } from "./style";
 import Header from "../../../components/Header/Login-Signup/header";
@@ -13,7 +12,6 @@ function EditInfoPage() {
   const token = localStorage.getItem("token");
 
   const profile = useGetProfile();
-  const navigate = useNavigate();
   useProtectedPage();
 
   const [form, onChange] = useForm({

@@ -36,7 +36,7 @@ function CartPage() {
   const navigate = useNavigate();
 
   const carrinho = JSON.parse(localStorage.getItem("cartShop") || "[]");
-  const currentRest = JSON.parse(localStorage.getItem("restaurant"));
+  const currentRest = JSON.parse(localStorage.getItem("restaurant")) || "[]";
 
   const productsArray = carrinho.map((obj) => {
     return { id: obj.products.id, quantity: obj.quantity };
@@ -50,7 +50,16 @@ function CartPage() {
       });
     };
     setBodyOrderPlace();
+    console.log(sumPrices);
   }, [currentPaymentMethod]);
+
+  // Soma dos preços do carrinho, pega o array que esta no localStorage (linha 38) e faz um map retornando o preço
+  // do produto * sua quantidade. Depois soma todos estes valores com o reduce.
+  const sumPrices = carrinho
+    .map((obj) => {
+      return obj.products.price * obj.quantity;
+    })
+    .reduce((curr, prev) => curr + prev, 0);
 
   return (
     <Container>
@@ -72,8 +81,7 @@ function CartPage() {
           <p>{currentRest.address}</p>
           <div id="delivery-shipping">
             <p>
-              {currentRest.deliveryTime - 10} -{" "}
-              {currentRest.deliveryTime} min
+              {currentRest.deliveryTime - 10} - {currentRest.deliveryTime} min
             </p>
           </div>
         </ContainerRestInfo>
@@ -106,7 +114,7 @@ function CartPage() {
         })}
       </ContainerCards>
       <DivTotal>
-        {values.sumPrices ? (
+        {sumPrices ? (
           <strong>
             <Texto2>Frete R$ {currentRest.shipping},00</Texto2>
           </strong>
@@ -116,9 +124,9 @@ function CartPage() {
         <Subtotal>
           <p>SUBTOTAL</p>
           <PRed>
-            {values.sumPrices ? (
+            {sumPrices ? (
               <strong>
-                R$ {Math.round(currentRest.shipping + values.sumPrices)}
+                R$ {Math.round(currentRest.shipping + sumPrices)}
                 ,00
               </strong>
             ) : (

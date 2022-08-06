@@ -7,39 +7,28 @@ export const DivContainerSplash = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  position: static;
-  -webkit-animation: fadeOut 5s;
-  animation: fadeOut 5s;
-  animation-fill-mode: forwards;
+  position: relative;
 
-  @-webkit-keyframes fadeOut {
-    0% {
-      opacity: 1;
-    }
-    99% {
-      opacity: 0.01;
-      width: 100%;
-      height: 100%;
-    }
-    100% {
-      opacity: 0;
-      width: 0;
-      height: 0;
-    }
-  }
-  @keyframes fadeOut {
-    0% {
-      opacity: 1;
-    }
-    99% {
-      opacity: 0.01;
-      width: 100%;
-      height: 100%;
-    }
-    100% {
-      opacity: 0;
-      width: 0;
-      height: 0;
+  img {
+    animation-name: example;
+    animation-duration: 3.5s;
+    position: relative;
+    animation-timing-function: ease-in;
+    animation-fill-mode: forwards;
+
+    @keyframes example {
+      0% {
+        top: 0px;
+        scale: 1;
+      }
+      25% {
+        top: 0px;
+        scale: 1.6;
+      }
+      100% {
+        top: -240px;
+        scale: 1;
+      }
     }
   }
 `;

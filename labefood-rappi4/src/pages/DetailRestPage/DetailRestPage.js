@@ -19,36 +19,17 @@ function DetailRestPage() {
   useProtectedPage();
   const navigate = useNavigate();
   const pathParams = useParams();
-  const restDetails = useRestDetails(pathParams.id);
+  const values = useContext(GlobalContext);
+  const [restDetails, restProducts] = useRestDetails(pathParams.id);
+  const carrinho = JSON.parse(localStorage.getItem("cartShop") || "[]");
   const [number, setNumber] = useState("");
   const [checkToRenderContainerSelect, setCheckToRenderContainerSelect] =
     useState(false);
   const [arrayCheckId, setArrayCheckId] = useState([]);
-  const values = useContext(GlobalContext);
 
-  const carrinho = JSON.parse(localStorage.getItem("cartShop") || "[]");
-
-  const quantityCart = (arr, id) => {
-    var qtd = 0;
-    for (var i = 0; i < arr.length; i++) {
-      if (arr[i].products.id === id) {
-        qtd = arr[i].quantity;
-      }
-    }
-    return qtd;
-  };
-
-  const showToAddQuantity = (postId) => {
-    setArrayCheckId(postId);
-    setNumber("");
-    setCheckToRenderContainerSelect(true);
-  };
-
-  const addProductToCart = (product) => {
-    values.functionAdd(product, number, restDetails, navigate);
-    setCheckToRenderContainerSelect(false);
-  };
-
+  // (linha 121 e 175) recebe um ID e verifica se este produto esta no carrinho, caso tenha um produto no carrinho com mesmo id significa q este item foi selecionado
+  // então ele renderiza a linha 121, que executa outra função abaixo desta.
+  // carrinho = um objeto que tem o produto (products) e a quantidade (quantity).
   const checkProduct = (id) => {
     if (carrinho) {
       for (let i = 0; i < carrinho.length; i++) {
@@ -59,15 +40,62 @@ function DetailRestPage() {
     }
   };
 
+  // (linha 122) recebe um id e identifica no carrinho onde este produto está, então retorna a propriedade quantidade dele.
+  // A função de checar identifica se o produto de fato esta no carrinho e esta identifica qual a quantidade que escolheram.
+  const quantityCart = (id) => {
+    var qtd = 0;
+    for (var i = 0; i < carrinho.length; i++) {
+      if (carrinho[i].products.id === id) {
+        qtd = carrinho[i].quantity;
+      }
+    }
+    return qtd;
+  };
+
+  //Quando a gente clica para adicionar um produto, caso não existisse essa função todos os maps iriam abrir uma div diferente.
+  //É necessário uma forma de isolar para apenas o produto que eu escolher execute essa função, eu pego o ID dele quando clico em adicionar e
+  //adiciono em um array (arrayCheckId) e mudo a propriedade do checkToRenderContainerSelect para true. Então utilizo estas duas verificações
+  // na linha 183. Para fechar, eu seto para false usando duas divs invisiveis que ficam em cima e em baixo da div de seleção (linhas 126 e 134)
+  const showToAddQuantity = (postId) => {
+    setArrayCheckId(postId);
+    setNumber("");
+    setCheckToRenderContainerSelect(true);
+  };
+
+  //Quando clico em adicionar ao carrinho eu executo a função de adicionar vindo do GlobalState e a de fechar a janela.
+  const addProductToCart = (product) => {
+    values.functionAdd(product, number, restDetails, navigate);
+    setCheckToRenderContainerSelect(false);
+  };
+
+  //Função que permite checar se o restaurante possui tal categoria de produtos para renderizar ou não. Exemplo: se ele não tiver sorvete
+  //e eu colocar sorvete como parametro, ele vai retornar false, então não vai renderizar o map contendo os sorvetes (linha 238).
+  const checkCategorys = (
+    category1,
+    category2,
+    category3,
+    category4,
+    category5
+  ) => {
+    for (let i = 0; i < restProducts.length; i++) {
+      if (
+        restProducts[i].category === category1 ||
+        restProducts[i].category === category2 ||
+        restProducts[i].category === category3 ||
+        restProducts[i].category === category4 ||
+        restProducts[i].category === category5
+      ) {
+        return true;
+      }
+    }
+  };
+
   const renderProductsMap = (
     category1,
     category2,
     category3,
     category4,
-    category5,
-    category6,
-    category7,
-    category8
+    category5
   ) => {
     return restDetails.products
       ?.filter((product) => {
@@ -76,10 +104,7 @@ function DetailRestPage() {
           product.category === category2 ||
           product.category === category3 ||
           product.category === category4 ||
-          product.category === category5 ||
-          product.category === category6 ||
-          product.category === category7 ||
-          product.category === category8
+          product.category === category5
         );
       })
       .map((product) => {
@@ -94,7 +119,7 @@ function DetailRestPage() {
               </p>
             </div>
             {checkProduct(product.id) && (
-              <div id="quantity">{quantityCart(carrinho, product.id)}</div>
+              <div id="quantity">{quantityCart(product.id)}</div>
             )}
             {arrayCheckId.includes(product.id) && checkToRenderContainerSelect && (
               <ContainerQuantity>
@@ -184,21 +209,46 @@ function DetailRestPage() {
               <p>{restDetails.address}</p>
             </ContainerRestInfo>
             <ContainerMainFood>
-              <p>Principais</p>
-              <hr />
-              {renderProductsMap(
+              {checkCategorys(
                 "Lanche",
                 "Pastel",
                 "Salgado",
-                "Lanche",
                 "Pizza",
-                "Refeição",
-                "Sorvete",
-                "Doce"
+                "Refeição"
+              ) && (
+                <div>
+                  <p>Principais</p>
+                  <hr />
+                  {renderProductsMap(
+                    "Lanche",
+                    "Pastel",
+                    "Salgado",
+                    "Pizza",
+                    "Refeição"
+                  )}
+                </div>
               )}
-              <p>Acompanhamentos</p>
-              <hr />
-              {renderProductsMap("Acompanhamento", "Bebida", "Outros")}
+              {checkCategorys("Acompanhamento", "Outros") && (
+                <div>
+                  <p>Acompanhamentos</p>
+                  <hr />
+                  {renderProductsMap("Acompanhamento", "Outros")}
+                </div>
+              )}
+              {checkCategorys("Sorvete", "Doce") ? ( //existe sorvete ou doce de categoria neste restaurante? se sim, renderiza
+                <div>
+                  <p>Doces</p>
+                  <hr />
+                  {renderProductsMap("Sorvete", "Doce")}
+                </div>
+              ) : null}
+              {checkCategorys("Bebida") && (
+                <div>
+                  <p>Bebidas</p>
+                  <hr />
+                  {renderProductsMap("Bebida")}
+                </div>
+              )}
             </ContainerMainFood>
           </main>
         </Container>

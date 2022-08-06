@@ -1,5 +1,5 @@
 ### Projeto LabeFoods - Rappi4
-link do surge: https://labefoods-group1.surge.sh
+link do surge: https://labefoods-group-1.surge.sh
 
 Trabalharam neste projeto: Lincoln Ribeiro, Igor Castro, Giovanna Magalhães, Sávio Ayres e Raoni Lobo.
 

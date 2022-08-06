@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { useForm } from "../../hooks/useForm";
 import { useNavigate } from "react-router-dom";
 import { address } from "../../services/user";
@@ -9,7 +9,6 @@ import Header from "../../components/Header/Login-Signup/header";
 
 function AddressRegistrationFormPage() {
   const Navigate = useNavigate();
-  const [isLoading, setIsLoading] = useState(false);
   const [form, onChange, clean] = useForm({
     street: "",
     number: "",
@@ -21,7 +20,7 @@ function AddressRegistrationFormPage() {
 
   const onSubmit = (e) => {
     e.preventDefault();
-    address(form, clean, Navigate, setIsLoading);
+    address(form, clean, Navigate);
   };
 
   return (

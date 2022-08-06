@@ -72,8 +72,8 @@ export const ContainerMap = styled.div`
   img {
     min-width: 105px;
     max-width: 105px;
-    min-height: 105px;
-    max-height: 105px;
+    min-height: 110px;
+    max-height: 110px;
     border-top-left-radius: 8px;
     border-bottom-left-radius: 8px;
   }
@@ -109,6 +109,11 @@ export const ContainerMap = styled.div`
     #product-description {
       color: #b8b8b8;
       font-size: 14px;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      overflow: hidden; 
+      width: 215px;
+      height: 20px;
     }
 
     #product-price {

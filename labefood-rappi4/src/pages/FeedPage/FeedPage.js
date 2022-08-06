@@ -31,7 +31,6 @@ import useProtectedAdress from "../../hooks/useProtectedAdress";
 import NavegationFeed from "../../components/Footer/navegationFeed";
 import getPlaceOrder from "./../../hooks/useGetPlaceOrder";
 import clock from "./../../assets/images/clock.svg";
-import styled from "styled-components";
 import { Spinner } from "@chakra-ui/react";
 
 function FeedPage() {

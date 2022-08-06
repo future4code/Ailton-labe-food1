@@ -1,5 +1,4 @@
 import React from "react";
-import styled from "styled-components";
 import goToPage from "../../routes/coordinator";
 import { useNavigate } from "react-router-dom";
 import useGetProfile from "../../hooks/useGetProfile";
@@ -47,6 +46,8 @@ function ProfilePage() {
 
   const logoutProfile = () => {
     localStorage.removeItem("token");
+    localStorage.removeItem("restaurant");
+    localStorage.removeItem("cartShop");
     goToPage(navigate, "login");
   };
 
