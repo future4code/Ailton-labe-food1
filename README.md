@@ -35,34 +35,34 @@ Após finalizar compra, o usuário é redirecionado para o feed, sendo impossibi
 Prints do LabeFoods:
 
 <p>Splashscreen</p>
-<img src="https://user-images.githubusercontent.com/100432523/183158604-5bf3530d-fa81-4046-a37a-b251f883418d.png" alt="tela-batalha" width="150px" height="350px"/>
+<img src="https://user-images.githubusercontent.com/100432523/183158604-5bf3530d-fa81-4046-a37a-b251f883418d.png" alt="tela-batalha" width="200px" height="350px"/>
 
 <p>Login</p>
-<img src="https://user-images.githubusercontent.com/100432523/183158598-830c7df2-08af-48ef-9c9c-69544091a8f4.png" alt="tela-batalha" width="150px" height="350px"/>
+<img src="https://user-images.githubusercontent.com/100432523/183158598-830c7df2-08af-48ef-9c9c-69544091a8f4.png" alt="tela-batalha" width="200px" height="350px"/>
 
 <p>Cadastrar conta</p>
-<img src="https://user-images.githubusercontent.com/100432523/183158588-4e123add-cf2c-456c-adda-389a911751d5.png" alt="tela-batalha" width="150px" height="350px"/>
+<img src="https://user-images.githubusercontent.com/100432523/183158588-4e123add-cf2c-456c-adda-389a911751d5.png" alt="tela-batalha" width="200px" height="350px"/>
 
 <p>Cadastrar endereço</p>
-<img src="https://user-images.githubusercontent.com/100432523/183158586-4c433473-cf9d-4581-94a9-2e6261c89f37.png" alt="tela-batalha" width="150px" height="350px"/>
+<img src="https://user-images.githubusercontent.com/100432523/183158586-4c433473-cf9d-4581-94a9-2e6261c89f37.png" alt="tela-batalha" width="200px" height="350px"/>
 
 <p>Feed</p>
-<img src="https://user-images.githubusercontent.com/100432523/183158597-bdeee593-079f-41df-b3f6-666bf11e3a09.png" alt="tela-batalha" width="150px" height="350px"/>
+<img src="https://user-images.githubusercontent.com/100432523/183158597-bdeee593-079f-41df-b3f6-666bf11e3a09.png" alt="tela-batalha" width="200px" height="350px"/>
 
 <p>Detalhes restaurante</p>
-<img src="https://user-images.githubusercontent.com/100432523/183158591-67fae1c8-17cc-4cb6-b357-46d68f25fd31.png" alt="tela-batalha" width="150px" height="350px"/>
+<img src="https://user-images.githubusercontent.com/100432523/183158591-67fae1c8-17cc-4cb6-b357-46d68f25fd31.png" alt="tela-batalha" width="200px" height="350px"/>
 
 <p>Carrinho</p>
-<img src="https://user-images.githubusercontent.com/100432523/183158589-7ed7e033-9b99-4066-a3ed-c0fd3738f6e5.png" alt="tela-batalha" width="150px" height="350px"/>
+<img src="https://user-images.githubusercontent.com/100432523/183158589-7ed7e033-9b99-4066-a3ed-c0fd3738f6e5.png" alt="tela-batalha" width="200px" height="350px"/>
 
 <p>Pedido em andamento</p>
-<img src="https://user-images.githubusercontent.com/100432523/183158600-fe5e96c0-9398-4118-ab5c-9241bf37ea6b.png" alt="tela-batalha" width="150px" height="350px"/>
+<img src="https://user-images.githubusercontent.com/100432523/183158600-fe5e96c0-9398-4118-ab5c-9241bf37ea6b.png" alt="tela-batalha" width="200px" height="350px"/>
 
 <p>Perfil</p>
-<img src="https://user-images.githubusercontent.com/100432523/183158603-2176339a-f12a-4dd8-ac89-e279eed52337.png" alt="tela-batalha" width="150px" height="350px"/>
+<img src="https://user-images.githubusercontent.com/100432523/183158603-2176339a-f12a-4dd8-ac89-e279eed52337.png" alt="tela-batalha" width="200px" height="350px"/>
 
 <p>Editar informações</p>
-<img src="https://user-images.githubusercontent.com/100432523/183158596-96a8dfae-7889-40d8-bc8f-7598d2d7d30f.png" alt="tela-batalha" width="150px" height="350px"/>
+<img src="https://user-images.githubusercontent.com/100432523/183158596-96a8dfae-7889-40d8-bc8f-7598d2d7d30f.png" alt="tela-batalha" width="200px" height="350px"/>
 
 <p>Editar endereço</p>
-<img src="https://user-images.githubusercontent.com/100432523/183158594-60f6be6b-309a-42a7-9c80-d10d5b8a0391.png" alt="tela-batalha" width="150px" height="350px"/>
+<img src="https://user-images.githubusercontent.com/100432523/183158594-60f6be6b-309a-42a7-9c80-d10d5b8a0391.png" alt="tela-batalha" width="200px" height="350px"/>
