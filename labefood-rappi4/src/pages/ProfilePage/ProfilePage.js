@@ -17,10 +17,12 @@ import {
   Tittle,
   ButtonLogout,
 } from "./style";
+import useProtectedAdress from "../../hooks/useProtectedAdress";
 
 function ProfilePage() {
   const navigate = useNavigate();
   useProtectedPage();
+  useProtectedAdress()
 
   const profile = useGetProfile();
   const [history, isLoading] = useGetOrdersHistory();

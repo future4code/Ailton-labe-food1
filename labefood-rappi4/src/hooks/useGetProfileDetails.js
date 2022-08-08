@@ -9,7 +9,7 @@ const useGetProfileDetails = () => {
     const getProfileDetails = () => {
       const token = localStorage.getItem("token");
       axios
-        .get(`${BASE_URL}/profile/address`, {
+        .get(`${BASE_URL}/profile/address/`, {
           headers: {
             auth: token,
           },

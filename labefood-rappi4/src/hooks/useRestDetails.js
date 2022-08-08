@@ -10,7 +10,7 @@ const useRestDetails = (id) => {
     const getRestDetails = () => {
       const token = localStorage.getItem("token");
       axios
-        .get(`${BASE_URL}/restaurants/${id}`, {
+        .get(`${BASE_URL}/restaurants/${id}/`, {
           headers: {
             auth: token,
           },

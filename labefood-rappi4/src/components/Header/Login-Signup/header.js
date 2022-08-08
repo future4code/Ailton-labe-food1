@@ -1,4 +1,3 @@
-
 import React from "react";
 
 import {
@@ -12,21 +11,19 @@ import back from "./../../../assets/images/back.svg";
 import { useNavigate } from "react-router-dom";
 import goToPage from "../../../routes/coordinator";
 
-
 function Header(props) {
   const navigate = useNavigate();
 
   return (
     <ChakraProvider>
       <DivContainerHeader>
-
-       
-         <ImageBack
-
-            src={back}
-            onClick={() => goToPage(navigate, `${props.page}`)}
-          ></ImageBack>
- <DivCentralize><TextAling>{props.title}</TextAling></DivCentralize>
+        <ImageBack
+          src={back}
+          onClick={() => goToPage(navigate, `${props.page}`)}
+        ></ImageBack>
+        <DivCentralize>
+          <TextAling>{props.title}</TextAling>
+        </DivCentralize>
         <hr></hr>
       </DivContainerHeader>
     </ChakraProvider>

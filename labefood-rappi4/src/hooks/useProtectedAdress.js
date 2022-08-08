@@ -11,7 +11,7 @@ const useProtectedAdress = () => {
     const getProfile = () => {
       const token = localStorage.getItem("token");
       axios
-        .get(`${BASE_URL}/profile`, {
+        .get(`${BASE_URL}/profile/`, {
           headers: {
             auth: token,
           },

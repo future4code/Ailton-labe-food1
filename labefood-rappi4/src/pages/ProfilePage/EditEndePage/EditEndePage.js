@@ -6,10 +6,12 @@ import { address } from "../../../services/user";
 import useProtectedPage from "../../../hooks/useProtected";
 import Header from "../../../components/Header/Login-Signup/header";
 import { LabelFloat } from "../../../services/FloatingLabel";
+import useProtectedAdress from "../../../hooks/useProtectedAdress";
 
 function EditEndePage() {
   const profileDetails = useGetProfileDetails();
   useProtectedPage();
+  useProtectedAdress()
 
   const [form, onChange, cleanFields] = useForm({
     street: "",
@@ -93,7 +95,7 @@ function EditEndePage() {
               required
             />
             <label>Estado*</label>
-          </LabelFloat>
+          </LabelFloat> 
           <button onClick={() => onSubmit()}>
             <strong>Salvar</strong>
           </button>

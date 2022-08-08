@@ -26,9 +26,11 @@ import Header from "./../../components/Header/Login-Signup/header";
 import { GlobalContext } from "../../Global/GlobalContext";
 import useGetProfileDetails from "../../hooks/useGetProfileDetails";
 import { useNavigate } from "react-router-dom";
+import useProtectedAdress from "../../hooks/useProtectedAdress";
 
 function CartPage() {
   useProtectedPage();
+  useProtectedAdress()
   const values = useContext(GlobalContext);
   const profile = useGetProfileDetails();
   const [currentPaymentMethod, setCurrentPaymentMethod] = useState("money");
@@ -50,11 +52,8 @@ function CartPage() {
       });
     };
     setBodyOrderPlace();
-    console.log(sumPrices);
   }, [currentPaymentMethod]);
 
-  // Soma dos preços do carrinho, pega o array que esta no localStorage (linha 38) e faz um map retornando o preço
-  // do produto * sua quantidade. Depois soma todos estes valores com o reduce.
   const sumPrices = carrinho
     .map((obj) => {
       return obj.products.price * obj.quantity;
@@ -75,7 +74,7 @@ function CartPage() {
           </p>
         )}
       </DivEndereco>
-      {currentRest ? (
+      {currentRest.name && currentRest.address ? (
         <ContainerRestInfo>
           <p id="restaurant-name">{currentRest.name}</p>
           <p>{currentRest.address}</p>

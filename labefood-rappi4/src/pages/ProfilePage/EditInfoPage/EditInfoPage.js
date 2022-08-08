@@ -7,12 +7,14 @@ import useProtectedPage from "../../../hooks/useProtected";
 import { Container } from "./style";
 import Header from "../../../components/Header/Login-Signup/header";
 import { LabelFloat } from "../../../services/FloatingLabel";
+import useProtectedAdress from "../../../hooks/useProtectedAdress";
 
 function EditInfoPage() {
   const token = localStorage.getItem("token");
 
   const profile = useGetProfile();
   useProtectedPage();
+  useProtectedAdress()
 
   const [form, onChange] = useForm({
     name: "",
@@ -22,13 +24,15 @@ function EditInfoPage() {
 
   const updateProfile = () => {
     axios
-      .put(`${BASE_URL}/profile`, form, {
+      .put(`${BASE_URL}/profile/`, form, {
         headers: {
           auth: token,
         },
       })
-      .then((res) => {})
-      .catch((err) => {});
+      .then((res) => {
+      })
+      .catch((err) => {
+      });
   };
 
   return (
