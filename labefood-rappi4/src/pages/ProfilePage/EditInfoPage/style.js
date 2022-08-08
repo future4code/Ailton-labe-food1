@@ -38,10 +38,9 @@ export const Container = styled.div`
       align-items: center;
       border-radius: 4px;
       width: 90%;
-
     }
     button {
-      background-color: #E86E5A;
+      background-color: #e86e5a;
       width: 90%;
       display: flex;
       flex-direction: column;
@@ -52,6 +51,9 @@ export const Container = styled.div`
       height: 42px;
       margin-left: 10px;
       margin-top: 5px;
+      &:hover {
+        cursor: pointer;
+      }
     }
   }
 `;

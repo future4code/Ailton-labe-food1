@@ -14,9 +14,11 @@ import {
   ContainerForm,
   Loading,
 } from "./style";
+import useProtectedAdress from "../../hooks/useProtectedAdress";
 
 function DetailRestPage() {
   useProtectedPage();
+  useProtectedAdress()
   const navigate = useNavigate();
   const pathParams = useParams();
   const values = useContext(GlobalContext);
@@ -27,9 +29,6 @@ function DetailRestPage() {
     useState(false);
   const [arrayCheckId, setArrayCheckId] = useState([]);
 
-  // (linha 121 e 175) recebe um ID e verifica se este produto esta no carrinho, caso tenha um produto no carrinho com mesmo id significa q este item foi selecionado
-  // então ele renderiza a linha 121, que executa outra função abaixo desta.
-  // carrinho = um objeto que tem o produto (products) e a quantidade (quantity).
   const checkProduct = (id) => {
     if (carrinho) {
       for (let i = 0; i < carrinho.length; i++) {
@@ -40,8 +39,6 @@ function DetailRestPage() {
     }
   };
 
-  // (linha 122) recebe um id e identifica no carrinho onde este produto está, então retorna a propriedade quantidade dele.
-  // A função de checar identifica se o produto de fato esta no carrinho e esta identifica qual a quantidade que escolheram.
   const quantityCart = (id) => {
     var qtd = 0;
     for (var i = 0; i < carrinho.length; i++) {
@@ -52,24 +49,17 @@ function DetailRestPage() {
     return qtd;
   };
 
-  //Quando a gente clica para adicionar um produto, caso não existisse essa função todos os maps iriam abrir uma div diferente.
-  //É necessário uma forma de isolar para apenas o produto que eu escolher execute essa função, eu pego o ID dele quando clico em adicionar e
-  //adiciono em um array (arrayCheckId) e mudo a propriedade do checkToRenderContainerSelect para true. Então utilizo estas duas verificações
-  // na linha 183. Para fechar, eu seto para false usando duas divs invisiveis que ficam em cima e em baixo da div de seleção (linhas 126 e 134)
   const showToAddQuantity = (postId) => {
     setArrayCheckId(postId);
     setNumber("");
     setCheckToRenderContainerSelect(true);
   };
 
-  //Quando clico em adicionar ao carrinho eu executo a função de adicionar vindo do GlobalState e a de fechar a janela.
   const addProductToCart = (product) => {
     values.functionAdd(product, number, restDetails, navigate);
     setCheckToRenderContainerSelect(false);
   };
 
-  //Função que permite checar se o restaurante possui tal categoria de produtos para renderizar ou não. Exemplo: se ele não tiver sorvete
-  //e eu colocar sorvete como parametro, ele vai retornar false, então não vai renderizar o map contendo os sorvetes (linha 238).
   const checkCategorys = (
     category1,
     category2,

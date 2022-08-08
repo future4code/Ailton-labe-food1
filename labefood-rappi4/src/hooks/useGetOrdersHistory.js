@@ -12,7 +12,7 @@ const useGetOrdersHistory = () => {
       setIsLoading(true)
       const token = localStorage.getItem("token");
       axios
-        .get(`${BASE_URL}/orders/history`, {
+        .get(`${BASE_URL}/orders/history/`, {
           headers: {
             auth: token,
           },

@@ -6,7 +6,7 @@ import { alertSweet } from "./alertSweet/alertSweet";
 
 export const login = (body, clear, Navigate) => {
   axios
-    .post(`${BASE_URL}/login`, body)
+    .post(`${BASE_URL}/login/`, body)
     .then((res) => {
       localStorage.setItem("token", res.data.token);
       clear();
@@ -19,7 +19,7 @@ export const login = (body, clear, Navigate) => {
 
 export const address = (body, clear, Navigate) => {
   axios
-    .put(`${BASE_URL}/address`, body, {
+    .put(`${BASE_URL}/address/`, body, {
       headers: {
         auth: localStorage.getItem("token"),
       },
@@ -38,7 +38,7 @@ export const address = (body, clear, Navigate) => {
 export const signup = (body, clear, Navigate, verifyPass) => {
   if (body.password === verifyPass) {
     axios
-      .post(`${BASE_URL}/signup`, body)
+      .post(`${BASE_URL}/signup/`, body)
       .then((res) => {
         clear();
         localStorage.setItem("token", res.data.token);

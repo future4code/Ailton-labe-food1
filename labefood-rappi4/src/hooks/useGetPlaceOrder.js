@@ -11,7 +11,7 @@ const UseGetPlaceOrder = () => {
       setIsLoading(true)
       const token = localStorage.getItem("token");
       axios
-        .get(`${BASE_URL}/active-order`, {
+        .get(`${BASE_URL}/active-order/`, {
           headers: {
             auth: token,
           },

@@ -43,7 +43,7 @@ function FeedPage() {
 
   const [restaurants, isLoadingRestaurant] = useRequestData(
     [],
-    `${BASE_URL}/restaurants`
+    `${BASE_URL}/restaurants/`
   );
   const [data, isLoadingOrder] = getPlaceOrder();
 
