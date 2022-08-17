@@ -1,7 +1,7 @@
-import React, { useState } from 'react'
-import { useForm } from './../../hooks/useForm'
-import { useNavigate } from 'react-router-dom'
-import goToPage from './../../routes/coordinator'
+import React, { useState } from "react";
+import { useForm } from "./../../hooks/useForm";
+import { useNavigate } from "react-router-dom";
+import goToPage from "./../../routes/coordinator";
 import {
   Form,
   DivContainer,
@@ -10,55 +10,38 @@ import {
   DivText,
   DivInput,
   DivCadastre,
-  DivCliqueAqui
-} from './styled'
-import { login } from './../../services/user'
-import logo from './../../assets/images/logo.svg'
-import Header from '../../components/Header/Login-Signup/header'
+  DivCliqueAqui,
+} from "./styled";
+import { login } from "./../../services/user";
+import logo from "./../../assets/images/logo.svg";
 import {
   ChakraProvider,
   Icon,
-  Stack,
-  Input,
   InputGroup,
-  InputLeftElement,
   InputRightElement,
-  extendTheme,
-  Select,
-  FormControl,
-  FormLabel,
-  FormErrorMessage,
-  FormHelperText,
-  Button
-} from '@chakra-ui/react'
-import { BsFillEyeSlashFill } from 'react-icons/bs'
-import { BsFillEyeFill } from 'react-icons/bs'
-import { LabelFloat } from '../../services/FloatingLabel'
+} from "@chakra-ui/react";
+import { BsFillEyeSlashFill } from "react-icons/bs";
+import { BsFillEyeFill } from "react-icons/bs";
+import { LabelFloat } from "../../services/FloatingLabel";
 
 function LoginPage() {
-  const Navigate = useNavigate()
+  const Navigate = useNavigate();
 
   const [form, onChange, cleanFields] = useForm({
-    email: '',
-    password: ''
-  })
-  const [isLoading, setIsLoading] = useState(false)
-
-  const [show, setShow] = React.useState(false)
-  const handleClick = () => setShow(!show)
+    email: "",
+    password: "",
+  });
+  const [show, setShow] = React.useState(false);
+  const handleClick = () => setShow(!show);
 
   const onSubmitForm = (e) => {
-    e.preventDefault()
-    login(form, cleanFields, Navigate, setIsLoading)
-  }
+    e.preventDefault();
+    login(form, cleanFields, Navigate);
+  };
 
   return (
     <ChakraProvider>
       <DivContainer>
-        <div>
-          <Header />
-        </div>
-
         <DivContainerImage>
           <img src={logo} alt="logo"></img>
         </DivContainerImage>
@@ -69,30 +52,34 @@ function LoginPage() {
         <div>
           <Form onSubmit={onSubmitForm}>
             <DivInput>
-              <LabelFloat>
-                <input
-                  placeholder="email@email.com"
-                  value={form.email}
-                  type={'email'}
-                  name="email"
-                  required
-                  onChange={onChange}
-                ></input>
-                <label>E-mail*</label>
-              </LabelFloat>
+              <InputGroup>
+                <LabelFloat>
+                  <input
+                    pattern={"[a-z0-9._%+-]+@[a-z0-9.-]+.[a-z]{2,}$"}
+                    placeholder="email@email.com"
+                    value={form.email}
+                    type={"email"}
+                    name="email"
+                    required
+                    onChange={onChange}
+                  ></input>
+                  <label>E-mail*</label>
+                </LabelFloat>
+              </InputGroup>
 
-              <InputGroup size="md">
+              <InputGroup>
                 <LabelFloat>
                   <input
                     placeholder="Mínimo de 6 caracteres"
+                    minLength={"6"}
                     value={form.password}
                     name="password"
-                    type={show ? 'text' : 'password'}
+                    type={show ? "text" : "password"}
                     required
                     onChange={onChange}
-                  />
+                  ></input>
                   <label>Senha*</label>
-                  <InputRightElement width="4.5rem">
+                  <InputRightElement marginBlock={2}>
                     <div onClick={handleClick}>
                       {show ? (
                         <div>
@@ -109,18 +96,20 @@ function LoginPage() {
               </InputGroup>
             </DivInput>
 
-            <ButtonEntrar type="submit">Entrar</ButtonEntrar>
+            <ButtonEntrar type="submit">
+              <strong>Entrar</strong>
+            </ButtonEntrar>
           </Form>
           <DivCadastre>
-            Não possui cadastro?
-            <DivCliqueAqui onClick={() => goToPage(Navigate, 'signup')}>
-              Clique aqui.{' '}
+            <strong>Não possui cadastro?</strong>
+            <DivCliqueAqui onClick={() => goToPage(Navigate, "signup")}>
+              Clique aqui.{" "}
             </DivCliqueAqui>
           </DivCadastre>
         </div>
       </DivContainer>
     </ChakraProvider>
-  )
+  );
 }
 
-export default LoginPage
+export default LoginPage;

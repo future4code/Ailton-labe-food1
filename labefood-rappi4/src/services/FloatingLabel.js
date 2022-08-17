@@ -4,7 +4,7 @@ export const LabelFloat = styled.div`
   position: relative;
   width: 100%;
   height: 50px;
-  margin: 20px 10px;
+  margin: 10px 10px;
   border: none;
 
   label {
@@ -14,7 +14,7 @@ export const LabelFloat = styled.div`
     left: 15px;
     color: #b8b8b8;
     font-size: 12px;
-    width: 80px;
+    width: 100px;
     padding-left: 5px;
   }
 
@@ -27,6 +27,19 @@ export const LabelFloat = styled.div`
     font-size: 18px;
     border-radius: 2px;
     border: solid 1px #b8b8b8;
-    color: #d0d0d0;
+    color: black;
+    ::placeholder {
+      color: #d0d0d0;
+      opacity: 1;
+    }
+    :-ms-input-placeholder {
+      /* Internet Explorer 10-11 */
+      color: #d0d0d0;;
+    }
+
+    ::-ms-input-placeholder {
+      /* Microsoft Edge */
+      color: #d0d0d0;;
+    }
   }
 `;

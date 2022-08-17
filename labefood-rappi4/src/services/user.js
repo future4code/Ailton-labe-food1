@@ -1,66 +1,52 @@
 
-import React from 'react'
-import axios from 'axios'
-import { Navigate } from 'react-router-dom'
-import { BASE_URL } from './../constants/Url/url'
-import goToPage from '../routes/coordinator'
+import axios from "axios";
+import { BASE_URL } from "./../constants/Url/url";
+import goToPage from "../routes/coordinator";
+import { alertSweet } from "./alertSweet/alertSweet";
 
-
-export const login = (body, clear, Navigate, setIsLoading) => {
+export const login = (body, clear, Navigate) => {
   axios
-    .post(`${BASE_URL}/login`, body)
+    .post(`${BASE_URL}/login/`, body)
     .then((res) => {
-
-      console.log(res)
-      localStorage.setItem('token', res.data.token)
-      clear()
-      setIsLoading(false)
-      goToPage(Navigate, '')
+      localStorage.setItem("token", res.data.token);
+      clear();
+      goToPage(Navigate, "");
     })
     .catch((err) => {
-      setIsLoading(false)
-      alert(err)
-    })
-}
+      alertSweet("error", "Falhou!", "Usuário ou senha inválido.");
+    });
+};
 
-
-export const address = (body, clear, Navigate, setIsLoading) => {
+export const address = (body, clear, Navigate) => {
   axios
-    .put(`${BASE_URL}/address`, body, {
+    .put(`${BASE_URL}/address/`, body, {
       headers: {
         auth: localStorage.getItem("token"),
       },
     })
     .then((res) => {
-      console.log(res);
-      setIsLoading(false);
+      localStorage.setItem("token", res.data.token);
+      alertSweet("success", "Deu Certo!", "Conta cadastrada com sucesso!");
       clear();
-      goToPage(Navigate, "address");
+      goToPage(Navigate, "");
     })
     .catch((err) => {
+      alertSweet("error", "Falhou!", "Tente novamente.");
+    });
+};
 
-      setIsLoading(false)
-      alert(err)
-    })
-}
-
-
-export const signup = (body, clear, Navigate, setIsLoading, verifyPass) => {
+export const signup = (body, clear, Navigate, verifyPass) => {
   if (body.password === verifyPass) {
     axios
-      .post(`${BASE_URL}/signup`, body)
+      .post(`${BASE_URL}/signup/`, body)
       .then((res) => {
-
-        clear()
-        setIsLoading(false)
-        goToPage(Navigate, 'login')
+        clear();
+        localStorage.setItem("token", res.data.token);
+        goToPage(Navigate, "address");
       })
       .catch((err) => {
-        setIsLoading(false)
-        alert(err)
-      })
+      });
   } else {
-    return alert('Senhas não coincidem')
+    return alertSweet("error", "Falhou!", "Senhas não coincidem");
   }
-}
-
+};

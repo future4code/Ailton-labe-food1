@@ -9,7 +9,8 @@ export const DivContainerImage = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 6%;
+  padding: 18%;
+  
 `
 
 export const DivText = styled.div`
@@ -28,7 +29,9 @@ export const DivInput = styled.div`
   margin-bottom: 5%;
 
   input {
+    color: black;
     margin-bottom: 5%;
+    width: 75vw;
   }
 `
 
@@ -46,12 +49,14 @@ export const ButtonEntrar = styled.button`
   height: 42px;
   width: 75%;
   border-radius: 4px;
+  margin-left: 5%;
 `
 
 export const DivCadastre = styled.div`
   display: flex;
   justify-content: center;
   margin-top: 4%;
+  margin-left: 5%;
 `
 
 export const DivCliqueAqui = styled.div`

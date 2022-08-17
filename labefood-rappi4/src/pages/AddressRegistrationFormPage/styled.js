@@ -1,7 +1,6 @@
 import styled from 'styled-components'
 
 export const DivContainer = styled.div`
-  min-height: 100vh;
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
@@ -25,10 +24,16 @@ export const Form = styled.form`
   width: 70vw;
   justify-content: center;
   align-items: center;
+
+  input{
+    color:black;
+  }
+
 `
 export const ButtonSave = styled.button`
   background-color: #e86e5a;
   height: 42px;
-  width: 75vw;
+  width: 70vw;
   border-radius: 4px;
+  font-weight: bold;
 `

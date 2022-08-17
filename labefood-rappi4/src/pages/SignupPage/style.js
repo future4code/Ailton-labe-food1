@@ -19,17 +19,18 @@ align-items: center;
 
 export const DivInput = styled.div`
 
-width: 75%;
-display: flex;
-flex-direction: column;
-margin-bottom: 5%;
-
-input{
+  width: 75%;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 5%;
+  
+  /* input {
+    color: black;
     margin-bottom: 5%;
-}
-
-
+    width: 100%;
+  } */
 `
+
 
 export const DivContainerImage = styled.div`
 
@@ -57,7 +58,7 @@ export const ButtonCadastrar = styled.button`
 
 background-color: #e86e5a;
 height: 42px;
-width: 75%;
+width: 70%;
 border-radius: 4px;
 
 `

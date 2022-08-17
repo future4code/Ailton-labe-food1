@@ -1,23 +1,20 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import axios from "axios";
-import styled from "styled-components";
 import { BASE_URL } from "../../../constants/Url/url";
 import useGetProfile from "../../../hooks/useGetProfile";
 import { useForm } from "../../../hooks/useForm";
-import goToPage from "../../../routes/coordinator";
-import { useNavigate } from "react-router-dom";
 import useProtectedPage from "../../../hooks/useProtected";
-import { Container } from "./style"
-import {MdArrowBackIos} from "react-icons/md";
-import {Icon} from '@chakra-ui/react'
-import Header from "../../../components/Header/Login-Signup/header"
+import { Container } from "./style";
+import Header from "../../../components/Header/Login-Signup/header";
+import { LabelFloat } from "../../../services/FloatingLabel";
+import useProtectedAdress from "../../../hooks/useProtectedAdress";
 
 function EditInfoPage() {
   const token = localStorage.getItem("token");
 
   const profile = useGetProfile();
-  const navigate = useNavigate();
-  useProtectedPage()
+  useProtectedPage();
+  useProtectedAdress()
 
   const [form, onChange] = useForm({
     name: "",
@@ -27,51 +24,60 @@ function EditInfoPage() {
 
   const updateProfile = () => {
     axios
-      .put(`${BASE_URL}/profile`, form, {
+      .put(`${BASE_URL}/profile/`, form, {
         headers: {
           auth: token,
         },
       })
-      .then((res) => {})
-      .catch((err) => {});
+      .then((res) => {
+      })
+      .catch((err) => {
+      });
   };
 
   return (
     <Container>
-      <Header page="profile" title="Editar"/>
-      {/* <header>
-        <div id="header">
-          <div onClick={() => goToPage(navigate, "profile")}>
-            <Icon as={MdArrowBackIos}/>
-            </div>
-          <p><b>Editar</b></p>
-        </div>
-        <hr />
-      </header> */}
+      <Header page="profile" title="Editar" />
       <main>
         <form id="forms">
-          <input
-            name="name"
-            value={form.name}
-            onChange={onChange}
-            placeholder={profile.name}
-            required
-          />
-          <input
-            name="email"
-            value={form.email}
-            onChange={onChange}
-            placeholder={profile.email}
-            required
-          />
-          <input
-            name="cpf"
-            value={form.cpf}
-            onChange={onChange}
-            placeholder={profile.cpf}
-            required
-          />
-          <button onClick={() => updateProfile()}>Salvar</button>
+          <LabelFloat>
+            <input
+              minLength={"3"}
+              name="name"
+              value={form.name}
+              onChange={onChange}
+              placeholder={profile.name}
+              required
+            />
+            <label>Nome *</label>
+          </LabelFloat>
+          <LabelFloat>
+            <input
+              type="email"
+              name="email"
+              value={form.email}
+              onChange={onChange}
+              placeholder={profile.email}
+              required
+            />
+            <label>E-mail*</label>
+          </LabelFloat>
+          <LabelFloat>
+            <input
+              pattern={'[0-9]{3}\.?[0-9]{3}\.?[0-9]{3}\-?[0-9]{2}'}
+              maxLength={"11"}
+              name="cpf"
+              value={form.cpf}
+              onChange={onChange}
+              placeholder={profile.cpf}
+              required
+              title={'Este número precisa ter 11 caracteres.'}
+            />
+            <label>CPF*</label>
+          </LabelFloat>
+          <button onClick={() => updateProfile()}>
+            <strong>Salvar</strong>
+          </button>
         </form>
       </main>
     </Container>

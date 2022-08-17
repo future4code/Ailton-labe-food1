@@ -1,10 +1,12 @@
-import axios from "axios";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { BASE_URL } from "../constants/Url/url";
+import goToPage from "../routes/coordinator";
+import axios from "axios";
 
-const useGetProfile = () => {
+const useProtectedAdress = () => {
+  const navigate = useNavigate();
 
-  const [profile, setProfile] = useState({});
   useEffect(() => {
     const getProfile = () => {
       const token = localStorage.getItem("token");
@@ -15,14 +17,14 @@ const useGetProfile = () => {
           },
         })
         .then((res) => {
-          setProfile(res.data.user);
+          if (res.data.user.hasAddress === false) {
+            goToPage(navigate, "address");
+          }
         })
         .catch((err) => {});
     };
     getProfile();
   }, []);
-
-  return profile
 };
 
-export default useGetProfile;
+export default useProtectedAdress;

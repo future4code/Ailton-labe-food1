@@ -1,70 +1,68 @@
-# Getting Started with Create React App
+### Projeto LabeFoods - Rappi4
+link do surge: https://labefoods-1.surge.sh
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Trabalharam neste projeto: Lincoln Ribeiro, Igor Castro, Giovanna Magalhães, Sávio Ayres e Raoni Lobo.
 
-## Available Scripts
+Proposta: Criar uma plataforma de Delivery: a LabeFoods.
 
-In the project directory, you can run:
+É um projeto mobile-first.
 
-### `npm start`
+## Funcionalidades/não funcionalidades do projeto
+### Página inicial (Login)
+#### Funciona:<br>
+Dois inputs e um botão e um link para página de cadastro, caso não tenha usuário ainda.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+### Página de Cadastro.
+#### Funciona:<br>
+Pequeno formulário com 5 inputs e um botão para finalizar o cadastro, que realiza uma requisição na API para criar uma conta. Logo após uma nova tela surge, de cadastro de endereço do usuário com 6 inputs e um botão para finalizar cadastro.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+### Feed de Restaurantes / busca Restaurante.
+#### Funciona:<br>
+Exibe todos os restaurantes cadastrados, com nome / tempo de entrega / Frete. Exibe também um input de busca, onde é possível filtrar o restaurante pelo nome e um carrossel com filtro de categoria de restaurantes. Também exibe um footer de navegação para as páginas Feed/Carrinho/Perfil. 
 
-### `npm test`
+### Página detalhes do Restaurante (ao clicar no botão Detalhes)
+#### Funciona:<br>
+Dados do restaurante com: Categoria, nome, duração de entrega e endereço. Exibe também o cardápio do restaurante filtrado por tipos de refeição, com a barra de navegação, botão no header para voltar e descrição da tela em que se encontra.
+Cada item do cardápio contém nome, descrição, valor e um botão para adicionar os itens e quantidades. 
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### Página Carrinho
+#### Funciona:<br>
+O carrinho renderiza o endereço do usuário os itens selecionados, valor do frete a ser pago, subtotal, modalidade de pagamento e um botão para confirmar pedido. Possuindo também, o header e o footer com as informações de página e navegação por toda aplicação.
 
-### `npm run build`
+### Mensagem Pedido
+#### Funciona:<br>
+Após finalizar compra, o usuário é redirecionado para o feed, sendo impossibilitado de comprar até o período de entrega ser concretizado. Durante este período fica em exibição na tela feed do usuário a mensagem com os dados da compra tais quais: Valor total, restaurante e tempo de entrega.
+Prints do LabeFoods:
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+<p>Splashscreen</p>
+<img src="https://user-images.githubusercontent.com/100432523/183158604-5bf3530d-fa81-4046-a37a-b251f883418d.png" alt="tela-batalha" width="200px" height="350px"/>
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+<p>Login</p>
+<img src="https://user-images.githubusercontent.com/100432523/183158598-830c7df2-08af-48ef-9c9c-69544091a8f4.png" alt="tela-batalha" width="200px" height="350px"/>
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+<p>Cadastrar conta</p>
+<img src="https://user-images.githubusercontent.com/100432523/183158588-4e123add-cf2c-456c-adda-389a911751d5.png" alt="tela-batalha" width="200px" height="350px"/>
 
-### `npm run eject`
+<p>Cadastrar endereço</p>
+<img src="https://user-images.githubusercontent.com/100432523/183158586-4c433473-cf9d-4581-94a9-2e6261c89f37.png" alt="tela-batalha" width="200px" height="350px"/>
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+<p>Feed</p>
+<img src="https://user-images.githubusercontent.com/100432523/183158597-bdeee593-079f-41df-b3f6-666bf11e3a09.png" alt="tela-batalha" width="200px" height="350px"/>
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+<p>Detalhes restaurante</p>
+<img src="https://user-images.githubusercontent.com/100432523/183158591-67fae1c8-17cc-4cb6-b357-46d68f25fd31.png" alt="tela-batalha" width="200px" height="350px"/>
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+<p>Carrinho</p>
+<img src="https://user-images.githubusercontent.com/100432523/183158589-7ed7e033-9b99-4066-a3ed-c0fd3738f6e5.png" alt="tela-batalha" width="200px" height="350px"/>
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+<p>Pedido em andamento</p>
+<img src="https://user-images.githubusercontent.com/100432523/183158600-fe5e96c0-9398-4118-ab5c-9241bf37ea6b.png" alt="tela-batalha" width="200px" height="350px"/>
 
-## Learn More
+<p>Perfil</p>
+<img src="https://user-images.githubusercontent.com/100432523/183158603-2176339a-f12a-4dd8-ac89-e279eed52337.png" alt="tela-batalha" width="200px" height="350px"/>
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+<p>Editar informações</p>
+<img src="https://user-images.githubusercontent.com/100432523/183158596-96a8dfae-7889-40d8-bc8f-7598d2d7d30f.png" alt="tela-batalha" width="200px" height="350px"/>
 
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+<p>Editar endereço</p>
+<img src="https://user-images.githubusercontent.com/100432523/183158594-60f6be6b-309a-42a7-9c80-d10d5b8a0391.png" alt="tela-batalha" width="200px" height="350px"/>

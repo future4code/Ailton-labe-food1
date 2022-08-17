@@ -1,26 +1,33 @@
-import React from 'react'
-import { DivContainerHeader, ImageBack } from './style'
-import { ChakraProvider } from '@chakra-ui/react'
-import { Icon } from '@chakra-ui/react'
-import { BsFillPersonFill } from 'react-icons/bs'
-import back from './../../../assets/images/back.svg'
-import { useNavigate } from 'react-router-dom'
-import goToPage from '../../../routes/coordinator'
+import React from "react";
+
+import {
+  DivContainerHeader,
+  ImageBack,
+  TextAling,
+  DivCentralize,
+} from "./style";
+import { ChakraProvider } from "@chakra-ui/react";
+import back from "./../../../assets/images/back.svg";
+import { useNavigate } from "react-router-dom";
+import goToPage from "../../../routes/coordinator";
 
 function Header(props) {
-  const Navigate = useNavigate()
+  const navigate = useNavigate();
 
   return (
     <ChakraProvider>
       <DivContainerHeader>
-        <div>
-          <ImageBack src={back} onClick={() => goToPage(Navigate, `${props.page}`)}></ImageBack>
-          <p>{props.title}</p>
-        </div>
+        <ImageBack
+          src={back}
+          onClick={() => goToPage(navigate, `${props.page}`)}
+        ></ImageBack>
+        <DivCentralize>
+          <TextAling>{props.title}</TextAling>
+        </DivCentralize>
         <hr></hr>
       </DivContainerHeader>
     </ChakraProvider>
-  )
+  );
 }
 
-export default Header
+export default Header;

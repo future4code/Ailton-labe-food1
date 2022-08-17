@@ -1,215 +1,253 @@
 import React, { useContext, useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
-import styled from "styled-components";
+import { useNavigate, useParams } from "react-router-dom";
 import useProtectedPage from "../../hooks/useProtected";
 import useRestDetails from "../../hooks/useRestDetails";
 import Header from "../../components/Header/Login-Signup/header";
 import { GlobalContext } from "../../Global/GlobalContext";
-
-const Container = styled.div`
-  height: 100%;
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-
-  main {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-top: 1rem;
-
-    #rest-logo {
-      width: 90%;
-      height: 120px;
-      object-fit: cover;
-      object-position: 0 0 1rem 5rem;
-      border-radius: 14px 14px 0px 0px;
-      border: solid 1px #b8b8b8;
-    }
-  }
-`;
-
-const ContainerRestInfo = styled.div`
-  width: 90%;
-  margin-top: 0.8rem;
-  display: flex;
-  flex-direction: column;
-  gap: 0.4rem;
-
-  #restaurant-name {
-    color: #e86e5a;
-    font-size: 16px;
-  }
-
-  #delivery-shipping {
-    display: flex;
-    gap: 2rem;
-  }
-
-  p {
-    color: #b8b8b8;
-    font-size: 16px;
-  }
-`;
-
-const ContainerMainFood = styled.div`
-  width: 90%;
-  height: 100%;
-  margin-top: 1rem;
-
-  hr {
-    width: 100%;
-    border-bottom: solid 1px black;
-    margin: 8px 0 12px 0;
-  }
-
-  div {
-    height: 100%;
-    width: 100%;
-  }
-`;
-
-const ContainerMap = styled.div`
-  display: flex;
-  border: solid 1px #b8b8b8;
-  height: 112px;
-  position: relative;
-  margin: 8px 0;
-  align-items: center;
-  border-radius: 8px;
-  gap: 12px;
-
-  img {
-    min-width: 105px;
-    max-width: 105px;
-    min-height: 105px;
-    max-height: 105px;
-    border-top-left-radius: 8px;
-    border-bottom-left-radius: 8px;
-  }
-
-  #quantity {
-    position: absolute;
-    top: 0;
-    right: 0;
-    width: 33px;
-    height: 33px;
-    font-size: 16px;
-    color: #e86e5a;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin: 0 0 9px 16px;
-    padding: 7px 12px;
-    border-top-right-radius: 8px;
-    border-bottom-left-radius: 8px;
-    border: solid 1px #e86e5a;
-  }
-
-  #container-info {
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
-
-    #product-name {
-      color: #e86e5a;
-      font-size: 16px;
-    }
-
-    #product-description {
-      color: #b8b8b8;
-      font-size: 14px;
-    }
-
-    #product-price {
-      color: black;
-      font-size: 16px;
-    }
-  }
-
-  button {
-    position: absolute;
-    bottom: 0;
-    right: 0;
-    width: 90px;
-    height: 31px;
-    border-top-left-radius: 8px;
-    border-bottom-right-radius: 8px;
-    border: solid 1px #000;
-    font-size: 13px;
-    text-align: center;
-    color: #000;
-  }
-`;
+import { Spinner } from "@chakra-ui/react";
+import {
+  Container,
+  ContainerRestInfo,
+  ContainerMainFood,
+  ContainerMap,
+  ContainerQuantity,
+  ContainerForm,
+  Loading,
+} from "./style";
+import useProtectedAdress from "../../hooks/useProtectedAdress";
 
 function DetailRestPage() {
   useProtectedPage();
+  useProtectedAdress()
+  const navigate = useNavigate();
   const pathParams = useParams();
-  const restDetails = useRestDetails(pathParams.id);
-
   const values = useContext(GlobalContext);
+  const [restDetails, restProducts] = useRestDetails(pathParams.id);
+  const carrinho = JSON.parse(localStorage.getItem("cartShop") || "[]");
+  const [number, setNumber] = useState("");
+  const [checkToRenderContainerSelect, setCheckToRenderContainerSelect] =
+    useState(false);
+  const [arrayCheckId, setArrayCheckId] = useState([]);
 
-  const quantityCart = (arr, product) => {
+  const checkProduct = (id) => {
+    if (carrinho) {
+      for (let i = 0; i < carrinho.length; i++) {
+        if (carrinho[i].products.id === id) {
+          return true;
+        }
+      }
+    }
+  };
+
+  const quantityCart = (id) => {
     var qtd = 0;
-    for (var i = 0; i < arr.length; i++) {
-      if (arr[i] === product) {
-        qtd++;
+    for (var i = 0; i < carrinho.length; i++) {
+      if (carrinho[i].products.id === id) {
+        qtd = carrinho[i].quantity;
       }
     }
     return qtd;
   };
 
-  return (
-    <Container>
-      <Header page="" title="Restaurant" />
-      <main>
-        <img id="rest-logo" src={restDetails.logoUrl} alt="logo" />
-        <ContainerRestInfo>
-          <p id="restaurant-name">{restDetails.name}</p>
-          <p>{restDetails.category}</p>
-          <div id="delivery-shipping">
-            <p>
-              {restDetails.deliveryTime - 10} - {restDetails.deliveryTime} min
-            </p>
-            <p>Frete R${restDetails.shipping},00</p>
-          </div>
-          <p>{restDetails.address}</p>
-        </ContainerRestInfo>
-        <ContainerMainFood>
-          <p>Principais</p>
-          <hr />
-          {restDetails.products?.map((product) => {
-            return (
-              <ContainerMap>
-                <img src={product.photoUrl} alt="produto" />
-                <div id="container-info">
-                  <p id="product-name">{product.name}</p>
-                  <p id="product-description">{product.description}</p>
-                  <p id="product-price">
-                    <strong>R${product.price}</strong>
-                  </p>
+  const showToAddQuantity = (postId) => {
+    setArrayCheckId(postId);
+    setNumber("");
+    setCheckToRenderContainerSelect(true);
+  };
+
+  const addProductToCart = (product) => {
+    values.functionAdd(product, number, restDetails, navigate);
+    setCheckToRenderContainerSelect(false);
+  };
+
+  const checkCategorys = (
+    category1,
+    category2,
+    category3,
+    category4,
+    category5
+  ) => {
+    for (let i = 0; i < restProducts.length; i++) {
+      if (
+        restProducts[i].category === category1 ||
+        restProducts[i].category === category2 ||
+        restProducts[i].category === category3 ||
+        restProducts[i].category === category4 ||
+        restProducts[i].category === category5
+      ) {
+        return true;
+      }
+    }
+  };
+
+  const renderProductsMap = (
+    category1,
+    category2,
+    category3,
+    category4,
+    category5
+  ) => {
+    return restDetails.products
+      ?.filter((product) => {
+        return (
+          product.category === category1 ||
+          product.category === category2 ||
+          product.category === category3 ||
+          product.category === category4 ||
+          product.category === category5
+        );
+      })
+      .map((product) => {
+        return (
+          <ContainerMap key={product.id}>
+            <img src={product.photoUrl} alt="produto" />
+            <div id="container-info">
+              <p id="product-name">{product.name}</p>
+              <p id="product-description">{product.description}</p>
+              <p id="product-price">
+                <strong>R${product.price}</strong>
+              </p>
+            </div>
+            {checkProduct(product.id) && (
+              <div id="quantity">{quantityCart(product.id)}</div>
+            )}
+            {arrayCheckId.includes(product.id) && checkToRenderContainerSelect && (
+              <ContainerQuantity>
+                <div
+                  id="background-top"
+                  onClick={() =>
+                    setCheckToRenderContainerSelect(
+                      !checkToRenderContainerSelect
+                    )
+                  }
+                ></div>
+                <div
+                  id="background-bottom"
+                  onClick={() =>
+                    setCheckToRenderContainerSelect(
+                      !checkToRenderContainerSelect
+                    )
+                  }
+                ></div>
+                <div id="container-select">
+                  <p>Selecione a quantidade desejada</p>
+                  <ContainerForm>
+                    <form>
+                      <select
+                        required
+                        value={number}
+                        onChange={(e) => setNumber(e.target.value)}
+                      >
+                        <option>0</option>
+                        <option>1</option>
+                        <option>2</option>
+                        <option>3</option>
+                        <option>4</option>
+                        <option>5</option>
+                        <option>6</option>
+                        <option>7</option>
+                        <option>8</option>
+                        <option>9</option>
+                        <option>10</option>
+                      </select>
+                      <button
+                        id="button-add-to-cart"
+                        type="button"
+                        onClick={() => addProductToCart(product)}
+                      >
+                        ADICIONAR AO CARRINHO
+                      </button>
+                    </form>
+                  </ContainerForm>
                 </div>
-                {values.cartProducts.includes(product) && (
-                  <div id="quantity">
-                    {quantityCart(values.cartProducts, product)}
-                  </div>
-                )}
-                {/* {values.cartProducts.includes(product) ? (
-                  <button onClick={() => values.functionRemove(product.id)}>
-                    Remover
-                  </button>
-                ) : ( */}
-                <button onClick={() => values.functionAdd(product)}>
-                  Adicionar
-                </button>
-                {/* )} */}
-              </ContainerMap>
-            );
-          })}
-        </ContainerMainFood>
-      </main>
-    </Container>
+              </ContainerQuantity>
+            )}
+            {checkProduct(product.id) ? (
+              <button
+                id="button-remove"
+                onClick={() => values.functionRemove(product.id)}
+              >
+                Remover
+              </button>
+            ) : (
+              <button onClick={() => showToAddQuantity(product.id)}>
+                Adicionar
+              </button>
+            )}
+          </ContainerMap>
+        );
+      });
+  };
+
+  return (
+    <div>
+      {restDetails.logoUrl && restDetails.name ? (
+        <Container>
+          <Header page="" title="Restaurante" />
+          <main>
+            <img id="rest-logo" src={restDetails.logoUrl} alt="logo" />
+            <ContainerRestInfo>
+              <p id="restaurant-name">{restDetails.name}</p>
+              <p>{restDetails.category}</p>
+              <div id="delivery-shipping">
+                <p>
+                  {restDetails.deliveryTime - 10} - {restDetails.deliveryTime}{" "}
+                  min
+                </p>
+                <p>Frete R${restDetails.shipping},00</p>
+              </div>
+              <p>{restDetails.address}</p>
+            </ContainerRestInfo>
+            <ContainerMainFood>
+              {checkCategorys(
+                "Lanche",
+                "Pastel",
+                "Salgado",
+                "Pizza",
+                "Refeição"
+              ) && (
+                <div>
+                  <p>Principais</p>
+                  <hr />
+                  {renderProductsMap(
+                    "Lanche",
+                    "Pastel",
+                    "Salgado",
+                    "Pizza",
+                    "Refeição"
+                  )}
+                </div>
+              )}
+              {checkCategorys("Acompanhamento", "Outros") && (
+                <div>
+                  <p>Acompanhamentos</p>
+                  <hr />
+                  {renderProductsMap("Acompanhamento", "Outros")}
+                </div>
+              )}
+              {checkCategorys("Sorvete", "Doce") ? ( //existe sorvete ou doce de categoria neste restaurante? se sim, renderiza
+                <div>
+                  <p>Doces</p>
+                  <hr />
+                  {renderProductsMap("Sorvete", "Doce")}
+                </div>
+              ) : null}
+              {checkCategorys("Bebida") && (
+                <div>
+                  <p>Bebidas</p>
+                  <hr />
+                  {renderProductsMap("Bebida")}
+                </div>
+              )}
+            </ContainerMainFood>
+          </main>
+        </Container>
+      ) : (
+        <Loading>
+          <Spinner width="20px" height="20px" />
+        </Loading>
+      )}
+    </div>
   );
 }
 
